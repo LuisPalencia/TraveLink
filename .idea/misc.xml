@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/drawable/button_rectangle_oval.xml" value="0.3675" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/drawable/button_rectangle_oval_blue.xml" value="0.3675" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/drawable/color_bottom_navigation_view.xml" value="0.2905" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/drawable/ic_add.xml" value="0.3675" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/drawable/ic_person.xml" value="0.2905" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/drawable/ic_profile.xml" value="0.2905" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/drawable/rectangle_borders_rounded_red.xml" value="0.3828125" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/drawable/rectangle_borders_rounded_red_fill.xml" value="0.3828125" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/activity_login.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/activity_main.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/activity_recover_password.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/activity_sign_up.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/fragment_create_event.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/fragment_create_trip.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/fragment_event_details.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/fragment_events.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/fragment_home_trip.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/fragment_profile.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/fragment_trips.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/header_events_list.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/item_city.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/item_event_list.xml" value="0.21721311475409835" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/item_events_list.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/item_trip_list.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/item_trip_list_2.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/menu/bottom_navigation_items.xml" value="0.275" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

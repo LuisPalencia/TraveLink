@@ -1,0 +1,136 @@
+<resources>
+    <string name="app_name">TraveLink</string>
+
+    <!-- General -->
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="error">Error</string>
+    <string name="email">Email</string>
+    <string name="error_internet_title">Error: Internet</string>
+    <string name="error_internet_content">The device is not connected to internet. You need an internet connection in order to use the app</string>
+
+    <!-- Login -->
+    <string name="log_in">Log in</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="not_have_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="wrong_credentials">Incorrect username or password</string>
+    <string name="incorrect_email">The email is not correct</string>
+
+    <string name="error_login">There was an error when trying to log in</string>
+    <string name="error_email_verified">You must confirm the email first</string>
+    <string name="error_login_google">There was an error when trying to log in via Google</string>
+    <string name="correct_login">Login done successfully</string>
+
+
+    <!-- Sign up -->
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="agree_privacy_policy">I agree with privacy and policy</string>
+    <string name="go_back_to_login">Go back to login</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="different_passwords">Passwords are different</string>
+    <string name="incorrect_name">You must introduce a name</string>
+    <string name="incorrect_last_name">You must introduce a lastname</string>
+    <string name="incorrect_password">The password must contain: 1 number, 1 lowercase, 1 uppercase and a minimun length of 6 characters</string>
+    <string name="success_account_creation">Verification email has been sent. Please check your mailbox and confirm the account</string>
+    <string name="error_in_data_account">There are some errors in the data introduced. Please fix them</string>
+    <string name="error_sign_up_privacy_policy">You must accept the privacy and policy of the app</string>
+
+    <!-- Recover password -->
+    <string name="send_email">Send email</string>
+    <string name="success_email_recover_password">Email has been sent. Plase check your mailbox</string>
+    <string name="error_email_recover_password">An error ocurred when trying to send the email</string>
+    <string name="error_not_existing_email">The email specified doesn\'t exist</string>
+    <string name="recover_your_password">Recover your password</string>
+
+    <!-- Main activity -->
+    <string name="trips">Trips</string>
+    <string name="favourites">Favourites</string>
+    <string name="profile">Profile</string>
+
+
+    <!-- Profile fragment -->
+    <string name="hello">Hello</string>
+    <string name="account_configuration">Account configuration</string>
+    <string name="log_off">Log off</string>
+    <string name="contact">Contact</string>
+
+    <!-- CreateTrip fragment -->
+    <string name="create_new_trip">Create a new trip!</string>
+    <string name="trip_name">Trip name</string>
+    <string name="start_date">Start date</string>
+    <string name="end_date">End date</string>
+    <string name="cities">Cities</string>
+    <string name="add_city">Add city</string>
+    <string name="create_trip">Create trip</string>
+    <string name="error_name_trip_empty">You need to introduce a name</string>
+    <string name="error_start_date_not_selected">You need to select a start date</string>
+    <string name="error_end_date_not_selected">You need to select an end date</string>
+    <string name="error_end_date_before_start_date">End date can\'t be before than start date</string>
+    <string name="error_max_days_exceeded">A trip cannot last more than 30 days</string>
+    <string name="error_cities_not_added">You need to select an end date</string>
+    <string name="error_cities_already_added">The city selected is already added</string>
+    <string name="error_adding_city">An error occurred when trying to add the city</string>
+    <string name="error_cities_max">The maximum of cities is five</string>
+    <string name="trip_created">The trip has been created!</string>
+    <string name="error_trip_creation">An error occurred when trying to create the trip</string>
+
+    <!-- HomeTrip Fragment -->
+    <string name="events">Events</string>
+    <string name="map">Map</string>
+    <string name="rating">Rating</string>
+    <string name="participants">Participants</string>
+    <string name="remove_trip">Remove trip</string>
+    <string name="expenses">Expenses</string>
+    <string name="trip_information">Trip info</string>
+    <string name="timeline">Timeline</string>
+    <string name="create_event">Create event</string>
+    <string name="error_load_trip">An error occurred when trying to load the trip</string>
+
+    <!-- CreateEvent fragment -->
+    <string name="create_new_event">Create a new event!</string>
+    <string name="event_name">Name for the event</string>
+    <string name="event_date">Date for the event</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+    <string name="description_field">A brief description of the event, or details to note about it</string>
+    <string name="city">City</string>
+    <string name="place">Place</string>
+    <string name="price">Price</string>
+    <string name="error_name_event_empty">You need to introduce a name for the event</string>
+    <string name="error_price_event_empty">You need to introduce a price for the event</string>
+    <string name="error_start_time_empty">You need to introduce the start time of the event</string>
+    <string name="error_end_time_empty">You need to introduce the end time of the event</string>
+    <string name="error_end_time_before_start_time">The end time can not be before the start time</string>
+    <string name="error_date_event_empty">You need to introduce a date for the event</string>
+    <string name="error_place_event_empty">You need to introduce a place for the event</string>
+    <string name="event_created">The event has been created!</string>
+    <string name="error_event_creation">An error occurred when trying to create the event</string>
+
+    <!-- Events Fragment -->
+    <string name="error_load_event">An error occurred when trying to load the event</string>
+
+    <!-- Event details Fragment -->
+    <string name="show_location">Show location</string>
+
+    <!-- Layout examples -->
+    <string name="example_trip_name">Trip to Madrid</string>
+    <string name="example_date">01/01/2022 – 07/01/2022</string>
+    <string name="example_city">Madrid</string>
+    <string name="example_day">01/01/2022</string>
+    <string name="example_event_name">Science museum</string>
+    <string name="example_event_time">12:00 – 14:00</string>
+    <string name="example_description">Est ei erat mucius quaeque. Ei his quas phaedrum, efficiantur mediocritatem ne sed, hinc oratio blandit ei sed. Blandit gloriatur eam et. Brute noluisse per et, verear disputando neglegentur at quo. Sea quem legere ei, unum soluta ne duo. Ludus complectitur quo te, ut vide autem homero pro.</string>
+    <string name="example_place">Plaza de España</string>
+    <string name="example_price">0.00€</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

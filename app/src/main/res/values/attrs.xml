@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Bottom navigation view -->
+    <attr name="color_bnv_background" format="reference" />
+    <attr name="color_bnv_checked" format="reference" />
+    <attr name="color_bnv_not_checked" format="reference" />
+
+    <!-- Other values-->
+    <attr name="colorOnRipple" format="reference" />
+    <attr name="colorIcon" format="reference" />
+    <attr name="colorTextView" format="reference" />
+    <attr name="colorBackgroundTransparent" format="reference" />
+    <attr name="colorProfileImage" format="reference" />
+
+</resources>

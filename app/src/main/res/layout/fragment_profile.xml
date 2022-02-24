@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.fragments.ProfileFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMiddleVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        />
+
+    <TextView
+        android:id="@+id/txtHelloUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="@string/hello"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewImgProfile"
+        android:layout_width="155dp"
+        android:layout_height="155dp"
+        android:layout_marginTop="50dp"
+        app:cardCornerRadius="250dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/txtHelloUser"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="250dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ic_profile_image"
+                app:tint="?attr/colorProfileImage"
+                android:scaleType="centerCrop"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnProfileConfig"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:theme="@style/ButtonStyle"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/button_rectangle_oval"
+        android:text="@string/account_configuration"
+        app:layout_constraintTop_toBottomOf="@id/cardViewImgProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContact"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:theme="@style/ButtonStyle"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_rectangle_oval"
+        android:text="@string/contact"
+        app:layout_constraintTop_toBottomOf="@id/btnProfileConfig"
+        app:layout_constraintStart_toStartOf="@id/btnProfileConfig"
+        app:layout_constraintEnd_toEndOf="@id/btnProfileConfig"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogoff"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:theme="@style/ButtonStyle"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_rectangle_oval"
+        android:text="@string/log_off"
+        app:layout_constraintTop_toBottomOf="@id/btnContact"
+        app:layout_constraintStart_toStartOf="@id/btnProfileConfig"
+        app:layout_constraintEnd_toEndOf="@id/btnProfileConfig"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
