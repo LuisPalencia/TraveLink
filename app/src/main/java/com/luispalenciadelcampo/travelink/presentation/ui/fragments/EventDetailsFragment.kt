@@ -85,7 +85,7 @@ class EventDetailsFragment : Fragment() {
 
     private fun setButtons(){
         binding.btnShowMap.setOnClickListener {
-
+            supportFragmentManager.showEventLocation(event)
         }
     }
 

@@ -44,4 +44,7 @@ object Constants {
     const val RESULT_GET_USER_ERROR = "RESULT_GET_USER_ERROR"
     const val RESULT_GET_TRIPS_ERROR = "RESULT_GET_TRIPS_ERROR"
     const val RESULT_CREATE_TRIP_ERROR = "RESULT_CREATE_TRIP_ERROR"
+
+    // Permission requests
+    const val WRITE_EXTERNAL_STORAGE_PERMISSIONS_CODE = 100
 }

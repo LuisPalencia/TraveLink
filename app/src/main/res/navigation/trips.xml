@@ -66,11 +66,28 @@
         tools:layout="@layout/fragment_events" >
         <action
             android:id="@+id/action_eventsFragment_to_eventDetailsFragment"
-            app:destination="@id/eventDetailsFragment" />
+            app:destination="@id/eventDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/eventDetailsFragment"
         android:name="com.luispalenciadelcampo.travelink.presentation.ui.fragments.EventDetailsFragment"
         android:label="fragment_event_details"
-        tools:layout="@layout/fragment_event_details" />
+        tools:layout="@layout/fragment_event_details" >
+        <action
+            android:id="@+id/action_eventDetailsFragment_to_eventMapFragment"
+            app:destination="@id/eventMapFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/eventMapFragment"
+        android:name="com.luispalenciadelcampo.travelink.presentation.ui.fragments.EventMapFragment"
+        android:label="fragment_event_map"
+        tools:layout="@layout/fragment_event_map" />
 </navigation>

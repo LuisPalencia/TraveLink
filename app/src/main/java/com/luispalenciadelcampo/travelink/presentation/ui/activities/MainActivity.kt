@@ -21,6 +21,7 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import com.luispalenciadelcampo.travelink.utils.Resource
 import com.luispalenciadelcampo.travelink.utils.setupWithNavController
@@ -187,6 +188,12 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         }else{
             Toast.makeText(this, R.string.error_load_event, Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun showEventLocation(event: Event) {
+        val bundle = bundleOf()
+        bundle.putString(Constants.BUNDLE_ID_EVENT_SELECTED, event.id)
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_eventDetailsFragment_to_eventMapFragment, bundle)
     }
 
     //Method that signs out the current user, finishes the activity and start the LoginActivity
