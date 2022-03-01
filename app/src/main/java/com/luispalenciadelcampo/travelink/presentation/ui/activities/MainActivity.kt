@@ -1,11 +1,16 @@
 package com.luispalenciadelcampo.travelink.presentation.ui.activities
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
@@ -27,6 +32,8 @@ import com.luispalenciadelcampo.travelink.utils.Resource
 import com.luispalenciadelcampo.travelink.utils.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.io.FileInputStream
+import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), SupportFragmentManager {
@@ -66,6 +73,7 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
             initializeMainActivity()
             getInitialData()
             setObservers()
+            checkLocationPermission()
         }else{
             //setLayoutNoInternetConnection()
         }
@@ -84,6 +92,7 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
 
     private fun initializePlacesAPI(){
         // Initialize the SDK
+        
         Places.initialize(applicationContext, Constants.PLACES_API_KEY)
 
         // Create a new PlacesClient instance
@@ -142,6 +151,50 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
                 is Resource.Error -> {
                     Toast.makeText(this, getString(R.string.error_event_creation), Toast.LENGTH_LONG).show()
                 }
+            }
+        }
+    }
+
+    private fun checkLocationPermission(){
+        when {
+            //Permissions are granted
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == (PackageManager.PERMISSION_GRANTED) -> {
+                Log.d(TAG, "ACCESS_FINE_LOCATION permission is granted")
+            }
+            //Permissions are not granted and the dialog in order to request them is not showed
+            shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
+                Log.d(TAG, "ACCESS_FINE_LOCATION permission is not granted")
+            }
+            //Permissions are not granted and the dialog in order to request them can be showed
+            else -> {
+                // Request the storage permission
+                requestPermissions(
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    Constants.ACCESS_FINE_LOCATION_PERMISSIONS_CODE
+                )
+            }
+        }
+    }
+
+    // Overrided function that is executed after a permission requests
+    @SuppressLint("MissingSuperCall")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            Constants.ACCESS_FINE_LOCATION_PERMISSIONS_CODE -> {
+                // If request is cancelled, the result arrays are empty.
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    // Permission is granted.
+                    Log.d(TAG, "ACCESS_FINE_LOCATION permission is granted")
+                } else {
+                    Log.d(TAG, "ACCESS_FINE_LOCATION permission is not granted")
+                }
+                return
             }
         }
     }

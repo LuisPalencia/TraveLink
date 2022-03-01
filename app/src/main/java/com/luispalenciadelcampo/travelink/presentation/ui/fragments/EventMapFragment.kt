@@ -1,11 +1,16 @@
 package com.luispalenciadelcampo.travelink.presentation.ui.fragments
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -25,7 +30,7 @@ class EventMapFragment : Fragment(), OnMapReadyCallback {
     private val TAG = "ProfileFragment"
     private lateinit var rootView: View
 
-    private lateinit var map: GoogleMap
+    private var map: GoogleMap? = null
 
     private val mainViewModel: MainViewModel by activityViewModels()
 
@@ -71,22 +76,65 @@ class EventMapFragment : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
+    @SuppressLint("MissingPermission")
     private fun setDeviceLocation(){
+        if(this.map == null){
+            return
+        }
+
+        try{
+            if(ContextCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == (PackageManager.PERMISSION_GRANTED)){
+                map?.isMyLocationEnabled = true
+                map?.uiSettings?.isMyLocationButtonEnabled  = true
+            }else{
+                map?.isMyLocationEnabled = false
+                map?.uiSettings?.isMyLocationButtonEnabled = false
+
+            }
+        }catch (e: SecurityException){
+
+        }
+
 
     }
 
+
+    private fun checkLocationPermission(){
+        when {
+            //Permissions are granted
+            ContextCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == (PackageManager.PERMISSION_GRANTED) -> {
+                setDeviceLocation()
+            }
+            //Permissions are not granted and the dialog in order to request them is not showed
+            shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
+                Toast.makeText(this.requireContext(), getString(R.string.error_message_permission_location), Toast.LENGTH_LONG).show()
+            }
+            //Permissions are not granted and the dialog in order to request them can be showed
+            else -> {
+                // Request the permission
+
+            }
+        }
+    }
+
+
     override fun onMapReady(p0: GoogleMap) {
-        map = p0
+        this.map = p0
+        if(this.map != null){
+            this.map!!.uiSettings.isZoomControlsEnabled = true
+            this.map!!.uiSettings.isCompassEnabled = true
 
-        val latLng = LatLng(event.place.latitude, event.place.longitude)
-        map.addMarker(
-            MarkerOptions()
-                .position(latLng)
-                .title(event.name)
-        )
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.0F))
+            val latLng = LatLng(event.place.latitude, event.place.longitude)
+            this.map!!.addMarker(
+                MarkerOptions()
+                    .position(latLng)
+                    .title(event.name)
+            )
+            map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.0F))
 
-        setDeviceLocation()
+            checkLocationPermission()
+        }
+
     }
 
 
