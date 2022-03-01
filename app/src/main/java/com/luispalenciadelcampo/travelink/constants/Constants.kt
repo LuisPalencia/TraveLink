@@ -46,5 +46,5 @@ object Constants {
     const val RESULT_CREATE_TRIP_ERROR = "RESULT_CREATE_TRIP_ERROR"
 
     // Permission requests
-    const val WRITE_EXTERNAL_STORAGE_PERMISSIONS_CODE = 100
+    const val ACCESS_FINE_LOCATION_PERMISSIONS_CODE = 100
 }
