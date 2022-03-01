@@ -13,6 +13,7 @@ import com.luispalenciadelcampo.travelink.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,6 +35,7 @@ class MainViewModel @Inject constructor(
     val createEventStatus = MutableLiveData<Resource<Event>>()
     val eventsTrip = MutableLiveData<Resource<MutableList<Event>>>()
     val eventSelected = MutableLiveData<Event>()
+    private var eventListenerJob: Job? = null
 
     suspend fun getUserFromDB(userId: String){
         viewModelScope.launch(Dispatchers.Main) {
@@ -67,13 +69,17 @@ class MainViewModel @Inject constructor(
 
     @ExperimentalCoroutinesApi
     suspend fun getEvents(trip: Trip){
-        viewModelScope.launch {
+        this.eventListenerJob = viewModelScope.launch {
             useCase.GetEventsUseCase(tripSelected.value!!).collect { resultEvents ->
                 when (resultEvents) {
                     is Resource.Success -> {
                         Log.d(TAG, resultEvents.data.toString())
-                        eventsTrip.postValue(resultEvents)
                         Storage.events[trip.id] = resultEvents.data
+
+                        // Only update the
+                        if(tripSelected.value != null){
+                            if(tripSelected.value!!.id == trip.id) eventsTrip.postValue(resultEvents)
+                        }
                     }
                     is Resource.Error -> {
                         Log.d(TAG, "Error when trying to get the trips: ${resultEvents.message}")
@@ -83,6 +89,13 @@ class MainViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun removeEventListener(){
+        if(eventListenerJob != null){
+            eventListenerJob!!.cancel()
+            eventListenerJob = null
         }
     }
 

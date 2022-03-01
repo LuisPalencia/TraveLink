@@ -72,6 +72,9 @@ class HomeTripFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+
+        // Remove the event listener
+        mainViewModel.removeEventListener()
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
