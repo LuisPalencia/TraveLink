@@ -33,6 +33,7 @@ class MainViewModel @Inject constructor(
     val liveDataUpdateTrip = MutableLiveData<Trip>()
 
     val createEventStatus = MutableLiveData<Resource<Event>>()
+    val removeEventStatus = MutableLiveData<Resource<Boolean>>()
     val eventsTrip = MutableLiveData<Resource<MutableList<Event>>>()
     val eventSelected = MutableLiveData<Event>()
     private var eventListenerJob: Job? = null
@@ -126,6 +127,13 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             val resultCreateEvent = useCase.CreateEventUseCase(event, tripSelected.value!!.id)
             createEventStatus.postValue(resultCreateEvent)
+        }
+    }
+
+    suspend fun removeEvent(event: Event){
+        viewModelScope.launch(Dispatchers.Main) {
+            val resultRemoveEvent = useCase.RemoveEventUseCase(event, tripSelected.value!!.id)
+            removeEventStatus.postValue(resultRemoveEvent)
         }
     }
 

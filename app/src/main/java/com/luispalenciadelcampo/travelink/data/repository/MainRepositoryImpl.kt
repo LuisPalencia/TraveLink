@@ -299,6 +299,19 @@ class MainRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun removeEvent(event: Event, tripId: String): Resource<Boolean> {
+        return try {
+            Log.d(TAG, "REMOVING EVENT")
+            val eventRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_EVENTS}/$tripId/${event.id}")
+            eventRef.removeValue().await()
+            Log.d(TAG, "EVENT REMOVED SUCCESSFULLY")
+
+            Resource.Success(true)
+        }catch (e: Exception){
+            Resource.Error(Constants.RESULT_REMOVE_EVENT_ERROR)
+        }
+    }
+
     suspend fun getPlaceImage(placeId: String): Resource<PlaceImage>{
         // Specify fields. Requests for photos must always have the PHOTO_METADATAS field.
         val fields = listOf(Place.Field.PHOTO_METADATAS)

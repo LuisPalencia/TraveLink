@@ -130,6 +130,22 @@
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
                     />
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnDeleteEvent"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:background="@drawable/rectangle_borders_rounded_red_fill"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/remove_event"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textAllCaps="false"
+                    app:layout_constraintTop_toBottomOf="@id/btnShowMap"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    />
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

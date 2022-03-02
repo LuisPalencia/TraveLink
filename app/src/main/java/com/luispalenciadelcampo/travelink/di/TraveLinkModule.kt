@@ -61,7 +61,8 @@ object TraveLinkModule {
             GetTripsUseCase = GetTripsUseCase(mainRepository),
             CreateTripUseCase = CreateTripUseCase(mainRepository),
             CreateEventUseCase = CreateEventUseCase(mainRepository),
-            GetEventsUseCase = GetEventsUseCase(mainRepository)
+            GetEventsUseCase = GetEventsUseCase(mainRepository),
+            RemoveEventUseCase = RemoveEventUseCase(mainRepository)
         )
     }
 }

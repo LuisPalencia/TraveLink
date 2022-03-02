@@ -117,6 +117,9 @@
 
     <!-- Event details Fragment -->
     <string name="show_location">Show location</string>
+    <string name="remove_event">Remove event</string>
+    <string name="event_removed_successfully">Event removed successfully</string>
+    <string name="error_event_removed">An error occurred when removing the event</string>
 
     <!-- Event map Fragment -->
     <string name="error_message_permission_location">You need to enable the location permission in order to show your current location</string>
