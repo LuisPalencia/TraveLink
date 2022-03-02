@@ -94,14 +94,14 @@ class EventDetailsFragment : Fragment() {
         }
 
         binding.btnDeleteEvent.setOnClickListener {
-            setObserver()
+            setObserverRemoveEvent()
             lifecycleScope.launch {
                 mainViewModel.removeEvent(event)
             }
         }
     }
 
-    private fun setObserver(){
+    private fun setObserverRemoveEvent(){
         mainViewModel.removeEventStatus.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Success -> {
