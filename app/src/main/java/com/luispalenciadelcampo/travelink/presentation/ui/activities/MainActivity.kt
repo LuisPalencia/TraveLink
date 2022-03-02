@@ -232,6 +232,10 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_eventsFragment)
     }
 
+    override fun showEventsMap() {
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_eventsMapFragment)
+    }
+
     override fun eventSelected(idEvent: String) {
         val event = mainViewModel.getEventById(idEvent)
         if(event != null){

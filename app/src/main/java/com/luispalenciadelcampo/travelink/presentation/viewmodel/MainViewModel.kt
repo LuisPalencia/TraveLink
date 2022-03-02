@@ -92,6 +92,10 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun getLocalEvents(trip: Trip): MutableList<Event>? {
+        return Storage.events[trip.id]
+    }
+
     fun removeEventListener(){
         if(eventListenerJob != null){
             eventListenerJob!!.cancel()

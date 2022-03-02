@@ -53,6 +53,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeTripFragment_to_eventsMapFragment"
+            app:destination="@id/eventsMapFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/createEventFragment"
@@ -90,4 +97,9 @@
         android:name="com.luispalenciadelcampo.travelink.presentation.ui.fragments.EventMapFragment"
         android:label="fragment_event_map"
         tools:layout="@layout/fragment_event_map" />
+    <fragment
+        android:id="@+id/eventsMapFragment"
+        android:name="com.luispalenciadelcampo.travelink.presentation.ui.fragments.EventsMapFragment"
+        android:label="fragment_events_map"
+        tools:layout="@layout/fragment_events_map" />
 </navigation>
