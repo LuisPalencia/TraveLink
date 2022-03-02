@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +28,7 @@ import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 
 class EventMapFragment : Fragment(), OnMapReadyCallback {
 
-    private val TAG = "ProfileFragment"
+    private val TAG = "EventMapFragment"
     private lateinit var rootView: View
 
     private var map: GoogleMap? = null
@@ -76,47 +77,36 @@ class EventMapFragment : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
+    // Method that shows in the map the device's position
     @SuppressLint("MissingPermission")
-    private fun setDeviceLocation(){
+    private fun checkLocationPermissionAndSetDeviceLocation(){
         if(this.map == null){
             return
         }
 
         try{
-            if(ContextCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == (PackageManager.PERMISSION_GRANTED)){
-                map?.isMyLocationEnabled = true
-                map?.uiSettings?.isMyLocationButtonEnabled  = true
-            }else{
-                map?.isMyLocationEnabled = false
-                map?.uiSettings?.isMyLocationButtonEnabled = false
-
+            when {
+                //Permissions are granted
+                ContextCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == (PackageManager.PERMISSION_GRANTED) -> {
+                    map?.isMyLocationEnabled = true
+                    map?.uiSettings?.isMyLocationButtonEnabled  = true
+                }
+                //Permissions are not granted and the dialog in order to request them is not showed
+                shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
+                    map?.isMyLocationEnabled = false
+                    map?.uiSettings?.isMyLocationButtonEnabled  = false
+                }
+                //Permissions are not granted and the dialog in order to request them can be showed
+                else -> {
+                    // Request the permission
+                    map?.isMyLocationEnabled = false
+                    map?.uiSettings?.isMyLocationButtonEnabled  = false
+                }
             }
         }catch (e: SecurityException){
-
-        }
-
-
-    }
-
-
-    private fun checkLocationPermission(){
-        when {
-            //Permissions are granted
-            ContextCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == (PackageManager.PERMISSION_GRANTED) -> {
-                setDeviceLocation()
-            }
-            //Permissions are not granted and the dialog in order to request them is not showed
-            shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
-                Toast.makeText(this.requireContext(), getString(R.string.error_message_permission_location), Toast.LENGTH_LONG).show()
-            }
-            //Permissions are not granted and the dialog in order to request them can be showed
-            else -> {
-                // Request the permission
-
-            }
+            Log.d(TAG, e.toString())
         }
     }
-
 
     override fun onMapReady(p0: GoogleMap) {
         this.map = p0
@@ -132,7 +122,7 @@ class EventMapFragment : Fragment(), OnMapReadyCallback {
             )
             map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.0F))
 
-            checkLocationPermission()
+            checkLocationPermissionAndSetDeviceLocation()
         }
 
     }
