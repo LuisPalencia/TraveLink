@@ -91,6 +91,8 @@
     <string name="timeline">Timeline</string>
     <string name="create_event">Create event</string>
     <string name="error_load_trip">An error occurred when trying to load the trip</string>
+    <string name="trip_removed_successfully">Trip removed successfully</string>
+    <string name="error_trip_removed">An error occurred when removing the trip</string>
 
     <!-- CreateEvent fragment -->
     <string name="create_new_event">Create a new event!</string>

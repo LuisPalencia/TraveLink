@@ -14,6 +14,7 @@ interface MainRepository {
     @ExperimentalCoroutinesApi
     suspend fun getEvents(trip: Trip): Flow<Resource<MutableList<Event>>>
     suspend fun createTrip(trip: Trip): Resource<Trip>
+    suspend fun removeTrip(trip: Trip): Resource<Boolean>
     suspend fun createEvent(event: Event, tripId: String): Resource<Event>
     suspend fun removeEvent(event: Event, tripId: String): Resource<Boolean>
 }

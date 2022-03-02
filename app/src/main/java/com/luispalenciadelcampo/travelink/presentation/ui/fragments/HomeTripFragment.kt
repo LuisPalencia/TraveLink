@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.constants.Constants
@@ -19,6 +20,7 @@ import com.luispalenciadelcampo.travelink.databinding.FragmentHomeTripBinding
 import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
+import com.luispalenciadelcampo.travelink.utils.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -122,7 +124,24 @@ class HomeTripFragment : Fragment() {
         }
 
         binding.cardViewRemoveTrip.setOnClickListener {
+            setObserverRemoveTrip()
+            lifecycleScope.launch {
+                mainViewModel.removeTrip(trip)
+            }
+        }
+    }
 
+    private fun setObserverRemoveTrip(){
+        mainViewModel.removeTripStatus.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Resource.Success -> {
+                    Toast.makeText(this.requireContext(), getString(R.string.trip_removed_successfully), Toast.LENGTH_LONG).show()
+                    supportFragmentManager.popBackStackFragment()
+                }
+                is Resource.Error -> {
+                    Snackbar.make(binding.scrollView, getString(R.string.error_trip_removed), Snackbar.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

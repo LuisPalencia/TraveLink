@@ -16,5 +16,6 @@ class UseCase (
     var CreateTripUseCase: CreateTripUseCase,
     var CreateEventUseCase: CreateEventUseCase,
     var GetEventsUseCase: GetEventsUseCase,
-    val RemoveEventUseCase: RemoveEventUseCase
+    var RemoveEventUseCase: RemoveEventUseCase,
+    var RemoveTripUseCase: RemoveTripUseCase
 )

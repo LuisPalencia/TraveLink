@@ -269,6 +269,22 @@ class MainRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun removeTrip(trip: Trip): Resource<Boolean> {
+        return try {
+
+            val eventsTripRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_EVENTS}/${trip.id}")
+            eventsTripRef.removeValue().await()
+
+            val userId = trip.userAdminId ?: throw Exception()
+            val tripsUserRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_TRIPS}/$userId/${trip.id}")
+            tripsUserRef.removeValue().await()
+
+            Resource.Success(true)
+        }catch (e: Exception){
+            Resource.Error(Constants.RESULT_REMOVE_TRIP_ERROR)
+        }
+    }
+
     override suspend fun createEvent(event: Event, tripId: String): Resource<Event> {
         return try {
 
@@ -301,10 +317,8 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun removeEvent(event: Event, tripId: String): Resource<Boolean> {
         return try {
-            Log.d(TAG, "REMOVING EVENT")
             val eventRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_EVENTS}/$tripId/${event.id}")
             eventRef.removeValue().await()
-            Log.d(TAG, "EVENT REMOVED SUCCESSFULLY")
 
             Resource.Success(true)
         }catch (e: Exception){

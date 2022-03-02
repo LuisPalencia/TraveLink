@@ -29,6 +29,7 @@ class MainViewModel @Inject constructor(
 
     val trips = MutableLiveData<Resource<MutableList<Trip>>>()
     val createTripStatus = MutableLiveData<Resource<Trip>>()
+    val removeTripStatus = MutableLiveData<Resource<Boolean>>()
     val tripSelected = MutableLiveData<Trip>()
     val liveDataUpdateTrip = MutableLiveData<Trip>()
 
@@ -108,6 +109,13 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             val resultCreateTrip = useCase.CreateTripUseCase(trip)
             createTripStatus.postValue(resultCreateTrip)
+        }
+    }
+
+    suspend fun removeTrip(trip: Trip){
+        viewModelScope.launch(Dispatchers.Main) {
+            val resultRemoveTrip = useCase.RemoveTripUseCase(trip)
+            removeTripStatus.postValue(resultRemoveTrip)
         }
     }
 
