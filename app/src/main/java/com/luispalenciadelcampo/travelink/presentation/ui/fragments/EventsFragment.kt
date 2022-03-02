@@ -55,6 +55,7 @@ class EventsFragment : Fragment() {
 
         setRecyclerView()
         setObserver()
+        setButtons()
 
         return rootView
     }
@@ -93,6 +94,12 @@ class EventsFragment : Fragment() {
 
                 }
             }
+        }
+    }
+
+    private fun setButtons(){
+        binding.btnCreateEvent.setOnClickListener {
+            supportFragmentManager.createEvent()
         }
     }
 
