@@ -134,6 +134,10 @@
     <string name="first_event_error">This is the first event</string>
     <string name="last_event_error">This is the last event</string>
 
+    <!-- Expenses Fragment -->
+    <string name="total_expenses_trip">The total cost of the trip is:</string>
+    <string name="events_with_expenses">Events with expenses</string>
+
     <!-- Layout examples -->
     <string name="example_trip_name">Trip to Madrid</string>
     <string name="example_date">01/01/2022 – 07/01/2022</string>

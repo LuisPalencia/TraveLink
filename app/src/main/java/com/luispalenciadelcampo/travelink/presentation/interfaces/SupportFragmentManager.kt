@@ -10,6 +10,7 @@ interface SupportFragmentManager {
     fun createEventFromHomeFragment()
     fun showEventsTrip()
     fun showEventsMap()
+    fun showExpenses()
     fun eventSelected(idEvent: String)
     fun showEventLocation(event: Event)
     fun signOutUser()

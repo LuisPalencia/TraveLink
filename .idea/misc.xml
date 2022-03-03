@@ -29,12 +29,15 @@
         <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/item_trip_list.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/layout/item_trip_list_2.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/AndroidStudioProjects/TraveLink/app/src/main/res/menu/bottom_navigation_items.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/drawable/background_top_corner_rounded.xml" value="0.2825" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/activity_login.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_event_details.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_event_map.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_events_map.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_expenses.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_home_trip.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_map.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/item_expenses_list.xml" value="0.275" />
       </map>
     </option>
   </component>

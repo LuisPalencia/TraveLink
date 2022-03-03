@@ -15,6 +15,10 @@ class TripFunctions {
             return events.sortedWith(compareBy({it.day}, {it.startTime})).toMutableList()
         }
 
+        fun orderEventsListByExpensePrice(events: MutableList<Event>): MutableList<Event>{
+            return events.sortedWith(compareBy<Event> { it.price }.reversed()).toMutableList()
+        }
+
         fun getStringForDayPosition(day: Int, startDate: Date): String{
             val calendar = Calendar.getInstance()
             calendar.time = startDate

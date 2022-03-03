@@ -29,10 +29,8 @@ class TripsFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by activityViewModels()
 
-    private lateinit var adapter: TripsAdapter
-
     // Adapter
-    //private var adapter: TripsAdapter
+    private lateinit var adapter: TripsAdapter
 
     private var _binding: FragmentTripsBinding? = null
     // This property is only valid between onCreateView and

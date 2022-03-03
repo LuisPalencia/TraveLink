@@ -118,7 +118,7 @@ class HomeTripFragment : Fragment() {
         }
 
         binding.cardViewExpenses.setOnClickListener {
-
+            supportFragmentManager.showExpenses()
         }
 
         binding.cardViewRating.setOnClickListener {

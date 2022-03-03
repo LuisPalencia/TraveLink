@@ -247,6 +247,10 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_eventsMapFragment)
     }
 
+    override fun showExpenses() {
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_expensesFragment)
+    }
+
     override fun eventSelected(idEvent: String) {
         val event = mainViewModel.getEventById(idEvent)
         if(event != null){

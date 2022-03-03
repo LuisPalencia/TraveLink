@@ -10,6 +10,7 @@ import com.luispalenciadelcampo.travelink.data.dto.User
 import com.luispalenciadelcampo.travelink.domain.usecases.UseCase
 import com.luispalenciadelcampo.travelink.storage.Storage
 import com.luispalenciadelcampo.travelink.utils.Resource
+import com.luispalenciadelcampo.travelink.utils.TripFunctions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -162,6 +163,30 @@ class MainViewModel @Inject constructor(
         }else{
             return null
         }
+    }
+
+    fun getEventsWithExpensesOrdered(): MutableList<Event>{
+        val expensesEventList = mutableListOf<Event>()
+
+        if(tripSelected.value != null && Storage.events[tripSelected.value?.id] != null){
+            for(event in Storage.events[tripSelected.value?.id]!!){
+                if(event.price > 0.0){
+                    expensesEventList.add(event)
+                }
+            }
+
+            return TripFunctions.orderEventsListByExpensePrice(expensesEventList)
+        }else{
+            return expensesEventList
+        }
+    }
+
+    fun getTotalExpenseTrip(events: MutableList<Event>): Double{
+        var totalExpense = 0.0
+        for(event in events){
+            totalExpense += event.price
+        }
+        return totalExpense
     }
 
 
