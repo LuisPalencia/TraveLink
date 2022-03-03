@@ -169,6 +169,9 @@ class EventsMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
                     .snippet(GenericFunctions.dateHourToString(event.startTime))
                 )
             }
+            // Set the text for the first event
+            setTextEventSelected()
+
             // Set the listener when a marker is selected
             this.map?.setOnInfoWindowClickListener(this)
 
