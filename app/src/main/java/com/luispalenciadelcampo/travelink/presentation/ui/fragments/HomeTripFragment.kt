@@ -107,12 +107,14 @@ class HomeTripFragment : Fragment() {
             supportFragmentManager.showEventsTrip()
         }
 
-        binding.cardViewMap.setOnClickListener {
-            supportFragmentManager.showEventsMap()
+
+
+        binding.cardViewCreateEvent.setOnClickListener {
+            supportFragmentManager.createEventFromHomeFragment()
         }
 
-        binding.cardViewParticipants.setOnClickListener {
-
+        binding.cardViewMap.setOnClickListener {
+            supportFragmentManager.showEventsMap()
         }
 
         binding.cardViewExpenses.setOnClickListener {

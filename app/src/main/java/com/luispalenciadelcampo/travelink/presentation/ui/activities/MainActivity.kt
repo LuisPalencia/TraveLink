@@ -235,6 +235,10 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         findNavController(R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_createEventFragment)
     }
 
+    override fun createEventFromHomeFragment() {
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_createEventFragment)
+    }
+
     override fun showEventsTrip() {
         findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_eventsFragment)
     }

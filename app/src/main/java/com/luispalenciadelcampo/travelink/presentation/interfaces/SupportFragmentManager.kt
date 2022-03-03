@@ -7,6 +7,7 @@ interface SupportFragmentManager {
     fun createTrip()
     fun userConfigSelected()
     fun createEvent()
+    fun createEventFromHomeFragment()
     fun showEventsTrip()
     fun showEventsMap()
     fun eventSelected(idEvent: String)
