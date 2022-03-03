@@ -31,6 +31,7 @@ class MainViewModel @Inject constructor(
     val createTripStatus = MutableLiveData<Resource<Trip>>()
     val removeTripStatus = MutableLiveData<Resource<Boolean>>()
     val tripSelected = MutableLiveData<Trip>()
+    private var tripsListenerJob: Job? = null
     val liveDataUpdateTrip = MutableLiveData<Trip>()
 
     val createEventStatus = MutableLiveData<Resource<Event>>()
@@ -48,8 +49,7 @@ class MainViewModel @Inject constructor(
 
     @ExperimentalCoroutinesApi
     suspend fun getTrips(userId: String){
-        Log.d(TAG, "Getting events")
-        viewModelScope.launch {
+        this.tripsListenerJob = viewModelScope.launch {
             useCase.GetTripsUseCase(userId).collect { resultTrips ->
                 when (resultTrips) {
                     is Resource.Success -> {
@@ -98,10 +98,17 @@ class MainViewModel @Inject constructor(
         return Storage.events[trip.id]
     }
 
+    fun removeTripsListener(){
+        if(this.tripsListenerJob != null){
+            this.tripsListenerJob!!.cancel()
+            this.tripsListenerJob = null
+        }
+    }
+
     fun removeEventListener(){
-        if(eventListenerJob != null){
-            eventListenerJob!!.cancel()
-            eventListenerJob = null
+        if(this.eventListenerJob != null){
+            this.eventListenerJob!!.cancel()
+            this.eventListenerJob = null
         }
     }
 

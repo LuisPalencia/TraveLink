@@ -79,6 +79,13 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         }
     }
 
+    override fun onDestroy() {
+        // Remove the trips listener
+        mainViewModel.removeTripsListener()
+
+        super.onDestroy()
+    }
+
     //Method that is executed when the toolbar back button is pressed
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false

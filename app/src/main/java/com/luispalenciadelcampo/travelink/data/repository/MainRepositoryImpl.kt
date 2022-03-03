@@ -121,7 +121,10 @@ class MainRepositoryImpl @Inject constructor(
         }
 
         tripsRef.addValueEventListener(tripsListener)
-        awaitClose { tripsRef.removeEventListener(tripsListener) }
+        awaitClose {
+            Log.d(TAG, "Removing trips listener for user $userId")
+            tripsRef.removeEventListener(tripsListener)
+        }
     }
 
 
