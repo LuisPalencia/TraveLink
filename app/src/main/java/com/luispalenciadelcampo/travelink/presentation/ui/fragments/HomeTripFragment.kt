@@ -143,6 +143,7 @@ class HomeTripFragment : Fragment() {
                 is Resource.Error -> {
                     Snackbar.make(binding.scrollView, getString(R.string.error_trip_removed), Snackbar.LENGTH_SHORT).show()
                 }
+                else -> {}
             }
         }
     }
