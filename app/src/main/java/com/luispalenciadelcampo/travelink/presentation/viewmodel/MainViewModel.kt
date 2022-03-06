@@ -59,6 +59,14 @@ class MainViewModel @Inject constructor(
                         trips.postValue(resultTrips)
                         Storage.trips = resultTrips.data
 
+                        if(tripSelected.value != null){
+                            for (trip in resultTrips.data){
+                                if(trip.id == tripSelected.value!!.id){
+                                    tripSelected.postValue(trip)
+                                    break
+                                }
+                            }
+                        }
                     }
                     is Resource.Error -> {
                         Log.d(TAG, "Error when trying to get the trips: ${resultTrips.message}")

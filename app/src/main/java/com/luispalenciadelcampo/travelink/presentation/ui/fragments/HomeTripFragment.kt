@@ -139,6 +139,7 @@ class HomeTripFragment : Fragment() {
             when (result) {
                 is Resource.Success -> {
                     Toast.makeText(this.requireContext(), getString(R.string.trip_removed_successfully), Toast.LENGTH_LONG).show()
+                    mainViewModel.tripSelected.postValue(null)
                     supportFragmentManager.popBackStackFragment()
                 }
                 is Resource.Error -> {
