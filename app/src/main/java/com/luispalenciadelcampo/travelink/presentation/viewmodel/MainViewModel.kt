@@ -26,7 +26,7 @@ class MainViewModel @Inject constructor(
 
     private val TAG = "MainViewModel"
 
-    val user = MutableLiveData<Resource<User>>()
+    val user = MutableLiveData<User>()
 
     val trips = MutableLiveData<Resource<MutableList<Trip>>>()
     val createTripStatus = MutableLiveData<Resource<Trip>>()
@@ -45,7 +45,18 @@ class MainViewModel @Inject constructor(
     suspend fun getUserFromDB(userId: String){
         viewModelScope.launch(Dispatchers.Main) {
             val resultUser = useCase.GetUserInfoUseCase(userId)
-            user.postValue(resultUser)
+
+            when (resultUser) {
+                is Resource.Success -> {
+                    user.postValue(resultUser.data!!)
+                }
+                is Resource.Error -> {
+                    Log.d(TAG, "Error when trying to get the user")
+                }
+                is Resource.Loading -> {
+
+                }
+            }
         }
     }
 
