@@ -108,6 +108,7 @@ class MainRepositoryImpl @Inject constructor(
                     tripsList.add(trip)
                 }
 
+                tripsList = TripFunctions.orderTripsList(tripsList)
                 //trySend(Resource.Success(tripsList))
                 this@callbackFlow.trySendBlocking(Resource.Success(tripsList))
 

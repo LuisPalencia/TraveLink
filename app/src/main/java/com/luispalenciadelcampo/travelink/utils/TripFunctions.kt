@@ -8,7 +8,7 @@ class TripFunctions {
 
     companion object{
         fun orderTripsList(trips: MutableList<Trip>): MutableList<Trip>{
-            return trips.sortedWith(compareBy({it.startDate})).toMutableList()
+            return trips.sortedWith(compareBy({it.startDate}, {it.endDate})).toMutableList()
         }
 
         fun orderEventsList(events: MutableList<Event>): MutableList<Event>{
