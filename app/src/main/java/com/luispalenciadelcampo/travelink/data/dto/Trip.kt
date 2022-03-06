@@ -14,7 +14,7 @@ data class Trip(
     var cities: MutableList<TripPlace> = mutableListOf(),
     var startDate: Date = Date(),
     var endDate: Date = Date(),
-    var rating: Int = 0,
+    var rating: Double = 0.0,
     var participants: MutableList<String> = mutableListOf(),
     @get:Exclude
     var image: Bitmap? = null

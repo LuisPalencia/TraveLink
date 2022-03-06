@@ -122,7 +122,8 @@ class HomeTripFragment : Fragment() {
         }
 
         binding.cardViewRating.setOnClickListener {
-
+            setObserverRateTrip()
+            supportFragmentManager.rateTrip()
         }
 
         binding.cardViewRemoveTrip.setOnClickListener {
@@ -142,6 +143,20 @@ class HomeTripFragment : Fragment() {
                 }
                 is Resource.Error -> {
                     Snackbar.make(binding.scrollView, getString(R.string.error_trip_removed), Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun setObserverRateTrip(){
+        mainViewModel.rateTripStatus.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Resource.Success -> {
+                    Snackbar.make(binding.scrollView, getString(R.string.rate_trip_success), Snackbar.LENGTH_SHORT).show()
+                }
+                is Resource.Error -> {
+                    Snackbar.make(binding.scrollView, getString(R.string.rate_trip_error), Snackbar.LENGTH_SHORT).show()
                 }
                 else -> {}
             }

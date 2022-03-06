@@ -27,6 +27,7 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.luispalenciadelcampo.travelink.data.dto.Event
+import com.luispalenciadelcampo.travelink.presentation.ui.fragments.RateDialogFragment
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import com.luispalenciadelcampo.travelink.utils.Resource
 import com.luispalenciadelcampo.travelink.utils.setupWithNavController
@@ -251,6 +252,12 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_expensesFragment)
     }
 
+    override fun rateTrip() {
+        var dialog = RateDialogFragment()
+
+        dialog.show(supportFragmentManager, "rateDialog")
+    }
+
     override fun eventSelected(idEvent: String) {
         val event = mainViewModel.getEventById(idEvent)
         if(event != null){
@@ -281,6 +288,5 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
-
 
 }

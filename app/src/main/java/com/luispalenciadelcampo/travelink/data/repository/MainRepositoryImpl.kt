@@ -66,6 +66,7 @@ class MainRepositoryImpl @Inject constructor(
         val tripsRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_TRIPS}/$userId")
         val tripsListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                Log.d(TAG, "TRIPS CHANGED")
                 tripsList = mutableListOf()
                 snapshot.children.forEach { trips ->
                     val trip = Trip()
@@ -81,7 +82,7 @@ class MainRepositoryImpl @Inject constructor(
                             "endDate" -> {
                                 trip.endDate = GenericFunctions.stringToDate(it.value.toString())
                             }
-                            "rating" -> trip.rating = it.value.toString().toIntOrNull() ?: 0
+                            "rating" -> trip.rating = it.value.toString().toDoubleOrNull() ?: 0.0
                             "cities" -> {
                                 /*val gson = GsonBuilder().setPrettyPrinting().create()
                                 val sType = object : TypeToken<List<City>>() { }.type
@@ -326,6 +327,21 @@ class MainRepositoryImpl @Inject constructor(
             Resource.Success(true)
         }catch (e: Exception){
             Resource.Error(Constants.RESULT_REMOVE_EVENT_ERROR)
+        }
+    }
+
+    override suspend fun rateTrip(
+        tripId: String,
+        userId: String,
+        rating: Double
+    ): Resource<Boolean> {
+        return try {
+            val tripRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_TRIPS}/$userId/$tripId")
+            tripRef.child("rating").setValue(rating).await()
+
+            Resource.Success(true)
+        }catch (e: Exception){
+            Resource.Error(Constants.RESULT_RATE_TRIP_ERROR)
         }
     }
 

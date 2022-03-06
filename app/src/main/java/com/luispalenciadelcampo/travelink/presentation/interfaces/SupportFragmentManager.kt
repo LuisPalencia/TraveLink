@@ -11,6 +11,7 @@ interface SupportFragmentManager {
     fun showEventsTrip()
     fun showEventsMap()
     fun showExpenses()
+    fun rateTrip()
     fun eventSelected(idEvent: String)
     fun showEventLocation(event: Event)
     fun signOutUser()

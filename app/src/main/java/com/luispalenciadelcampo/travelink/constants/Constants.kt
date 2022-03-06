@@ -47,6 +47,8 @@ object Constants {
     const val RESULT_REMOVE_TRIP_ERROR = "RESULT_REMOVE_TRIP_ERROR"
     const val RESULT_REMOVE_EVENT_ERROR = "RESULT_REMOVE_EVENT_ERROR"
 
+    const val RESULT_RATE_TRIP_ERROR = "RESULT_RATE_TRIP_ERROR"
+
     // Permission requests
     const val ACCESS_FINE_LOCATION_PERMISSIONS_CODE = 100
 }

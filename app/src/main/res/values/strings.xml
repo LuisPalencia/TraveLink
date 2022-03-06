@@ -138,6 +138,18 @@
     <string name="total_expenses_trip">The total cost of the trip is:</string>
     <string name="events_with_expenses">Events with expenses</string>
 
+    <!-- Fragment Dialog Rating -->
+    <string name="trip_rating">Trip rating</string>
+    <string name="rate_this_trip">Please rate this trip</string>
+    <string name="send_rating">Send rating</string>
+    <string name="very_bad">Very bad</string>
+    <string name="not_good">Not good</string>
+    <string name="quite_ok">Quite Ok</string>
+    <string name="very_good">Very good</string>
+    <string name="excellent">Excellent!</string>
+    <string name="rate_trip_success">Trip has been rated!</string>
+    <string name="rate_trip_error">An error occurred when trying to rate the trip</string>
+
     <!-- Layout examples -->
     <string name="example_trip_name">Trip to Madrid</string>
     <string name="example_date">01/01/2022 – 07/01/2022</string>
