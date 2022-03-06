@@ -65,6 +65,7 @@
     <string name="trip_name">Trip name</string>
     <string name="start_date">Start date</string>
     <string name="end_date">End date</string>
+    <string name="date_for_trip">Trip date</string>
     <string name="cities">Cities</string>
     <string name="add_city">Add city</string>
     <string name="create_trip">Create trip</string>
