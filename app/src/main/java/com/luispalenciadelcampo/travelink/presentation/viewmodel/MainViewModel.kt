@@ -9,6 +9,7 @@ import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.data.dto.User
 import com.luispalenciadelcampo.travelink.domain.usecases.UseCase
 import com.luispalenciadelcampo.travelink.storage.Storage
+import com.luispalenciadelcampo.travelink.utils.GenericFunctions
 import com.luispalenciadelcampo.travelink.utils.Resource
 import com.luispalenciadelcampo.travelink.utils.TripFunctions
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,6 +18,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +31,8 @@ class MainViewModel @Inject constructor(
     val user = MutableLiveData<User>()
 
     val trips = MutableLiveData<Resource<MutableList<Trip>>>()
+    val actualTrips = MutableLiveData<MutableList<Trip>>()
+    val pastTrips = MutableLiveData<MutableList<Trip>>()
     val createTripStatus = MutableLiveData<Resource<Trip>>()
     val removeTripStatus = MutableLiveData<Resource<Boolean>>()
     val rateTripStatus = MutableLiveData<Resource<Boolean>>()
@@ -69,6 +73,7 @@ class MainViewModel @Inject constructor(
                         Log.d(TAG, resultTrips.data.toString())
                         trips.postValue(resultTrips)
                         Storage.trips = resultTrips.data
+                        sortTrips(resultTrips.data)
 
                         if(tripSelected.value != null){
                             for (trip in resultTrips.data){
@@ -88,6 +93,29 @@ class MainViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    private fun sortTrips(trips: MutableList<Trip>){
+        val actualTripsList = mutableListOf<Trip>()
+        val pastTripsList = mutableListOf<Trip>()
+
+
+        val calendar = GenericFunctions.getActualCalendarWithNoHour()
+        val actualDate = calendar.time
+
+        for(trip in trips){
+            Log.d(TAG, trip.name)
+            Log.d(TAG, "${trip.endDate}")
+            Log.d(TAG, actualDate.toString())
+            if(trip.endDate.before(actualDate)){
+                pastTripsList.add(trip)
+            }else{
+                actualTripsList.add(trip)
+            }
+        }
+
+        this.actualTrips.postValue(actualTripsList)
+        this.pastTrips.postValue(pastTripsList)
     }
 
     @ExperimentalCoroutinesApi
@@ -218,6 +246,8 @@ class MainViewModel @Inject constructor(
         }
         return totalExpense
     }
+
+
 
 
 
