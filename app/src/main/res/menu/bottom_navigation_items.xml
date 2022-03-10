@@ -5,10 +5,6 @@
         android:id="@+id/trips"
         android:icon="@drawable/ic_suitcase"
         android:title="@string/trips" />
-    <item
-        android:id="@+id/favourites"
-        android:icon="@drawable/ic_favourite"
-        android:title="@string/trips"/>
 
     <item
         android:id="@+id/profile"

@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         //binding.layoutNoConnection.root.visibility = View.GONE
 
         // Set the navigation graph of the app in order to keep the progress on each item of the bottomNavigationView
-        val navGraphIds = listOf(R.navigation.trips, R.navigation.favourites, R.navigation.profile)
+        val navGraphIds = listOf(R.navigation.trips, R.navigation.profile)
 
         val controller = binding.bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
