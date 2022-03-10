@@ -24,6 +24,7 @@ import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import com.luispalenciadelcampo.travelink.utils.GenericFunctions
 import com.luispalenciadelcampo.travelink.utils.Resource
 import com.luispalenciadelcampo.travelink.utils.TripFunctions
+import com.luispalenciadelcampo.travelink.utils.observeOnce
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -124,7 +125,7 @@ class EventDetailsFragment : Fragment() {
     }
 
     private fun setObserverRemoveEvent(){
-        mainViewModel.removeEventStatus.observe(viewLifecycleOwner) { result ->
+        mainViewModel.removeEventStatus.observeOnce(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Success -> {
                     Toast.makeText(this.requireContext(), getString(R.string.event_removed_successfully), Toast.LENGTH_LONG).show()

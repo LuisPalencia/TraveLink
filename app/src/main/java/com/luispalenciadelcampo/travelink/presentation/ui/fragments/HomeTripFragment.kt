@@ -22,6 +22,7 @@ import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivit
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import com.luispalenciadelcampo.travelink.utils.Resource
+import com.luispalenciadelcampo.travelink.utils.observeOnce
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -152,7 +153,7 @@ class HomeTripFragment : Fragment() {
     }
 
     private fun setObserverRemoveTrip(){
-        mainViewModel.removeTripStatus.observe(viewLifecycleOwner) { result ->
+        mainViewModel.removeTripStatus.observeOnce(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Success -> {
                     Toast.makeText(this.requireContext(), getString(R.string.trip_removed_successfully), Toast.LENGTH_LONG).show()
