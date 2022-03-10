@@ -34,6 +34,7 @@ class EventDetailsFragment : Fragment() {
     private lateinit var rootView: View
 
     private var event = Event()
+    private lateinit var trip: Trip
 
     private val mainViewModel: MainViewModel by activityViewModels()
 
@@ -51,23 +52,34 @@ class EventDetailsFragment : Fragment() {
         }catch (e: IOException){
             Log.d(TAG, "MainActivity is on null state")
         }
-
-        val idEvent = arguments?.getString(Constants.BUNDLE_ID_EVENT_SELECTED)
-        if(idEvent != null){
-            val eventTemp = mainViewModel.getEventById(idEvent)
-            if(eventTemp != null){
-                this.event = eventTemp
-            }
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout for this fragment
         _binding = FragmentEventDetailsBinding.inflate(inflater, container, false)
         rootView = binding.root
-        // Inflate the layout for this fragment
+
+
+        val tripUnw = arguments?.getParcelable<Trip>(Constants.BUNDLE_TRIP)
+        if(tripUnw == null){
+            Log.e(TAG, "EventDetailsFragment received a null Trip object from the arguments")
+            supportFragmentManager.popBackStackFragment()
+            return null
+        }
+
+        this.trip = tripUnw
+
+        val eventUnw = arguments?.getParcelable<Event>(Constants.BUNDLE_EVENT)
+        if(eventUnw == null){
+            Log.e(TAG, "EventDetailsFragment received a null Event object from the arguments")
+            supportFragmentManager.popBackStackFragment()
+            return null
+        }
+
+        this.event = eventUnw
 
         setView()
         setButtons()
@@ -83,7 +95,7 @@ class EventDetailsFragment : Fragment() {
 
     private fun setView(){
         binding.textViewEventName.text = event.name
-        binding.textViewDate.text = TripFunctions.getStringForDayPosition(event.day, mainViewModel.tripSelected.value!!.startDate)
+        binding.textViewDate.text = TripFunctions.getStringForDayPosition(event.day, this.trip.startDate)
         binding.textViewTime.text = "${GenericFunctions.dateHourToString(event.startTime)} - ${GenericFunctions.dateHourToString(event.endTime)}"
         binding.textViewPrice.text = "${event.price} €"
     }
@@ -96,7 +108,7 @@ class EventDetailsFragment : Fragment() {
         binding.btnDeleteEvent.setOnClickListener {
             setObserverRemoveEvent()
             lifecycleScope.launch {
-                mainViewModel.removeEvent(event)
+                mainViewModel.removeEvent(event, trip.id)
             }
         }
     }

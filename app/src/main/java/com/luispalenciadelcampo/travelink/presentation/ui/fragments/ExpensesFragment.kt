@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.luispalenciadelcampo.travelink.constants.Constants
 import com.luispalenciadelcampo.travelink.data.dto.Event
+import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.databinding.FragmentExpensesBinding
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
 import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
@@ -23,6 +25,8 @@ class ExpensesFragment : Fragment() {
     private val TAG = "ExpensesFragment"
     private lateinit var supportFragmentManager: SupportFragmentManager
     private lateinit var rootView: View
+
+    private lateinit var trip: Trip
 
     // Adapter
     private lateinit var adapter: ExpensesAdapter
@@ -54,6 +58,15 @@ class ExpensesFragment : Fragment() {
         _binding = FragmentExpensesBinding.inflate(inflater, container, false)
         rootView = binding.root
 
+        val tripUnw = arguments?.getParcelable<Trip>(Constants.BUNDLE_TRIP)
+        if(tripUnw == null){
+            Log.e(TAG, "ExpensesFragment received a null Trip object from the arguments")
+            supportFragmentManager.popBackStackFragment()
+            return null
+        }
+
+        this.trip = tripUnw
+
         setUpView()
 
         return rootView
@@ -65,7 +78,7 @@ class ExpensesFragment : Fragment() {
     }
 
     private fun setUpView(){
-        this.eventsWithExpenses = mainViewModel.getEventsWithExpensesOrdered()
+        this.eventsWithExpenses = mainViewModel.getEventsWithExpensesOrdered(this.trip.id)
 
         binding.textViewTotalCost.text = "${mainViewModel.getTotalExpenseTrip(this.eventsWithExpenses)} €"
 

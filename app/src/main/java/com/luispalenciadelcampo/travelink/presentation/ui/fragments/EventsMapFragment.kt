@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.luispalenciadelcampo.travelink.R
+import com.luispalenciadelcampo.travelink.constants.Constants
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.databinding.FragmentEventsBinding
@@ -74,8 +75,17 @@ class EventsMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
         _binding = FragmentEventsMapBinding.inflate(inflater, container, false)
         rootView = binding.root
 
+        val tripUnw = arguments?.getParcelable<Trip>(Constants.BUNDLE_TRIP)
+        if(tripUnw == null){
+            Log.e(TAG, "EventsMapFragment received a null Trip object from the arguments")
+            supportFragmentManager.popBackStackFragment()
+            return null
+        }
+
+        this.trip = tripUnw
+
         // Get the events of the trip
-        val eventsTemp = mainViewModel.getLocalEvents(mainViewModel.tripSelected.value!!)
+        val eventsTemp = mainViewModel.getLocalEvents(this.trip)
         // Check if events are not null and not empty
         if(eventsTemp != null && eventsTemp.size > 0){
             this.eventList = eventsTemp

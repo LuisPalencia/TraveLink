@@ -61,7 +61,14 @@ class HomeTripFragment : Fragment() {
         _binding = FragmentHomeTripBinding.inflate(inflater, container, false)
         rootView = binding.root
 
-        trip = mainViewModel.tripSelected.value!!
+        val tripUnw = arguments?.getParcelable<Trip>(Constants.BUNDLE_TRIP)
+        if(tripUnw == null){
+            Log.e(TAG, "HomeTripFragment received a null Trip object from the arguments")
+            supportFragmentManager.popBackStackFragment()
+            return null
+        }
+
+        this.trip = tripUnw
 
         getEventsTrip()
 
@@ -104,26 +111,26 @@ class HomeTripFragment : Fragment() {
 
     private fun setButtons(){
         binding.cardViewEvents.setOnClickListener {
-            supportFragmentManager.showEventsTrip()
+            supportFragmentManager.showEventsTrip(trip.id)
         }
 
 
 
         binding.cardViewCreateEvent.setOnClickListener {
-            supportFragmentManager.createEventFromHomeFragment()
+            supportFragmentManager.createEventFromHomeFragment(trip.id)
         }
 
         binding.cardViewMap.setOnClickListener {
-            supportFragmentManager.showEventsMap()
+            supportFragmentManager.showEventsMap(trip.id)
         }
 
         binding.cardViewExpenses.setOnClickListener {
-            supportFragmentManager.showExpenses()
+            supportFragmentManager.showExpenses(trip.id)
         }
 
         binding.cardViewRating.setOnClickListener {
             setObserverRateTrip()
-            supportFragmentManager.rateTrip()
+            supportFragmentManager.rateTrip(trip.id)
         }
 
         binding.cardViewRemoveTrip.setOnClickListener {
@@ -139,7 +146,6 @@ class HomeTripFragment : Fragment() {
             when (result) {
                 is Resource.Success -> {
                     Toast.makeText(this.requireContext(), getString(R.string.trip_removed_successfully), Toast.LENGTH_LONG).show()
-                    mainViewModel.tripSelected.postValue(null)
                     supportFragmentManager.popBackStackFragment()
                 }
                 is Resource.Error -> {

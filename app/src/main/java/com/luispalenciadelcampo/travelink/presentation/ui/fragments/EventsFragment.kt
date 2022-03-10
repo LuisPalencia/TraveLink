@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.luispalenciadelcampo.travelink.constants.Constants
+import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.databinding.FragmentEventsBinding
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
 import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
@@ -25,6 +27,8 @@ class EventsFragment : Fragment() {
     private lateinit var rootView: View
 
     private val mainViewModel: MainViewModel by activityViewModels()
+
+    private lateinit var trip: Trip
 
     private lateinit var adapter: EventsAdapter
 
@@ -52,6 +56,14 @@ class EventsFragment : Fragment() {
         _binding = FragmentEventsBinding.inflate(inflater, container, false)
         rootView = binding.root
 
+        val tripUnw = arguments?.getParcelable<Trip>(Constants.BUNDLE_TRIP)
+        if(tripUnw == null){
+            Log.e(TAG, "EventsFragment received a null Trip object from the arguments")
+            supportFragmentManager.popBackStackFragment()
+            return null
+        }
+
+        this.trip = tripUnw
 
         setRecyclerView()
         setObserver()
@@ -67,11 +79,11 @@ class EventsFragment : Fragment() {
     }
 
     private fun setRecyclerView(){
-        adapter = EventsAdapter(this.requireContext(), mainViewModel.tripSelected.value!!)
+        adapter = EventsAdapter(this.requireContext(), trip)
         adapter.setEventsListener(object : EventsAdapter.EventsListener{
             override fun onItemClick(position: Int, idEvent: String) {
                 Log.d(TAG, "Event selected: $idEvent")
-                supportFragmentManager.eventSelected(idEvent)
+                supportFragmentManager.eventSelected(trip.id, idEvent)
             }
         })
 
@@ -81,6 +93,7 @@ class EventsFragment : Fragment() {
 
     private fun setObserver(){
         mainViewModel.eventsTrip.observe(viewLifecycleOwner) { result ->
+            Log.d(TAG, "INFO OBTAINED")
             when (result) {
                 is Resource.Success -> {
                     Log.d(TAG, result.data.toString())
@@ -99,7 +112,7 @@ class EventsFragment : Fragment() {
 
     private fun setButtons(){
         binding.btnCreateEvent.setOnClickListener {
-            supportFragmentManager.createEvent()
+            supportFragmentManager.createEvent(trip.id)
         }
     }
 

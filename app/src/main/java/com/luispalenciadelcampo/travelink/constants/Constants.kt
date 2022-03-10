@@ -23,7 +23,9 @@ object Constants {
     // Bundles
     const val LOGGED_BEFORE_MAIN_ACTIVITY = "LOGGED_BEFORE_MAIN_ACTIVITY" //Bundle login
     const val BUNDLE_ID_TRIP_SELECTED = "idTrip" // ID Trip selected
+    const val BUNDLE_TRIP = "trip" // Trip selected
     const val BUNDLE_ID_EVENT_SELECTED = "BUNDLE_ID_EVENT_SELECTED" // ID Event selected
+    const val BUNDLE_EVENT = "event" // ID Event selected
 
 
     // Results

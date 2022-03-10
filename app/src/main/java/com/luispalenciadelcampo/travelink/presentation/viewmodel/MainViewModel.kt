@@ -36,14 +36,12 @@ class MainViewModel @Inject constructor(
     val createTripStatus = MutableLiveData<Resource<Trip>>()
     val removeTripStatus = MutableLiveData<Resource<Boolean>>()
     val rateTripStatus = MutableLiveData<Resource<Boolean>>()
-    val tripSelected = MutableLiveData<Trip>()
     private var tripsListenerJob: Job? = null
     val liveDataUpdateTrip = MutableLiveData<Trip>()
 
     val createEventStatus = MutableLiveData<Resource<Event>>()
     val removeEventStatus = MutableLiveData<Resource<Boolean>>()
     val eventsTrip = MutableLiveData<Resource<MutableList<Event>>>()
-    val eventSelected = MutableLiveData<Event>()
     private var eventListenerJob: Job? = null
 
     suspend fun getUserFromDB(userId: String){
@@ -74,15 +72,6 @@ class MainViewModel @Inject constructor(
                         trips.postValue(resultTrips)
                         Storage.trips = resultTrips.data
                         sortTrips(resultTrips.data)
-
-                        if(tripSelected.value != null){
-                            for (trip in resultTrips.data){
-                                if(trip.id == tripSelected.value!!.id){
-                                    tripSelected.postValue(trip)
-                                    break
-                                }
-                            }
-                        }
                     }
                     is Resource.Error -> {
                         Log.d(TAG, "Error when trying to get the trips: ${resultTrips.message}")
@@ -104,9 +93,6 @@ class MainViewModel @Inject constructor(
         val actualDate = calendar.time
 
         for(trip in trips){
-            Log.d(TAG, trip.name)
-            Log.d(TAG, "${trip.endDate}")
-            Log.d(TAG, actualDate.toString())
             if(trip.endDate.before(actualDate)){
                 pastTripsList.add(trip)
             }else{
@@ -121,16 +107,13 @@ class MainViewModel @Inject constructor(
     @ExperimentalCoroutinesApi
     suspend fun getEvents(trip: Trip){
         this.eventListenerJob = viewModelScope.launch {
-            useCase.GetEventsUseCase(tripSelected.value!!).collect { resultEvents ->
+            useCase.GetEventsUseCase(trip).collect { resultEvents ->
                 when (resultEvents) {
                     is Resource.Success -> {
+                        Log.d(TAG, "HOLAAAAAAAA")
                         Log.d(TAG, resultEvents.data.toString())
                         Storage.events[trip.id] = resultEvents.data
-
-                        // Only update the
-                        if(tripSelected.value != null){
-                            if(tripSelected.value!!.id == trip.id) eventsTrip.postValue(resultEvents)
-                        }
+                        eventsTrip.postValue(resultEvents)
                     }
                     is Resource.Error -> {
                         Log.d(TAG, "Error when trying to get the trips: ${resultEvents.message}")
@@ -175,7 +158,37 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    suspend fun createEvent(event: Event, idTrip: String){
+        viewModelScope.launch(Dispatchers.Main) {
+            val resultCreateEvent = useCase.CreateEventUseCase(event, idTrip)
+            createEventStatus.postValue(resultCreateEvent)
+        }
+    }
 
+    suspend fun removeEvent(event: Event, tripId: String){
+        viewModelScope.launch(Dispatchers.Main) {
+            val resultRemoveEvent = useCase.RemoveEventUseCase(event, tripId)
+            removeEventStatus.postValue(resultRemoveEvent)
+        }
+    }
+
+    suspend fun rateTrip(rating: Double, trip: Trip){
+        viewModelScope.launch(Dispatchers.Main) {
+            trip.rating = rating
+            val resultRateTrip = useCase.RateTrip(trip.id, trip.userAdminId!!, rating)
+            rateTripStatus.postValue(resultRateTrip)
+        }
+    }
+
+
+    fun getTripById(id: String): Trip?{
+        for(trip in Storage.trips){
+            if(trip.id == id) return trip
+        }
+        return null
+    }
+
+    /*
     fun selectedTrip(id: String): Trip?{
         for(trip in Storage.trips){
             if(trip.id == id){
@@ -186,36 +199,13 @@ class MainViewModel @Inject constructor(
 
         return null
     }
+     */
 
-    suspend fun createEvent(event: Event){
-        viewModelScope.launch(Dispatchers.Main) {
-            val resultCreateEvent = useCase.CreateEventUseCase(event, tripSelected.value!!.id)
-            createEventStatus.postValue(resultCreateEvent)
-        }
-    }
-
-    suspend fun removeEvent(event: Event){
-        viewModelScope.launch(Dispatchers.Main) {
-            val resultRemoveEvent = useCase.RemoveEventUseCase(event, tripSelected.value!!.id)
-            removeEventStatus.postValue(resultRemoveEvent)
-        }
-    }
-
-    suspend fun rateTrip(rating: Double){
-        viewModelScope.launch(Dispatchers.Main) {
-            if(tripSelected.value != null){
-                tripSelected.value!!.rating = rating
-                val resultRateTrip = useCase.RateTrip(tripSelected.value!!.id, tripSelected.value!!.userAdminId!!, rating)
-                rateTripStatus.postValue(resultRateTrip)
-            }
-        }
-    }
-
-    fun getEventById(id: String): Event?{
-        val events = Storage.events[tripSelected.value!!.id]
+    fun getEventById(idEvent: String, idTrip: String): Event?{
+        val events = Storage.events[idTrip]
         if(events != null){
             for(event in events){
-                if(event.id == id) return event
+                if(event.id == idEvent) return event
             }
             return null
         }else{
@@ -223,11 +213,11 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getEventsWithExpensesOrdered(): MutableList<Event>{
+    fun getEventsWithExpensesOrdered(idTrip: String): MutableList<Event>{
         val expensesEventList = mutableListOf<Event>()
 
-        if(tripSelected.value != null && Storage.events[tripSelected.value?.id] != null){
-            for(event in Storage.events[tripSelected.value?.id]!!){
+        if(Storage.events[idTrip] != null){
+            for(event in Storage.events[idTrip]!!){
                 if(event.price > 0.0){
                     expensesEventList.add(event)
                 }

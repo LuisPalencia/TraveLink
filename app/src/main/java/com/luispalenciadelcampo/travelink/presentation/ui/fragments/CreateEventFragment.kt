@@ -23,6 +23,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.luispalenciadelcampo.travelink.R
+import com.luispalenciadelcampo.travelink.constants.Constants
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.data.dto.TripPlace
@@ -66,7 +67,15 @@ class CreateEventFragment : Fragment() {
         _binding = FragmentCreateEventBinding.inflate(inflater, container, false)
         rootView = binding.root
 
-        trip = mainViewModel.tripSelected.value!!
+        val tripUnw = arguments?.getParcelable<Trip>(Constants.BUNDLE_TRIP)
+        if(tripUnw == null){
+            Log.e(TAG, "CreateEventFragment received a null Trip object from the arguments")
+            supportFragmentManager.popBackStackFragment()
+            return null
+        }
+
+        this.trip = tripUnw
+
 
         setupView()
         setButtons()
@@ -212,7 +221,7 @@ class CreateEventFragment : Fragment() {
             )
 
             lifecycleScope.launch {
-                mainViewModel.createEvent(event)
+                mainViewModel.createEvent(event, this@CreateEventFragment.trip.id)
             }
         }
     }

@@ -23,19 +23,23 @@ import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.constants.Constants
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.databinding.FragmentEventMapBinding
+import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
+import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
+import java.io.IOException
 
 
 class EventMapFragment : Fragment(), OnMapReadyCallback {
 
     private val TAG = "EventMapFragment"
+    private lateinit var supportFragmentManager: SupportFragmentManager
     private lateinit var rootView: View
 
     private var map: GoogleMap? = null
 
     private val mainViewModel: MainViewModel by activityViewModels()
 
-    private var event = Event()
+    private lateinit var event: Event
 
     private var _binding: FragmentEventMapBinding? = null
     // This property is only valid between onCreateView and
@@ -45,14 +49,14 @@ class EventMapFragment : Fragment(), OnMapReadyCallback {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        val idEvent = arguments?.getString(Constants.BUNDLE_ID_EVENT_SELECTED)
-        if(idEvent != null){
-            val eventTemp = mainViewModel.getEventById(idEvent)
-            if(eventTemp != null){
-                this.event = eventTemp
-            }
+        // Get the MainAcitivity reference with the interface SupportFragmentManager
+        try{
+            supportFragmentManager = context as MainActivity
+        }catch (e: IOException){
+            Log.d(TAG, "MainActivity is on null state")
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +65,15 @@ class EventMapFragment : Fragment(), OnMapReadyCallback {
         // Inflate the layout for this fragment
         _binding = FragmentEventMapBinding.inflate(inflater, container, false)
         rootView = binding.root
+
+        val eventUnw = arguments?.getParcelable<Event>(Constants.BUNDLE_EVENT)
+        if(eventUnw == null){
+            Log.e(TAG, "EventMapFragment received a null Event object from the arguments")
+            supportFragmentManager.popBackStackFragment()
+            return null
+        }
+
+        this.event = eventUnw
 
         setUpMap()
 

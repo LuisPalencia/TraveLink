@@ -213,10 +213,10 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
 
 
     override fun tripSelected(id: String) {
-        val trip = mainViewModel.selectedTrip(id)
+        val trip = mainViewModel.getTripById(id)
         if(trip != null){
             val bundle = bundleOf()
-            bundle.putString(Constants.BUNDLE_ID_TRIP_SELECTED, id)
+            bundle.putParcelable(Constants.BUNDLE_TRIP, trip)
             findNavController(R.id.nav_host_fragment).navigate(R.id.action_tripsFragment_to_homeTripFragment, bundle)
         }else{
             Toast.makeText(this, R.string.error_load_trip, Toast.LENGTH_LONG).show()
@@ -232,37 +232,78 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
 
     }
 
-    override fun createEvent() {
-        findNavController(R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_createEventFragment)
-    }
-
-    override fun createEventFromHomeFragment() {
-        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_createEventFragment)
-    }
-
-    override fun showEventsTrip() {
-        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_eventsFragment)
-    }
-
-    override fun showEventsMap() {
-        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_eventsMapFragment)
-    }
-
-    override fun showExpenses() {
-        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_expensesFragment)
-    }
-
-    override fun rateTrip() {
-        var dialog = RateDialogFragment()
-
-        dialog.show(supportFragmentManager, "rateDialog")
-    }
-
-    override fun eventSelected(idEvent: String) {
-        val event = mainViewModel.getEventById(idEvent)
-        if(event != null){
+    override fun createEvent(id: String) {
+        val trip = mainViewModel.getTripById(id)
+        if(trip != null){
             val bundle = bundleOf()
-            bundle.putString(Constants.BUNDLE_ID_EVENT_SELECTED, idEvent)
+            bundle.putParcelable(Constants.BUNDLE_TRIP, trip)
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_createEventFragment, bundle)
+        }else{
+            Toast.makeText(this, R.string.error_load_trip, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun createEventFromHomeFragment(id: String) {
+        val trip = mainViewModel.getTripById(id)
+        if(trip != null){
+            val bundle = bundleOf()
+            bundle.putParcelable(Constants.BUNDLE_TRIP, trip)
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_createEventFragment, bundle)
+        }else{
+            Toast.makeText(this, R.string.error_load_trip, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun showEventsTrip(id: String) {
+        val trip = mainViewModel.getTripById(id)
+        if(trip != null){
+            val bundle = bundleOf()
+            bundle.putParcelable(Constants.BUNDLE_TRIP, trip)
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_eventsFragment, bundle)
+        }else{
+            Toast.makeText(this, R.string.error_load_trip, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun showEventsMap(id: String) {
+        val trip = mainViewModel.getTripById(id)
+        if(trip != null){
+            val bundle = bundleOf()
+            bundle.putParcelable(Constants.BUNDLE_TRIP, trip)
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_eventsMapFragment, bundle)
+        }else{
+            Toast.makeText(this, R.string.error_load_trip, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun showExpenses(id: String) {
+        val trip = mainViewModel.getTripById(id)
+        if(trip != null){
+            val bundle = bundleOf()
+            bundle.putParcelable(Constants.BUNDLE_TRIP, trip)
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeTripFragment_to_expensesFragment, bundle)
+        }else{
+            Toast.makeText(this, R.string.error_load_trip, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun rateTrip(id: String) {
+        val trip = mainViewModel.getTripById(id)
+        if(trip != null){
+            var dialog = RateDialogFragment(trip)
+            dialog.show(supportFragmentManager, "rateDialog")
+        }else{
+            Toast.makeText(this, R.string.error_load_trip, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun eventSelected(idTrip: String, idEvent: String) {
+        val trip = mainViewModel.getTripById(idTrip)
+        val event = mainViewModel.getEventById(idEvent, idTrip)
+        if(trip != null && event != null){
+            val bundle = bundleOf()
+            bundle.putParcelable(Constants.BUNDLE_TRIP, trip)
+            bundle.putParcelable(Constants.BUNDLE_EVENT, event)
             findNavController(R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_eventDetailsFragment, bundle)
         }else{
             Toast.makeText(this, R.string.error_load_event, Toast.LENGTH_LONG).show()
@@ -271,7 +312,7 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
 
     override fun showEventLocation(event: Event) {
         val bundle = bundleOf()
-        bundle.putString(Constants.BUNDLE_ID_EVENT_SELECTED, event.id)
+        bundle.putParcelable(Constants.BUNDLE_EVENT, event)
         findNavController(R.id.nav_host_fragment).navigate(R.id.action_eventDetailsFragment_to_eventMapFragment, bundle)
     }
 

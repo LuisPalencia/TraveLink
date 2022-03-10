@@ -12,10 +12,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.luispalenciadelcampo.travelink.R
+import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
-class RateDialogFragment: DialogFragment() {
+class RateDialogFragment(private val trip: Trip): DialogFragment() {
 
     private val TAG = "RateDialogFragment"
     private lateinit var rootView: View
@@ -31,9 +32,7 @@ class RateDialogFragment: DialogFragment() {
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_dialog_rate, container, false)
 
-        if(mainViewModel.tripSelected.value != null){
-            setUpView()
-        }
+        setUpView()
 
         return rootView
     }
@@ -42,7 +41,7 @@ class RateDialogFragment: DialogFragment() {
         this.ratingBar = rootView.findViewById(R.id.ratingBar)
         this.textViewRating = rootView.findViewById(R.id.textViewRating)
 
-        this.ratingBar.rating = mainViewModel.tripSelected.value?.rating?.toFloat() ?: 0.0F
+        this.ratingBar.rating = trip.rating.toFloat()
 
         this.ratingBar.onRatingBarChangeListener =
             RatingBar.OnRatingBarChangeListener { ratingBar, rating, fromUser ->
@@ -69,7 +68,7 @@ class RateDialogFragment: DialogFragment() {
 
         rootView.findViewById<Button>(R.id.btnSendRating).setOnClickListener {
             lifecycleScope.launch {
-                mainViewModel.rateTrip(ratingBar.rating.toDouble())
+                mainViewModel.rateTrip(ratingBar.rating.toDouble(), this@RateDialogFragment.trip)
             }
             this.dismiss()
         }
