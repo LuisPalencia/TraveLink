@@ -53,6 +53,9 @@
     <string name="favourites">Favourites</string>
     <string name="profile">Profile</string>
 
+    <!-- Trips fragment -->
+    <string name="current_trips">Current trips</string>
+    <string name="past_trips">Past trips</string>
 
     <!-- Profile fragment -->
     <string name="hello">Hello</string>

@@ -10,13 +10,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
+import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.databinding.FragmentTripsBinding
 import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
 import com.luispalenciadelcampo.travelink.presentation.ui.adapters.TripsAdapter
+import com.luispalenciadelcampo.travelink.presentation.ui.adapters.TripsViewPagerAdapter
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import com.luispalenciadelcampo.travelink.utils.Resource
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -30,7 +34,7 @@ class TripsFragment : Fragment() {
     private val mainViewModel: MainViewModel by activityViewModels()
 
     // Adapter
-    private lateinit var adapter: TripsAdapter
+    private lateinit var adapter: TripsViewPagerAdapter
 
     private var _binding: FragmentTripsBinding? = null
     // This property is only valid between onCreateView and
@@ -56,9 +60,7 @@ class TripsFragment : Fragment() {
         _binding = FragmentTripsBinding.inflate(inflater, container, false)
         rootView = binding.root
 
-        setButtons()
-        setObservers()
-        setRecyclerView()
+        setViewPagerAdapter()
         getInitialData()
 
         return rootView
@@ -69,55 +71,27 @@ class TripsFragment : Fragment() {
         _binding = null
     }
 
-    private fun setButtons(){
-        binding.btnCreateTrip.setOnClickListener {
-            supportFragmentManager.createTrip()
-        }
+    private fun setViewPagerAdapter(){
+        this.adapter = TripsViewPagerAdapter(parentFragmentManager, requireActivity().lifecycle)
+        binding.viewPagerTrips.adapter = this.adapter
+
+        val tabNames = arrayOf(getString(R.string.current_trips), getString(R.string.past_trips))
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPagerTrips) { tab, position ->
+            tab.text = tabNames[position]
+        }.attach()
     }
 
-    private fun setObservers(){
-        mainViewModel.trips.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Resource.Success -> {
-                    //Log.d(TAG, result.data.toString())
-                    if(result.data != null){
-                        adapter.setTripsList(result.data)
-                        adapter.notifyDataSetChanged()
-                    }
-                }
-                is Resource.Error -> {
-                    Log.d(TAG, "Error when trying to get the trips: ${result.message}")
-                }
-                is Resource.Loading -> {
 
-                }
-            }
-        }
-    }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun getInitialData(){
         lifecycleScope.launch {
             mainViewModel.getTrips(FirebaseAuth.getInstance().currentUser!!.uid)
         }
     }
 
-    // Method that sets the recycler view of the favourite sneakers fragment
-    private fun setRecyclerView(){
-        // Create the adapter
-        adapter = TripsAdapter(this.requireContext())
 
-        adapter.setOnItemClickListener(object : TripsAdapter.OnItemClickListener{
-            // When an item is selected, it opens the sneaker details
-            override fun onItemClick(position: Int, idTrip: String) {
-                Log.d(TAG, "Trip selected: $idTrip")
-                supportFragmentManager.tripSelected(idTrip)
-            }
-        })
-
-        // Set the adapter and the layout manager for the recyclerview
-        binding.tripsRecyclerView.adapter = adapter
-        binding.tripsRecyclerView.layoutManager = LinearLayoutManager(this.context)
-    }
 
 
 }
