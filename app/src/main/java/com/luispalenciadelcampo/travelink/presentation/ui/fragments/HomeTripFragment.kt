@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.luispalenciadelcampo.travelink.R
@@ -134,10 +135,19 @@ class HomeTripFragment : Fragment() {
         }
 
         binding.cardViewRemoveTrip.setOnClickListener {
-            setObserverRemoveTrip()
-            lifecycleScope.launch {
-                mainViewModel.removeTrip(trip)
-            }
+            MaterialAlertDialogBuilder(this.requireContext())
+                .setTitle(getString(R.string.dialog_remove_trip_title))
+                .setMessage(getString(R.string.dialog_remove_trip_message))
+                .setPositiveButton(getString(R.string.ok)){ _, _ ->
+                    setObserverRemoveTrip()
+                    lifecycleScope.launch {
+                        mainViewModel.removeTrip(trip)
+                    }
+                }
+                .setNegativeButton(getString(R.string.cancel)){ dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
     }
 

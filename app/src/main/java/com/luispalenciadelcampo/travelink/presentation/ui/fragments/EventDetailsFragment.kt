@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.constants.Constants
@@ -106,10 +107,19 @@ class EventDetailsFragment : Fragment() {
         }
 
         binding.btnDeleteEvent.setOnClickListener {
-            setObserverRemoveEvent()
-            lifecycleScope.launch {
-                mainViewModel.removeEvent(event, trip.id)
-            }
+            MaterialAlertDialogBuilder(this.requireContext())
+                .setTitle(getString(R.string.dialog_remove_event_title))
+                .setMessage(getString(R.string.dialog_remove_event_message))
+                .setPositiveButton(getString(R.string.ok)){ _, _ ->
+                    setObserverRemoveEvent()
+                    lifecycleScope.launch {
+                        mainViewModel.removeEvent(event, trip.id)
+                    }
+                }
+                .setNegativeButton(getString(R.string.cancel)){ dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
     }
 

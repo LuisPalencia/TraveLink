@@ -94,6 +94,8 @@
     <string name="error_load_trip">An error occurred when trying to load the trip</string>
     <string name="trip_removed_successfully">Trip removed successfully</string>
     <string name="error_trip_removed">An error occurred when removing the trip</string>
+    <string name="dialog_remove_trip_title">Remove trip</string>
+    <string name="dialog_remove_trip_message">Are you sure you want to remove this trip? You will not be able to get it back</string>
 
     <!-- CreateEvent fragment -->
     <string name="create_new_event">Create a new event!</string>
@@ -123,6 +125,8 @@
     <string name="remove_event">Remove event</string>
     <string name="event_removed_successfully">Event removed successfully</string>
     <string name="error_event_removed">An error occurred when removing the event</string>
+    <string name="dialog_remove_event_title">Remove event</string>
+    <string name="dialog_remove_event_message">Are you sure you want to remove this event? You will not be able to get it back</string>
 
     <!-- Event map Fragment -->
     <string name="error_message_permission_location">You need to enable the location permission in order to show your current location</string>
