@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="night_background">#2C2C2C</color>
+
     <color name="red">#e53935</color>
     <color name="red_light">#ff6f60</color>
     <color name="red_dark">#ab000d</color>

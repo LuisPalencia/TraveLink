@@ -13,8 +13,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
+
+        <item name="android:windowBackground">@color/night_background</item>
         <item name="android:textColor">@color/white</item>
         <item name="colorProfileImage">@color/white</item>
+
+        <!-- Font family for all app -->
+        <item name="android:fontFamily">@font/nexa_regular</item>
 
         <!-- Colors Bottom Navigation View -->
         <item name="color_bnv_background">@color/night_color_bnv</item>
