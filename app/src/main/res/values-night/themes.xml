@@ -19,7 +19,7 @@
         <item name="colorProfileImage">@color/white</item>
 
         <!-- Font family for all app -->
-        <item name="android:fontFamily">@font/nexa_regular</item>
+        <item name="android:fontFamily">@font/roboto_black</item>
 
         <!-- Colors Bottom Navigation View -->
         <item name="color_bnv_background">@color/night_color_bnv</item>
