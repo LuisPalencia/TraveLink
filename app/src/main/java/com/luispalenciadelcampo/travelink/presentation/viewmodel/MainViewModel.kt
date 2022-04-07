@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.luispalenciadelcampo.travelink.data.dto.Event
+import com.luispalenciadelcampo.travelink.data.dto.PlaceImage
 import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.data.dto.User
 import com.luispalenciadelcampo.travelink.domain.usecases.UseCase
@@ -42,6 +43,7 @@ class MainViewModel @Inject constructor(
     val createEventStatus = MutableLiveData<Resource<Event>>()
     val removeEventStatus = MutableLiveData<Resource<Boolean>>()
     val eventsTrip = MutableLiveData<Resource<MutableList<Event>>>()
+    val getEventPlacePhotoStatus = MutableLiveData<Resource<PlaceImage>>()
     private var eventListenerJob: Job? = null
 
     suspend fun getUserFromDB(userId: String){
@@ -180,6 +182,14 @@ class MainViewModel @Inject constructor(
         }
     }
 
+
+    suspend fun getEventImage(event: Event){
+        viewModelScope.launch(Dispatchers.IO) {
+            val resultGetEventPhoto = useCase.GetPlaceImageUseCase(event.place.idPlace)
+            Log.d(TAG, "$resultGetEventPhoto")
+            getEventPlacePhotoStatus.postValue(resultGetEventPhoto)
+        }
+    }
 
     fun getTripById(id: String): Trip?{
         for(trip in Storage.trips){

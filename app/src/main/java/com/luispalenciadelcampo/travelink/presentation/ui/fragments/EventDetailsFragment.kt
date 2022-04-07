@@ -85,6 +85,7 @@ class EventDetailsFragment : Fragment() {
 
         setView()
         setButtons()
+        setObserverGetPlacePhoto()
 
         return rootView
     }
@@ -108,7 +109,9 @@ class EventDetailsFragment : Fragment() {
         }
 
         binding.cardViewPhotoEvent.setOnClickListener {
-
+            lifecycleScope.launch {
+                mainViewModel.getEventImage(this@EventDetailsFragment.event)
+            }
         }
 
         binding.cardViewEditEvent.setOnClickListener {
@@ -134,6 +137,24 @@ class EventDetailsFragment : Fragment() {
                 }
                 .show()
         }
+    }
+
+    private fun setObserverGetPlacePhoto(){
+        mainViewModel.getEventPlacePhotoStatus.observe(viewLifecycleOwner) { result ->
+            Log.d(TAG, "PHOTO STATUS CHANGED")
+            when (result) {
+                is Resource.Success -> {
+                    binding.imageViewEvent.setImageBitmap(result.data.image)
+                }
+                is Resource.Error -> {
+                    Snackbar.make(binding.scrollView, getString(R.string.error_event_removed), Snackbar.LENGTH_SHORT).show()
+                }
+                is Resource.Loading -> {
+
+                }
+            }
+        }
+
     }
 
     private fun setObserverRemoveEvent(){

@@ -3,6 +3,8 @@ package com.luispalenciadelcampo.travelink.data.repository
 import android.graphics.Bitmap
 import android.util.Log
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.*
@@ -346,7 +348,70 @@ class MainRepositoryImpl @Inject constructor(
         }
     }
 
-    suspend fun getPlaceImage(placeId: String): Resource<PlaceImage>{
+
+    override suspend fun getPlaceImage(placeId: String): Resource<PlaceImage>{
+        // Specify fields. Requests for photos must always have the PHOTO_METADATAS field.
+        val fields = listOf(Place.Field.PHOTO_METADATAS)
+
+        // Get a Place object (this example uses fetchPlace(), but you can also use findCurrentPlace())
+        val placeRequest = FetchPlaceRequest.newInstance(placeId, fields)
+        val request: Task<FetchPlaceResponse> = Storage.placesClient.fetchPlace(placeRequest)
+
+        var placeImage: PlaceImage? = null
+
+        var response: FetchPlaceResponse? = null
+
+
+
+        try {
+            response = Tasks.await(request)
+        }catch (e: Exception){
+            Resource.Error<String>(e.message ?: "Error")
+        }
+
+        if (response != null){
+            val place = response.place
+
+            // Get the photo metadata.
+            val metada = place.photoMetadatas
+            if (metada == null || metada.isEmpty()) {
+                Log.d(TAG, "No photo metadata.")
+                //return@addOnSuccessListener
+                Resource.Error<String>("Error: no photo metadata.")
+            }
+            val photoMetadata = metada.first()
+
+            // Get the attribution text.
+            val attributions = photoMetadata?.attributions
+
+            // Create a FetchPhotoRequest.
+            val photoRequest = FetchPhotoRequest.builder(photoMetadata)
+                .setMaxWidth(500) // Optional.
+                .setMaxHeight(300) // Optional.
+                .build()
+
+            var responseFetchPlacePhoto: FetchPhotoResponse? = null
+
+            try {
+                responseFetchPlacePhoto = Tasks.await(Storage.placesClient.fetchPhoto(photoRequest))
+            }catch (e: Exception){
+                return Resource.Error("Error: ${e.message}")
+            }
+
+            if (responseFetchPlacePhoto != null){
+                Log.d(TAG, "Photo founded")
+                placeImage = PlaceImage(responseFetchPlacePhoto.bitmap, attributions)
+                return Resource.Success(placeImage)
+            }else{
+                Log.e(TAG, "Place not found: ")
+                //val statusCode = exception.statusCode
+                return Resource.Error("Error when trying to get place image")
+            }
+        }
+        return Resource.Loading()
+    }
+    /*
+    override suspend fun getPlaceImage(placeId: String): Resource<PlaceImage>{
         // Specify fields. Requests for photos must always have the PHOTO_METADATAS field.
         val fields = listOf(Place.Field.PHOTO_METADATAS)
 
@@ -362,7 +427,8 @@ class MainRepositoryImpl @Inject constructor(
                 val metada = place.photoMetadatas
                 if (metada == null || metada.isEmpty()) {
                     Log.d(TAG, "No photo metadata.")
-                    return@addOnSuccessListener
+                    //return@addOnSuccessListener
+                    Resource.Error<String>("Error: no photo metadata.")
                 }
                 val photoMetadata = metada.first()
 
@@ -377,7 +443,7 @@ class MainRepositoryImpl @Inject constructor(
                 Storage.placesClient.fetchPhoto(photoRequest)
                     .addOnSuccessListener { fetchPhotoResponse: FetchPhotoResponse ->
                         placeImage = PlaceImage(fetchPhotoResponse.bitmap, attributions)
-                        //Resource.Success(bitmap)
+                        Resource.Success(placeImage)
                     }.addOnFailureListener { exception: Exception ->
                         if (exception is ApiException) {
                             Log.e(TAG, "Place not found: " + exception.message)
@@ -387,6 +453,8 @@ class MainRepositoryImpl @Inject constructor(
                         }
                     }
             }
-        return Resource.Success(placeImage!!)
+        return Resource.Loading()
     }
+
+     */
 }

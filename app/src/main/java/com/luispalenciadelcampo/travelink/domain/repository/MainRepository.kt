@@ -1,6 +1,7 @@
 package com.luispalenciadelcampo.travelink.domain.repository
 
 import com.luispalenciadelcampo.travelink.data.dto.Event
+import com.luispalenciadelcampo.travelink.data.dto.PlaceImage
 import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.data.dto.User
 import com.luispalenciadelcampo.travelink.utils.Resource
@@ -18,4 +19,5 @@ interface MainRepository {
     suspend fun createEvent(event: Event, tripId: String): Resource<Event>
     suspend fun removeEvent(event: Event, tripId: String): Resource<Boolean>
     suspend fun rateTrip(tripId: String, userId: String, rating: Double): Resource<Boolean>
+    suspend fun getPlaceImage(placeId: String): Resource<PlaceImage>
 }
