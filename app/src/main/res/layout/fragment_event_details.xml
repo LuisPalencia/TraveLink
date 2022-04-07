@@ -55,6 +55,14 @@
                     />
 
                 <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/middleGuideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5"
+                    />
+
+                <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/endGuideline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -75,6 +83,17 @@
                     app:layout_constraintTop_toTopOf="parent"
                     />
 
+                <ImageView
+                    android:id="@+id/imageViewDate"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_calendar_month"
+                    app:tint="?attr/colorPrimary"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/textViewEventName"
+                     />
+
                 <TextView
                     android:id="@+id/textViewDate"
                     android:layout_width="0dp"
@@ -82,10 +101,22 @@
                     android:text="@string/example_day"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintStart_toEndOf="@id/imageViewDate"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                    app:layout_constraintTop_toBottomOf="@id/textViewEventName"
+                    app:layout_constraintTop_toTopOf="@id/imageViewDate"
+                    app:layout_constraintBottom_toBottomOf="@id/imageViewDate"
+                    />
+
+                <ImageView
+                    android:id="@+id/imageViewTime"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_time"
+                    app:tint="?attr/colorPrimary"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/imageViewDate"
                     />
 
                 <TextView
@@ -95,10 +126,73 @@
                     android:text="@string/example_event_time"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintStart_toEndOf="@id/imageViewTime"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                    app:layout_constraintTop_toBottomOf="@id/textViewDate"
+                    app:layout_constraintTop_toTopOf="@id/imageViewTime"
+                    app:layout_constraintBottom_toBottomOf="@id/imageViewTime"
+                    />
+
+
+                <ImageView
+                    android:id="@+id/imageViewPlace"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_location"
+                    app:tint="?attr/colorPrimary"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/imageViewTime"
+                    />
+
+                <TextView
+                    android:id="@+id/textViewPlace"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/example_place"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintStart_toEndOf="@id/imageViewPlace"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintTop_toTopOf="@id/imageViewPlace"
+                    app:layout_constraintBottom_toBottomOf="@id/imageViewPlace"
+                    />
+
+                <ImageView
+                    android:id="@+id/imageViewCity"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_place_location"
+                    app:tint="?attr/colorPrimary"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/imageViewPlace"
+                    />
+
+                <TextView
+                    android:id="@+id/textViewCity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/example_city"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintStart_toEndOf="@id/imageViewCity"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintTop_toTopOf="@id/imageViewCity"
+                    app:layout_constraintBottom_toBottomOf="@id/imageViewCity"
+                    />
+
+                <ImageView
+                    android:id="@+id/imageViewPrice"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_euro"
+                    app:tint="?attr/colorPrimary"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/imageViewCity"
                     />
 
                 <TextView
@@ -108,27 +202,211 @@
                     android:text="@string/example_price"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintStart_toEndOf="@id/imageViewPrice"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                    app:layout_constraintTop_toBottomOf="@id/textViewTime"
+                    app:layout_constraintTop_toTopOf="@id/imageViewPrice"
+                    app:layout_constraintBottom_toBottomOf="@id/imageViewPrice"
                     />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnShowMap"
+
+
+
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewLocationEvent"
                     android:layout_width="0dp"
-                    android:layout_height="54dp"
-                    android:background="@drawable/rectangle_borders_rounded_red_fill"
+                    android:layout_height="0dp"
+
                     android:layout_marginTop="20dp"
-                    android:text="@string/show_location"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textAllCaps="false"
-                    app:layout_constraintTop_toBottomOf="@id/textViewPrice"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:clickable="true"
+                    android:elevation="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintDimensionRatio="1:1"
+
                     app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintEnd_toEndOf="@id/middleGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/imageViewPrice">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageViewLocationEvent"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/ic_location"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="?android:colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/textViewEvents"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/location"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageViewLocationEvent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewPhotoEvent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:clickable="true"
+                    android:elevation="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintDimensionRatio="1:1"
+
+                    app:layout_constraintStart_toStartOf="@id/middleGuideline"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/imageViewPrice">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageViewPhotoEvent"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/ic_photo"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="?android:colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/textViewPhotoEvent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/photo"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageViewPhotoEvent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewEditEvent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:clickable="true"
+                    android:elevation="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintDimensionRatio="1:1"
+
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintEnd_toEndOf="@id/middleGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/cardViewLocationEvent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageViewEditEvent"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/ic_edit"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="?android:colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/textViewEditEvent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/edit_event"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageViewEditEvent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewRateEvent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:clickable="true"
+                    android:elevation="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintDimensionRatio="1:1"
+
+                    app:layout_constraintStart_toStartOf="@id/middleGuideline"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/cardViewLocationEvent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageViewRateEvent"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/ic_star_fill"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="?android:colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/textViewRateEvent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/rate_event"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageViewRateEvent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnDeleteEvent"
@@ -141,7 +419,7 @@
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:textAllCaps="false"
-                    app:layout_constraintTop_toBottomOf="@id/btnShowMap"
+                    app:layout_constraintTop_toBottomOf="@id/cardViewEditEvent"
                     app:layout_constraintStart_toStartOf="@id/startGuideline"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
                     />

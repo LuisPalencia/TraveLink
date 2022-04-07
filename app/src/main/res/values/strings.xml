@@ -130,6 +130,10 @@
     <string name="error_event_removed">An error occurred when removing the event</string>
     <string name="dialog_remove_event_title">Remove event</string>
     <string name="dialog_remove_event_message">Are you sure you want to remove this event? You will not be able to get it back</string>
+    <string name="location">Location</string>
+    <string name="photo">Photo</string>
+    <string name="edit_event">Edit event</string>
+    <string name="rate_event">Rate event</string>
 
     <!-- Event map Fragment -->
     <string name="error_message_permission_location">You need to enable the location permission in order to show your current location</string>

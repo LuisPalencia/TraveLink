@@ -103,8 +103,20 @@ class EventDetailsFragment : Fragment() {
     }
 
     private fun setButtons(){
-        binding.btnShowMap.setOnClickListener {
+        binding.cardViewLocationEvent.setOnClickListener {
             supportFragmentManager.showEventLocation(event)
+        }
+
+        binding.cardViewPhotoEvent.setOnClickListener {
+
+        }
+
+        binding.cardViewEditEvent.setOnClickListener {
+
+        }
+
+        binding.cardViewRateEvent.setOnClickListener {
+
         }
 
         binding.btnDeleteEvent.setOnClickListener {
