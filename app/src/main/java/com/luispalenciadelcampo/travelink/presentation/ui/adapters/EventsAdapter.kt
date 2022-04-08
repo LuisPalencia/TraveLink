@@ -128,16 +128,12 @@ class EventsAdapter(
     class ViewHolder private constructor(val binding: ItemEventListBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: Event, context: Context) {
-            if(item.imageEvent != null){
 
-            }else{
+            if(item.imageUrl?.isNotEmpty() == true){
+                //binding.imageViewEvent.setImageBitmap(item.imageEvent!!.image)
                 Glide.with(context)
-                    .load(R.drawable.trip1)
+                    .load(item.imageUrl)
                     .into(binding.imageViewEvent)
-            }
-
-            if(item.imageEvent?.image != null){
-                binding.imageViewEvent.setImageBitmap(item.imageEvent!!.image)
             }else{
                 Glide.with(context)
                     .load(R.drawable.trip1)

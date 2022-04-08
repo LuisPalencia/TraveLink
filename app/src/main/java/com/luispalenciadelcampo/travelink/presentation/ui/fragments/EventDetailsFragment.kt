@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.luispalenciadelcampo.travelink.R
@@ -97,10 +99,20 @@ class EventDetailsFragment : Fragment() {
     }
 
     private fun setView(){
+        binding.loadingAnimation.isVisible = false
+
         binding.textViewEventName.text = event.name
         binding.textViewDate.text = TripFunctions.getStringForDayPosition(event.day, this.trip.startDate)
         binding.textViewTime.text = "${GenericFunctions.dateHourToString(event.startTime)} - ${GenericFunctions.dateHourToString(event.endTime)}"
         binding.textViewPrice.text = "${event.price} €"
+
+        if (event.imageUrl?.isNotEmpty() == true) {
+            Glide.with(this.requireContext())
+                .load(event.imageUrl)
+                .into(binding.imageViewEvent)
+        }else{
+
+        }
     }
 
     private fun setButtons(){
@@ -110,7 +122,7 @@ class EventDetailsFragment : Fragment() {
 
         binding.cardViewPhotoEvent.setOnClickListener {
             lifecycleScope.launch {
-                mainViewModel.getEventImage(this@EventDetailsFragment.event)
+                mainViewModel.getEventImage(trip.id, this@EventDetailsFragment.event)
             }
         }
 
@@ -144,13 +156,24 @@ class EventDetailsFragment : Fragment() {
             Log.d(TAG, "PHOTO STATUS CHANGED")
             when (result) {
                 is Resource.Success -> {
-                    binding.imageViewEvent.setImageBitmap(result.data.image)
+                    binding.loadingAnimation.isVisible = false
+
+                    Glide.with(this.requireContext())
+                        .load(result.data)
+                        .into(binding.imageViewEvent)
+                    Snackbar.make(binding.scrollView, getString(R.string.event_photo_obtained_message), Snackbar.LENGTH_SHORT).show()
                 }
                 is Resource.Error -> {
-                    Snackbar.make(binding.scrollView, getString(R.string.error_event_removed), Snackbar.LENGTH_SHORT).show()
+                    binding.loadingAnimation.isVisible = false
+                    Snackbar.make(binding.scrollView, getString(R.string.error_get_event_photo), Snackbar.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
-
+                    binding.loadingAnimation.setTextViewVisibility(true)
+                    binding.loadingAnimation.setTextStyle(true)
+                    binding.loadingAnimation.setTextSize(12F)
+                    binding.loadingAnimation.setTextMsg("Getting place photo")
+                    binding.loadingAnimation.setEnlarge(5)
+                    binding.loadingAnimation.isVisible = true
                 }
             }
         }

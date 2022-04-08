@@ -26,6 +26,8 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.presentation.ui.fragments.RateDialogFragment
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
@@ -71,6 +73,7 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         //Check if device is connected to internet
         if(GenericFunctions.isDeviceConnectedToInternet(this)){
             initializePlacesAPI()
+            initializeFirebaseStorage()
             initializeMainActivity()
             getInitialData()
             setObservers()
@@ -105,6 +108,10 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
 
         // Create a new PlacesClient instance
         Storage.placesClient = Places.createClient(this)
+    }
+
+    private fun initializeFirebaseStorage(){
+        Storage.firebaseStorage = Firebase.storage
     }
 
     // Method that initializes the main activity

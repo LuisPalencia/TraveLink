@@ -1,5 +1,6 @@
 package com.luispalenciadelcampo.travelink.domain.repository
 
+import android.graphics.Bitmap
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.data.dto.PlaceImage
 import com.luispalenciadelcampo.travelink.data.dto.Trip
@@ -20,4 +21,6 @@ interface MainRepository {
     suspend fun removeEvent(event: Event, tripId: String): Resource<Boolean>
     suspend fun rateTrip(tripId: String, userId: String, rating: Double): Resource<Boolean>
     suspend fun getPlaceImage(placeId: String): Resource<PlaceImage>
+    suspend fun getAndUploadEventImage(idTrip: String, event: Event): Resource<String>
+    suspend fun getAndUploadTripImage(trip: Trip): Resource<String>
 }

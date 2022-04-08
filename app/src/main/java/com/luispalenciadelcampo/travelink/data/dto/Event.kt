@@ -19,6 +19,7 @@ data class Event(
     var city: String = "", // ID of the city Place object
     var place: TripPlace = TripPlace(),
     var price: Double = 0.0,
-    @get:Exclude
-    var imageEvent: PlaceImage? = null
+    var imageUrl: String? = "",
+    //@get:Exclude
+    //var imageEvent: PlaceImage? = null
 ) : Parcelable

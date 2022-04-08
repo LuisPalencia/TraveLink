@@ -43,7 +43,7 @@ class MainViewModel @Inject constructor(
     val removeEventStatus = MutableLiveData<Resource<Boolean>>()
     val eventsTrip = MutableLiveData<Resource<MutableList<Event>>>()
     val liveDataSingleEvent = MutableLiveData<Event>()
-    val getEventPlacePhotoStatus = MutableLiveData<Resource<PlaceImage>>()
+    val getEventPlacePhotoStatus = MutableLiveData<Resource<String>>()
     private var eventListenerJob: Job? = null
 
     suspend fun getUserFromDB(userId: String){
@@ -182,8 +182,8 @@ class MainViewModel @Inject constructor(
         }
     }
 
-
-    suspend fun getEventImage(event: Event){
+/*
+    suspend fun getEventImage(idTrip: String, event: Event){
         viewModelScope.launch(Dispatchers.IO) {
             val resultGetEventPhoto = useCase.GetPlaceImageUseCase(event.place.idPlace)
             getEventPlacePhotoStatus.postValue(resultGetEventPhoto)
@@ -193,6 +193,9 @@ class MainViewModel @Inject constructor(
                     event.imageEvent = resultGetEventPhoto.data
                     //liveDataSingleEvent.postValue(event)
                     eventsTrip.postValue(eventsTrip.value)
+                    resultGetEventPhoto.data.image?.let {
+                        useCase.UploadEventImageUseCase(idTrip, event, it)
+                    }
                 }
                 is Resource.Error -> {
 
@@ -202,6 +205,34 @@ class MainViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+
+ */
+
+    suspend fun getEventImage(idTrip: String, event: Event){
+        viewModelScope.launch(Dispatchers.IO) {
+            getEventPlacePhotoStatus.postValue(Resource.Loading())
+            val resultGetEventPhoto = useCase.GetEventPhotoUseCase(idTrip, event)
+            getEventPlacePhotoStatus.postValue(resultGetEventPhoto)
+
+            when (resultGetEventPhoto) {
+                is Resource.Success -> {
+                    Log.d(TAG, "PHOTO OBTAINED SUCCESSFULLY: ${resultGetEventPhoto.data}")
+                    event.imageUrl = resultGetEventPhoto.data
+                    eventsTrip.postValue(eventsTrip.value)
+                }
+                is Resource.Error -> {
+                    Log.d(TAG, "ERROR WHEN TRYING TO GET PHOTO")
+                    Log.d(TAG, resultGetEventPhoto.message)
+                }
+                is Resource.Loading -> {
+
+                }
+            }
+        }
+
+
     }
 
     fun getTripById(id: String): Trip?{

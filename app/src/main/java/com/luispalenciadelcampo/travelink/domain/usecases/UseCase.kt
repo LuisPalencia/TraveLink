@@ -19,5 +19,7 @@ class UseCase (
     var RemoveEventUseCase: RemoveEventUseCase,
     var RemoveTripUseCase: RemoveTripUseCase,
     var RateTrip: RateTrip,
-    var GetPlaceImageUseCase: GetPlaceImageUseCase
+    var GetPlaceImageUseCase: GetPlaceImageUseCase,
+    var GetEventPhotoUseCase: GetEventPhotoUseCase,
+    var GetTripPhotoUseCase: GetTripPhotoUseCase
 )

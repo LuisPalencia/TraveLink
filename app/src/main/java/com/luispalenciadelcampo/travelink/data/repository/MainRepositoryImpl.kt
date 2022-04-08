@@ -1,17 +1,16 @@
 package com.luispalenciadelcampo.travelink.data.repository
 
 import android.graphics.Bitmap
+import android.net.Uri
 import android.util.Log
-import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
-import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.luispalenciadelcampo.travelink.constants.Constants
 import com.luispalenciadelcampo.travelink.data.dto.*
 import com.luispalenciadelcampo.travelink.domain.repository.MainRepository
@@ -25,6 +24,7 @@ import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
+import java.io.ByteArrayOutputStream
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -165,6 +165,7 @@ class MainRepositoryImpl @Inject constructor(
                                 }
                             }
                             "price" -> event.price = it.value.toString().toDoubleOrNull() ?: 0.0
+                            "imageUrl" -> event.imageUrl = it.value.toString()
                         }
                     }
                     eventsList.add(event)
@@ -410,6 +411,147 @@ class MainRepositoryImpl @Inject constructor(
         }
         return Resource.Loading()
     }
+
+    private fun uploadEventImage(idTrip: String, event: Event, eventImage: Bitmap): String?{
+        val eventImageReference = Storage.firebaseStorage.reference.child("${Constants.STORAGE_REFERENCE_IMAGE_TRIPS}/$idTrip/${Constants.STORAGE_REFERENCE_IMAGE_EVENTS}/${event.id}/eventImage.jpg")
+
+        return this.uploadImageFirebaseStorage(eventImageReference, eventImage)
+    }
+
+    private fun uploadTripImage(idTrip: String, tripImage: Bitmap): String?{
+        val tripImageReference =
+            Storage.firebaseStorage.reference.child("${Constants.STORAGE_REFERENCE_IMAGE_TRIPS}/$idTrip/tripImage.jpg")
+
+        return this.uploadImageFirebaseStorage(tripImageReference, tripImage)
+    }
+
+    private fun uploadImageFirebaseStorageV2(reference: StorageReference, image: Bitmap): String?{
+        val baos = ByteArrayOutputStream()
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+
+        var imageUrl: String? = null
+
+        var uploadTask = reference.putBytes(data)
+        uploadTask.addOnFailureListener {
+            // Handle unsuccessful uploads
+            return@addOnFailureListener
+        }.addOnSuccessListener { taskSnapshot ->
+            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+            // ...
+            taskSnapshot.metadata?.reference?.downloadUrl?.addOnSuccessListener {
+                imageUrl = it.toString()
+                Log.d(TAG, "PATH: $imageUrl")
+            }
+        }
+
+        return imageUrl
+    }
+
+    private fun uploadImageFirebaseStorage(reference: StorageReference, image: Bitmap): String?{
+        val baos = ByteArrayOutputStream()
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+
+        var imageUrl: String? = null
+        var uploadTask = reference.putBytes(data)
+
+        var response : UploadTask.TaskSnapshot?
+
+        try {
+            response = Tasks.await(uploadTask)
+        }catch (e: Exception){
+            return null
+        }
+
+        if (response != null){
+            val responseUrl : Uri
+            try {
+                responseUrl = Tasks.await(response.metadata?.reference?.downloadUrl!!)
+            }catch (e: Exception){
+                return null
+            }
+
+            if (responseUrl != null) {
+                imageUrl = responseUrl.toString()
+                Log.d(TAG, "PATH: $imageUrl")
+            }else{
+                return null
+            }
+        }
+
+        return imageUrl
+    }
+
+    private suspend fun insertImageUrlDB(idTrip: String, event: Event, imageUrl: String): Boolean{
+        try {
+            val eventsTripRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_EVENTS}/$idTrip")
+
+            //Set the map and update it in the DB
+            val childUpdates = hashMapOf<String, Any>(
+                "imageUrl" to imageUrl
+            )
+
+            Log.d(TAG, "INSERTING IN DB IMAGE URL")
+            //Perform the DB insertion
+            event.id?.let { eventsTripRef.child(it).updateChildren(childUpdates).await() }
+
+            Log.d(TAG, "FINISHED INSERTING")
+            return true
+        }catch (e: Exception){
+            Log.d(TAG, e.toString())
+            return false
+        }
+    }
+
+
+    override suspend fun getAndUploadEventImage(idTrip: String, event: Event): Resource<String> {
+        val resultGetEventPhoto = this.getPlaceImage(event.place.idPlace)
+
+        when (resultGetEventPhoto) {
+            is Resource.Success -> {
+                val imageUrl =
+                    resultGetEventPhoto.data.image?.let { this.uploadEventImage(idTrip, event, it) }
+                if (imageUrl != null) {
+                    this.insertImageUrlDB(idTrip, event, imageUrl)
+                    return Resource.Success(imageUrl)
+                }else{
+                    return Resource.Error("Error when trying to upload the photo URL")
+                }
+            }
+            is Resource.Error -> {
+                return Resource.Error(resultGetEventPhoto.message)
+            }
+            is Resource.Loading -> {
+
+            }
+        }
+        return Resource.Error("Error when trying to get the photo")
+    }
+
+    override suspend fun getAndUploadTripImage(trip: Trip): Resource<String> {
+        val resultGetTripPhoto = this.getPlaceImage(trip.cities[0].idPlace)
+
+        when (resultGetTripPhoto) {
+            is Resource.Success -> {
+                val imageUrl =
+                    resultGetTripPhoto.data.image?.let { this.uploadTripImage(trip.id, resultGetTripPhoto.data.image) }
+                if (imageUrl != null) {
+                    return Resource.Success(imageUrl)
+                }else{
+                    return Resource.Error("Error when trying to upload the photo URL")
+                }
+            }
+            is Resource.Error -> {
+                return Resource.Error(resultGetTripPhoto.message)
+            }
+            is Resource.Loading -> {
+
+            }
+        }
+        return Resource.Error("Error when trying to get the photo")
+    }
+
     /*
     override suspend fun getPlaceImage(placeId: String): Resource<PlaceImage>{
         // Specify fields. Requests for photos must always have the PHOTO_METADATAS field.

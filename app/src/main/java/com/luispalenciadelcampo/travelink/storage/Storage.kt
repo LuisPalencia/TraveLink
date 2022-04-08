@@ -1,6 +1,7 @@
 package com.luispalenciadelcampo.travelink.storage
 
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.firebase.storage.FirebaseStorage
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.data.dto.User
@@ -12,6 +13,9 @@ object Storage {
 
     // Places client
     lateinit var placesClient: PlacesClient
+
+    // Firebase storage
+    lateinit var firebaseStorage: FirebaseStorage
 
     // User logged
     lateinit var user: User

@@ -128,6 +128,8 @@
     <string name="remove_event">Remove event</string>
     <string name="event_removed_successfully">Event removed successfully</string>
     <string name="error_event_removed">An error occurred when removing the event</string>
+    <string name="error_get_event_photo">An error occurred when getting a photo of the event place</string>
+    <string name="event_photo_obtained_message">Photo obtained successfully</string>
     <string name="dialog_remove_event_title">Remove event</string>
     <string name="dialog_remove_event_message">Are you sure you want to remove this event? You will not be able to get it back</string>
     <string name="location">Location</string>

@@ -66,8 +66,11 @@ class ExpensesAdapter(
         viewHolder.textViewNameExpense.text = data[position].name
         viewHolder.textViewQuantityExpense.text = "${data[position].price} €"
 
-        if(data[position].imageEvent?.image != null){
-            viewHolder.imageViewExpense.setImageBitmap(data[position].imageEvent?.image)
+        //if(data[position].imageEvent?.image != null){
+        if(data[position].imageUrl?.isNotEmpty() == true){
+            Glide.with(context)
+                .load(data[position].imageUrl)
+                .into(viewHolder.imageViewExpense)
         }else{
             Glide.with(context)
                 .load(R.drawable.trip1)

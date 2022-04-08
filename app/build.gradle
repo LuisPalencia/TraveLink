@@ -84,9 +84,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     // Google Play Services Auth
     implementation 'com.google.android.gms:play-services-auth:20.1.0'
+    // Firebase storage
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
     // Google Places API
-    implementation 'com.google.android.libraries.places:places:2.5.0'
+    implementation 'com.google.android.libraries.places:places:2.6.0'
 
     // Google maps
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
@@ -106,6 +108,9 @@ dependencies {
 
     // CurrencyEditText
     implementation 'com.cottacush:CurrencyEditText:0.0.10'
+
+    // Android Loading Animation
+    implementation 'com.github.Marvel999:Android-Loading-Animation:1.0.0'
 }
 
 kapt {
