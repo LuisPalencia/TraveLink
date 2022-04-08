@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.material.snackbar.Snackbar
+import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.data.dto.PlaceImage
 import com.luispalenciadelcampo.travelink.data.dto.Trip
@@ -43,6 +45,7 @@ class MainViewModel @Inject constructor(
     val createEventStatus = MutableLiveData<Resource<Event>>()
     val removeEventStatus = MutableLiveData<Resource<Boolean>>()
     val eventsTrip = MutableLiveData<Resource<MutableList<Event>>>()
+    val liveDataSingleEvent = MutableLiveData<Event>()
     val getEventPlacePhotoStatus = MutableLiveData<Resource<PlaceImage>>()
     private var eventListenerJob: Job? = null
 
@@ -186,8 +189,21 @@ class MainViewModel @Inject constructor(
     suspend fun getEventImage(event: Event){
         viewModelScope.launch(Dispatchers.IO) {
             val resultGetEventPhoto = useCase.GetPlaceImageUseCase(event.place.idPlace)
-            Log.d(TAG, "$resultGetEventPhoto")
             getEventPlacePhotoStatus.postValue(resultGetEventPhoto)
+
+            when (resultGetEventPhoto) {
+                is Resource.Success -> {
+                    event.imageEvent = resultGetEventPhoto.data
+                    //liveDataSingleEvent.postValue(event)
+                    eventsTrip.postValue(eventsTrip.value)
+                }
+                is Resource.Error -> {
+
+                }
+                is Resource.Loading -> {
+
+                }
+            }
         }
     }
 

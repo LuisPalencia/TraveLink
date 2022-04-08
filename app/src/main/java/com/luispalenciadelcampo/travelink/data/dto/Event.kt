@@ -20,5 +20,5 @@ data class Event(
     var place: TripPlace = TripPlace(),
     var price: Double = 0.0,
     @get:Exclude
-    var image: Bitmap? = null
+    var imageEvent: PlaceImage? = null
 ) : Parcelable
