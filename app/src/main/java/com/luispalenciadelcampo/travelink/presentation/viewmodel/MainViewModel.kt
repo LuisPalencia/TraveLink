@@ -4,8 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.material.snackbar.Snackbar
-import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.data.dto.PlaceImage
 import com.luispalenciadelcampo.travelink.data.dto.Trip
@@ -21,7 +19,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel

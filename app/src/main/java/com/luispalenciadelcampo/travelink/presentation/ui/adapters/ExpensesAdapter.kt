@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.data.dto.Event
-import com.luispalenciadelcampo.travelink.data.dto.Trip
-import com.luispalenciadelcampo.travelink.utils.GenericFunctions
 
 class ExpensesAdapter(
     private val context: Context,
