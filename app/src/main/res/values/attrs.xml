@@ -11,5 +11,6 @@
     <attr name="colorTextView" format="reference" />
     <attr name="colorBackgroundTransparent" format="reference" />
     <attr name="colorProfileImage" format="reference" />
+    <attr name="colorBackgroundList" format="reference" />
 
 </resources>

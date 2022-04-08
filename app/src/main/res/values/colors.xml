@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="night_background">#2C2C2C</color>
+    <color name="list_background_day">#F3EEEE</color>
+    <color name="list_background_night">#131313</color>
 
     <color name="red">#e53935</color>
     <color name="red_light">#ff6f60</color>

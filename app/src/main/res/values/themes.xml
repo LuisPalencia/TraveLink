@@ -24,5 +24,8 @@
         <item name="color_bnv_checked">@color/day_color_bnv_checked</item>
         <item name="color_bnv_not_checked">@color/day_color_bnv_not_checked</item>
 
+        <!-- Color background list -->
+        <item name="colorBackgroundList">@color/list_background_day</item>
+
     </style>
 </resources>
