@@ -425,29 +425,6 @@ class MainRepositoryImpl @Inject constructor(
         return this.uploadImageFirebaseStorage(tripImageReference, tripImage)
     }
 
-    private fun uploadImageFirebaseStorageV2(reference: StorageReference, image: Bitmap): String?{
-        val baos = ByteArrayOutputStream()
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
-
-        var imageUrl: String? = null
-
-        var uploadTask = reference.putBytes(data)
-        uploadTask.addOnFailureListener {
-            // Handle unsuccessful uploads
-            return@addOnFailureListener
-        }.addOnSuccessListener { taskSnapshot ->
-            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-            // ...
-            taskSnapshot.metadata?.reference?.downloadUrl?.addOnSuccessListener {
-                imageUrl = it.toString()
-                Log.d(TAG, "PATH: $imageUrl")
-            }
-        }
-
-        return imageUrl
-    }
-
     private fun uploadImageFirebaseStorage(reference: StorageReference, image: Bitmap): String?{
         val baos = ByteArrayOutputStream()
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos)
@@ -483,7 +460,7 @@ class MainRepositoryImpl @Inject constructor(
         return imageUrl
     }
 
-    private suspend fun insertImageUrlDB(idTrip: String, event: Event, imageUrl: String): Boolean{
+    private suspend fun insertEventImageUrlDB(idTrip: String, event: Event, imageUrl: String): Boolean{
         try {
             val eventsTripRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_EVENTS}/$idTrip")
 
@@ -492,11 +469,28 @@ class MainRepositoryImpl @Inject constructor(
                 "imageUrl" to imageUrl
             )
 
-            Log.d(TAG, "INSERTING IN DB IMAGE URL")
             //Perform the DB insertion
             event.id?.let { eventsTripRef.child(it).updateChildren(childUpdates).await() }
 
-            Log.d(TAG, "FINISHED INSERTING")
+            return true
+        }catch (e: Exception){
+            Log.d(TAG, e.toString())
+            return false
+        }
+    }
+
+    private suspend fun insertTripImageUrlDB(idTrip: String, userId: String, imageUrl: String): Boolean{
+        try {
+            val tripRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_TRIPS}/$userId/$idTrip")
+
+            //Set the map and update it in the DB
+            val childUpdates = hashMapOf<String, Any>(
+                "imageUrl" to imageUrl
+            )
+
+            //Perform the DB insertion
+            tripRef.updateChildren(childUpdates).await()
+
             return true
         }catch (e: Exception){
             Log.d(TAG, e.toString())
@@ -513,7 +507,7 @@ class MainRepositoryImpl @Inject constructor(
                 val imageUrl =
                     resultGetEventPhoto.data.image?.let { this.uploadEventImage(idTrip, event, it) }
                 if (imageUrl != null) {
-                    this.insertImageUrlDB(idTrip, event, imageUrl)
+                    this.insertEventImageUrlDB(idTrip, event, imageUrl)
                     return Resource.Success(imageUrl)
                 }else{
                     return Resource.Error("Error when trying to upload the photo URL")
@@ -529,14 +523,15 @@ class MainRepositoryImpl @Inject constructor(
         return Resource.Error("Error when trying to get the photo")
     }
 
-    override suspend fun getAndUploadTripImage(trip: Trip): Resource<String> {
+    override suspend fun getAndUploadTripImage(trip: Trip, userId: String): Resource<String> {
         val resultGetTripPhoto = this.getPlaceImage(trip.cities[0].idPlace)
 
         when (resultGetTripPhoto) {
             is Resource.Success -> {
                 val imageUrl =
-                    resultGetTripPhoto.data.image?.let { this.uploadTripImage(trip.id, resultGetTripPhoto.data.image) }
+                    resultGetTripPhoto.data.image?.let { this.uploadTripImage(trip.id, it) }
                 if (imageUrl != null) {
+                    this.insertTripImageUrlDB(trip.id, userId, imageUrl)
                     return Resource.Success(imageUrl)
                 }else{
                     return Resource.Error("Error when trying to upload the photo URL")

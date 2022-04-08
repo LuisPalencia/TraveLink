@@ -22,5 +22,5 @@ interface MainRepository {
     suspend fun rateTrip(tripId: String, userId: String, rating: Double): Resource<Boolean>
     suspend fun getPlaceImage(placeId: String): Resource<PlaceImage>
     suspend fun getAndUploadEventImage(idTrip: String, event: Event): Resource<String>
-    suspend fun getAndUploadTripImage(trip: Trip): Resource<String>
+    suspend fun getAndUploadTripImage(trip: Trip, userId: String): Resource<String>
 }

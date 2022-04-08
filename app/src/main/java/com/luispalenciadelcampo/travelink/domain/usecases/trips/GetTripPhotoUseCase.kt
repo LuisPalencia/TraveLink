@@ -6,5 +6,5 @@ import com.luispalenciadelcampo.travelink.utils.Resource
 import javax.inject.Inject
 
 class GetTripPhotoUseCase @Inject constructor(private val mainRepository: MainRepository) {
-    suspend operator fun invoke(trip: Trip): Resource<String> = mainRepository.getAndUploadTripImage(trip)
+    suspend operator fun invoke(trip: Trip, userId: String): Resource<String> = mainRepository.getAndUploadTripImage(trip, userId)
 }
