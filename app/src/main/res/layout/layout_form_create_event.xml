@@ -192,7 +192,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/rectangle_borders_rounded_red_fill"
-            android:text="@string/create_trip"
+            android:text="@string/create_event"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="20sp"
