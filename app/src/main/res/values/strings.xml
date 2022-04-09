@@ -120,6 +120,11 @@
     <string name="event_created">The event has been created!</string>
     <string name="error_event_creation">An error occurred when trying to create the event</string>
 
+    <!-- EditEvent fragment -->
+    <string name="update_event">Update event</string>
+    <string name="event_updated">The event has been updated!</string>
+    <string name="error_event_update">An error occurred when trying to update the event</string>
+
     <!-- Events Fragment -->
     <string name="error_load_event">An error occurred when trying to load the event</string>
 

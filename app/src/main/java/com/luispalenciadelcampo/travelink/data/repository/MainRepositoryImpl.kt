@@ -319,7 +319,7 @@ class MainRepositoryImpl @Inject constructor(
             eventsTripRef.child(eventId).updateChildren(childUpdates).await()
             Resource.Success(event)
         }catch (e: Exception){
-            Resource.Error(Constants.RESULT_CREATE_TRIP_ERROR)
+            Resource.Error(Constants.RESULT_CREATE_EVENT_ERROR)
         }
     }
 
@@ -331,6 +331,31 @@ class MainRepositoryImpl @Inject constructor(
             Resource.Success(true)
         }catch (e: Exception){
             Resource.Error(Constants.RESULT_REMOVE_EVENT_ERROR)
+        }
+    }
+
+    override suspend fun updateEvent(event: Event, tripId: String): Resource<Boolean> {
+        return try {
+            val eventsTripRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_EVENTS}/$tripId")
+
+            //Set the map and update it in the DB
+            val childUpdates = hashMapOf<String, Any>(
+                "name" to event.name!!,
+                "day" to event.day,
+                "startTime" to GenericFunctions.dateHourToString(event.startTime!!),
+                "endTime" to GenericFunctions.dateHourToString(event.endTime!!),
+                "description" to event.description,
+                "rating" to 0,
+                "city" to event.city,
+                "place" to event.place,
+                "price" to event.price
+            )
+
+            //Perform the DB insertion
+            eventsTripRef.child(event.id!!).updateChildren(childUpdates).await()
+            Resource.Success(true)
+        }catch (e: Exception){
+            Resource.Error(Constants.RESULT_UPDATE_EVENT_ERROR)
         }
     }
 

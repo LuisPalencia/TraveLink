@@ -41,6 +41,7 @@ class MainViewModel @Inject constructor(
 
     val createEventStatus = MutableLiveData<Resource<Event>>()
     val removeEventStatus = MutableLiveData<Resource<Boolean>>()
+    val updateEventStatus = MutableLiveData<Resource<Boolean>>()
     val eventsTrip = MutableLiveData<Resource<MutableList<Event>>>()
     val liveDataSingleEvent = MutableLiveData<Event>()
     val getEventPlacePhotoStatus = MutableLiveData<Resource<String>>()
@@ -171,6 +172,13 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             val resultRemoveEvent = useCase.RemoveEventUseCase(event, tripId)
             removeEventStatus.postValue(resultRemoveEvent)
+        }
+    }
+
+    suspend fun updateEvent(event: Event, tripId: String){
+        viewModelScope.launch(Dispatchers.Main) {
+            val resultUpdateEvent = useCase.UpdateEventUseCase(event, tripId)
+            updateEventStatus.postValue(resultUpdateEvent)
         }
     }
 

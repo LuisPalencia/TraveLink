@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.luispalenciadelcampo.travelink.data.dto.Event
+import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.presentation.ui.fragments.RateDialogFragment
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import com.luispalenciadelcampo.travelink.utils.Resource
@@ -165,6 +166,18 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
                 }
                 is Resource.Error -> {
                     Toast.makeText(this, getString(R.string.error_event_creation), Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        mainViewModel.updateEventStatus.observe(this) { result ->
+            when (result) {
+                is Resource.Success -> {
+                    Toast.makeText(this, getString(R.string.event_updated), Toast.LENGTH_LONG).show()
+                    popBackStackFragment()
+                }
+                is Resource.Error -> {
+                    Toast.makeText(this, getString(R.string.error_event_update), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -315,6 +328,13 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         }else{
             Toast.makeText(this, R.string.error_load_event, Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun editEvent(trip: Trip, event: Event) {
+        val bundle = bundleOf()
+        bundle.putParcelable(Constants.BUNDLE_TRIP, trip)
+        bundle.putParcelable(Constants.BUNDLE_EVENT, event)
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_eventDetailsFragment_to_editEventFragment, bundle)
     }
 
     override fun showEventLocation(event: Event) {

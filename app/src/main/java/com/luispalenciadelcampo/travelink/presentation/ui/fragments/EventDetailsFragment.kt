@@ -104,6 +104,8 @@ class EventDetailsFragment : Fragment() {
         binding.textViewEventName.text = event.name
         binding.textViewDate.text = TripFunctions.getStringForDayPosition(event.day, this.trip.startDate)
         binding.textViewTime.text = "${GenericFunctions.dateHourToString(event.startTime)} - ${GenericFunctions.dateHourToString(event.endTime)}"
+        binding.textViewPlace.text = event.place.name
+        binding.textViewCity.text = TripFunctions.getCityName(event.city, trip.cities)
         binding.textViewPrice.text = "${event.price} €"
 
         if (event.imageUrl?.isNotEmpty() == true) {
@@ -111,7 +113,9 @@ class EventDetailsFragment : Fragment() {
                 .load(event.imageUrl)
                 .into(binding.imageViewEvent)
         }else{
-
+            Glide.with(this.requireContext())
+                .load(R.drawable.trip1)
+                .into(binding.imageViewEvent)
         }
     }
 
@@ -127,7 +131,7 @@ class EventDetailsFragment : Fragment() {
         }
 
         binding.cardViewEditEvent.setOnClickListener {
-
+            supportFragmentManager.editEvent(trip, event)
         }
 
         binding.cardViewRateEvent.setOnClickListener {

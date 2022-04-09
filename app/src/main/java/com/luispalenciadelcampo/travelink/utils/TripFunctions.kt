@@ -2,7 +2,9 @@ package com.luispalenciadelcampo.travelink.utils
 
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.data.dto.Trip
+import com.luispalenciadelcampo.travelink.data.dto.TripPlace
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class TripFunctions {
 
@@ -24,6 +26,20 @@ class TripFunctions {
             calendar.time = startDate
             calendar.add(Calendar.DATE, day)
             return GenericFunctions.createSimpleDateFormat().format(calendar.time)
+        }
+
+        fun getCityName(idCity: String, cities: MutableList<TripPlace>): String{
+            cities.forEach { city ->
+                if (city.idPlace == idCity) {
+                    return city.name
+                }
+            }
+            return ""
+        }
+
+        fun getTripDay(date: Date, startDateTrip: Date): Int{
+            val diffDates = date.time - startDateTrip.time
+            return TimeUnit.DAYS.convert(diffDates, TimeUnit.MILLISECONDS).toInt()
         }
     }
 }
