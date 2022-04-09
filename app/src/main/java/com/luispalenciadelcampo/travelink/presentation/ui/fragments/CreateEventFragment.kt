@@ -85,7 +85,7 @@ class CreateEventFragment : Fragment() {
 
     private fun setupView(){
         // Configuration for the Price EditText
-        binding.editTextPrice.setLocale(Locale.getDefault().toLanguageTag())
+        binding.layoutFormEvent.editTextPrice.setLocale(Locale.getDefault().toLanguageTag())
 
         // Configuration for the spinner that chooses the city
         val cityNamesList = mutableListOf<String>()
@@ -97,12 +97,12 @@ class CreateEventFragment : Fragment() {
         }
 
         val adapter = ArrayAdapter(this.requireContext(), R.layout.support_simple_spinner_dropdown_item, cityNamesList)
-        binding.spinnerCity.adapter = adapter
+        binding.layoutFormEvent.spinnerCity.adapter = adapter
 
-        binding.spinnerCity.setSelection(0)
+        binding.layoutFormEvent.spinnerCity.setSelection(0)
         cityId = trip.cities[0].idPlace
 
-        binding.spinnerCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding.layoutFormEvent.spinnerCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -120,7 +120,7 @@ class CreateEventFragment : Fragment() {
 
     // Set the logic of the buttons
     private fun setButtons(){
-        binding.editTextDate.setOnClickListener {
+        binding.layoutFormEvent.editTextDate.setOnClickListener {
             val builder = MaterialDatePicker.Builder.datePicker()
             val constraintsBuilderRange = CalendarConstraints.Builder()
 
@@ -139,11 +139,11 @@ class CreateEventFragment : Fragment() {
 
             datePicker.addOnPositiveButtonClickListener {
                 this.eventDate = Date(it)
-                binding.editTextDate.setText(GenericFunctions.dateToString(this.eventDate!!))
+                binding.layoutFormEvent.editTextDate.setText(GenericFunctions.dateToString(this.eventDate!!))
             }
         }
 
-        binding.editTextStartTime.setOnClickListener {
+        binding.layoutFormEvent.editTextStartTime.setOnClickListener {
             val materialTimePicker = createTimePicker()
             materialTimePicker.show(parentFragmentManager, "timePicker")
 
@@ -152,11 +152,11 @@ class CreateEventFragment : Fragment() {
                 calendar.set(Calendar.HOUR_OF_DAY, materialTimePicker.hour)
                 calendar.set(Calendar.MINUTE, materialTimePicker.minute)
                 startTime = calendar.time
-                binding.editTextStartTime.setText("${GenericFunctions.dateHourToString(startTime!!)}")
+                binding.layoutFormEvent.editTextStartTime.setText("${GenericFunctions.dateHourToString(startTime!!)}")
             }
         }
 
-        binding.editTextEndTime.setOnClickListener {
+        binding.layoutFormEvent.editTextEndTime.setOnClickListener {
             val materialTimePicker = createTimePicker()
             materialTimePicker.show(parentFragmentManager, "timePicker")
 
@@ -165,20 +165,20 @@ class CreateEventFragment : Fragment() {
                 calendar.set(Calendar.HOUR_OF_DAY, materialTimePicker.hour)
                 calendar.set(Calendar.MINUTE, materialTimePicker.minute)
                 endTime = calendar.time
-                binding.editTextEndTime.setText("${GenericFunctions.dateHourToString(endTime!!)}")
+                binding.layoutFormEvent.editTextEndTime.setText("${GenericFunctions.dateHourToString(endTime!!)}")
             }
         }
 
-        binding.editTextPlace.setOnClickListener {
+        binding.layoutFormEvent.editTextPlace.setOnClickListener {
             selectPlace()
         }
 
-        binding.btnCreateTrip.setOnClickListener {
-            if(binding.editTextEventName.text.isBlank()){
-                binding.editTextEventName.error = getString(R.string.error_name_event_empty)
+        binding.layoutFormEvent.btnCreateTrip.setOnClickListener {
+            if(binding.layoutFormEvent.editTextEventName.text.isBlank()){
+                binding.layoutFormEvent.editTextEventName.error = getString(R.string.error_name_event_empty)
                 return@setOnClickListener
             }else {
-                binding.editTextEventName.error = null
+                binding.layoutFormEvent.editTextEventName.error = null
             }
 
             if(this.eventDate == null){
@@ -198,11 +198,11 @@ class CreateEventFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if(binding.editTextPrice.text?.isBlank() == true){
-                binding.editTextPrice.error = getString(R.string.error_price_event_empty)
+            if(binding.layoutFormEvent.editTextPrice.text?.isBlank() == true){
+                binding.layoutFormEvent.editTextPrice.error = getString(R.string.error_price_event_empty)
                 return@setOnClickListener
             }else {
-                binding.editTextPrice.error = null
+                binding.layoutFormEvent.editTextPrice.error = null
             }
 
             val diffDates = eventDate!!.time - trip.startDate.time
@@ -210,14 +210,14 @@ class CreateEventFragment : Fragment() {
             Log.d(TAG, "Event day: $eventDay")
 
             val event = Event(
-                name = binding.editTextEventName.text.toString(),
+                name = binding.layoutFormEvent.editTextEventName.text.toString(),
                 day = eventDay,
                 startTime = this.startTime!!,
                 endTime = this.endTime!!,
                 city = this.cityId,
                 place = this.place!!,
-                price = binding.editTextPrice.getNumericValue(),
-                description = binding.editTextEventDescription.text.toString()
+                price = binding.layoutFormEvent.editTextPrice.getNumericValue(),
+                description = binding.layoutFormEvent.editTextEventDescription.text.toString()
             )
 
             lifecycleScope.launch {
@@ -264,7 +264,7 @@ class CreateEventFragment : Fragment() {
                         latitude = (place.latLng as LatLng).latitude,
                         longitude = (place.latLng as LatLng).longitude
                     )
-                    binding.editTextPlace.setText(place.name)
+                    binding.layoutFormEvent.editTextPlace.setText(place.name)
                 }
             }
             AutocompleteActivity.RESULT_ERROR -> {
