@@ -66,8 +66,10 @@ class TripsAdapter(
         viewHolder.textViewTripName.text = data[position].name
         viewHolder.textViewTripDate.text = "${GenericFunctions.dateToString(data[position].startDate!!)} - ${GenericFunctions.dateToString(data[position].endDate!!)}"
 
-        if(data[position].image != null){
-            viewHolder.imageViewTrip.setImageBitmap(data[position].image)
+        if (data[position].imageUrl?.isNotEmpty() == true) {
+            Glide.with(context)
+                .load(data[position].imageUrl)
+                .into(viewHolder.imageViewTrip)
         }else{
             Glide.with(context)
                 .load(R.drawable.trip1)

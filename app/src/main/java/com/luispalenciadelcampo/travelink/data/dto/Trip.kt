@@ -16,6 +16,7 @@ data class Trip(
     var endDate: Date = Date(),
     var rating: Double = 0.0,
     var participants: MutableList<String> = mutableListOf(),
-    @get:Exclude
-    var image: Bitmap? = null
+    var imageUrl: String? = "",
+    //@get:Exclude
+    //var image: Bitmap? = null
 ) : Parcelable

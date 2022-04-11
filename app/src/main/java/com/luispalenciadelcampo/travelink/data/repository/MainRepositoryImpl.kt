@@ -105,6 +105,7 @@ class MainRepositoryImpl @Inject constructor(
                                     trip.cities.add(city)
                                 }
                             }
+                            "imageUrl" -> trip.imageUrl = it.value.toString()
                         }
                     }
                     tripsList.add(trip)

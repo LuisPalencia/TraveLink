@@ -44,8 +44,12 @@ class MainViewModel @Inject constructor(
     val updateEventStatus = MutableLiveData<Resource<Boolean>>()
     val eventsTrip = MutableLiveData<Resource<MutableList<Event>>>()
     val liveDataSingleEvent = MutableLiveData<Event>()
-    val getEventPlacePhotoStatus = MutableLiveData<Resource<String>>()
     private var eventListenerJob: Job? = null
+
+    val getTripPlacePhotoStatus = MutableLiveData<Resource<String>>()
+    val getEventPlacePhotoStatus = MutableLiveData<Resource<String>>()
+
+
 
     suspend fun getUserFromDB(userId: String){
         viewModelScope.launch(Dispatchers.Main) {
@@ -217,6 +221,30 @@ class MainViewModel @Inject constructor(
 
 
  */
+
+    suspend fun getTripImage(trip: Trip, userId: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            getTripPlacePhotoStatus.postValue(Resource.Loading())
+
+            val resultGetTripPhoto = useCase.GetTripPhotoUseCase(trip, userId)
+            getTripPlacePhotoStatus.postValue(resultGetTripPhoto)
+
+            when (resultGetTripPhoto) {
+                is Resource.Success -> {
+                    Log.d(TAG, "PHOTO OBTAINED SUCCESSFULLY: ${resultGetTripPhoto.data}")
+                    trip.imageUrl = resultGetTripPhoto.data
+                    eventsTrip.postValue(eventsTrip.value)
+                }
+                is Resource.Error -> {
+                    Log.d(TAG, "ERROR WHEN TRYING TO GET PHOTO")
+                    Log.d(TAG, resultGetTripPhoto.message)
+                }
+                is Resource.Loading -> {
+
+                }
+            }
+        }
+    }
 
     suspend fun getEventImage(idTrip: String, event: Event){
         viewModelScope.launch(Dispatchers.IO) {

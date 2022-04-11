@@ -99,6 +99,9 @@
     <string name="error_trip_removed">An error occurred when removing the trip</string>
     <string name="dialog_remove_trip_title">Remove trip</string>
     <string name="dialog_remove_trip_message">Are you sure you want to remove this trip? You will not be able to get it back</string>
+    <string name="trip_photo">Trip photo</string>
+    <string name="error_get_trip_photo">An error occurred when getting a photo of the trip place</string>
+    <string name="trip_photo_obtained_message">Photo obtained successfully</string>
 
     <!-- CreateEvent fragment -->
     <string name="create_new_event">Create a new event!</string>
