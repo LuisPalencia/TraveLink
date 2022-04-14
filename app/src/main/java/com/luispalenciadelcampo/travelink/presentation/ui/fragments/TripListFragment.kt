@@ -1,12 +1,15 @@
 package com.luispalenciadelcampo.travelink.presentation.ui.fragments
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,8 +40,10 @@ class TripListFragment(private val tripsType: TripsType) : Fragment() {
     private lateinit var adapter: TripsAdapter
 
     // Views
-    private lateinit var btnCreateTrip: FloatingActionButton
+    private lateinit var floatingBtnCreateTrip: FloatingActionButton
     private lateinit var tripsRecyclerView: RecyclerView
+    private lateinit var layoutNoTrips: ConstraintLayout
+    private lateinit var btnCreateTrip: Button
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -67,12 +72,18 @@ class TripListFragment(private val tripsType: TripsType) : Fragment() {
     }
 
     private fun setViews(){
-        btnCreateTrip = rootView.findViewById(R.id.btnCreateTrip)
+        floatingBtnCreateTrip = rootView.findViewById(R.id.floatingBtnCreateTrip)
         tripsRecyclerView = rootView.findViewById(R.id.tripsRecyclerView)
+        layoutNoTrips = rootView.findViewById(R.id.layoutNoTrips)
+        btnCreateTrip = rootView.findViewById(R.id.btnCreateTrip)
     }
 
 
     private fun setButtons(){
+        floatingBtnCreateTrip.setOnClickListener {
+            supportFragmentManager.createTrip()
+        }
+
         btnCreateTrip.setOnClickListener {
             supportFragmentManager.createTrip()
         }
@@ -88,6 +99,14 @@ class TripListFragment(private val tripsType: TripsType) : Fragment() {
         liveDataTrips.observe(viewLifecycleOwner) { result ->
             adapter.setTripsList(result)
             adapter.notifyDataSetChanged()
+
+            if(result.size > 0){
+                tripsRecyclerView.visibility = View.VISIBLE
+                layoutNoTrips.visibility = View.GONE
+            }else{
+                tripsRecyclerView.visibility = View.GONE
+                layoutNoTrips.visibility = View.VISIBLE
+            }
             /*
             when (result) {
                 is Resource.Success -> {
