@@ -382,8 +382,8 @@
                 android:id="@+id/btnRemoveTrip"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:background="@drawable/rectangle_borders_rounded_red_fill"
-
+                android:background="@drawable/button_rectangle_oval"
+                android:theme="@style/ButtonStyle"
                 android:layout_margin="20dp"
                 android:text="@string/remove_trip"
                 android:textColor="@color/white"
