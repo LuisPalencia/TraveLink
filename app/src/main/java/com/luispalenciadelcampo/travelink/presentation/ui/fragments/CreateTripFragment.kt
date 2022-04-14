@@ -172,7 +172,8 @@ class CreateTripFragment : Fragment() {
             //Listener when a city element is removed
             override fun onRemoveCityClick(position: Int) {
                 citiesList.removeAt(position)
-                adapter.notifyItemRemoved(position)
+                //adapter.notifyItemRemoved(position)
+                adapter.notifyDataSetChanged()
             }
         })
 
