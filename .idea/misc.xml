@@ -44,6 +44,8 @@
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/drawable/rectangle_borders_rounded_red_fill.xml" value="0.196" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/activity_login.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/activity_main.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/activity_recover_password.xml" value="0.14140625" />
+        <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/activity_sign_up.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_create_event.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_create_trip.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_dialog_rate.xml" value="0.275" />
@@ -56,6 +58,7 @@
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_home_trip.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_list_trips.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_map.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_profile.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_trip_list_current.xml" value="0.264453125" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/fragment_trips.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/header_events_list.xml" value="0.275" />
@@ -63,6 +66,7 @@
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/item_expenses_list.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/item_trip_list.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/layout_form_create_event.xml" value="0.275" />
+        <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/layout_no_events.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/layout_no_trips.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/layout/test.xml" value="0.275" />
         <entry key="..\:/Users/Palen/Documents/Git/TraveLink/app/src/main/res/menu/bottom_navigation_items.xml" value="0.275" />

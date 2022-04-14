@@ -131,6 +131,7 @@
 
     <!-- Events Fragment -->
     <string name="error_load_event">An error occurred when trying to load the event</string>
+    <string name="no_events_message">There are no events for this trip. Create a new one now!</string>
 
     <!-- Event details Fragment -->
     <string name="show_location">Show location</string>

@@ -97,8 +97,17 @@ class EventsFragment : Fragment() {
             when (result) {
                 is Resource.Success -> {
                     Log.d(TAG, result.data.toString())
-                    adapter.addHeaderAndSubmitList(result.data)
-                    //adapter.notifyDataSetChanged()
+                    if(result.data.size > 0){
+                        binding.eventsRecyclerView.visibility = View.VISIBLE
+                        binding.layoutNoEvents.layoutNoEvents.visibility = View.GONE
+
+                        adapter.addHeaderAndSubmitList(result.data)
+                        //adapter.notifyDataSetChanged()
+                    }else{
+                        binding.eventsRecyclerView.visibility = View.GONE
+                        binding.layoutNoEvents.layoutNoEvents.visibility = View.VISIBLE
+                    }
+
                 }
                 is Resource.Error -> {
                     Log.d(TAG, "Error when trying to get the trips: ${result.message}")
@@ -112,6 +121,10 @@ class EventsFragment : Fragment() {
 
     private fun setButtons(){
         binding.btnCreateEvent.setOnClickListener {
+            supportFragmentManager.createEvent(trip.id)
+        }
+
+        binding.layoutNoEvents.btnCreateNewEvent.setOnClickListener {
             supportFragmentManager.createEvent(trip.id)
         }
     }
