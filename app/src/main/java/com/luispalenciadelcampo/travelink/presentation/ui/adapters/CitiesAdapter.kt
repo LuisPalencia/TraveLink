@@ -59,7 +59,7 @@ class CitiesAdapter (
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.textViewCityName.text = data[position].name
 
-        viewHolder.itemView.setOnClickListener {
+        viewHolder.btnRemoveCity.setOnClickListener {
             mListener.onRemoveCityClick(position)
         }
 
