@@ -77,6 +77,10 @@ class ExpensesAdapter(
                 .into(viewHolder.imageViewExpense)
         }
 
+        viewHolder.itemView.setOnClickListener {
+            mListener.onItemClick(data[position])
+        }
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)

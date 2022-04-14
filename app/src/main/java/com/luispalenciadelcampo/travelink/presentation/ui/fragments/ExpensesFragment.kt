@@ -94,7 +94,7 @@ class ExpensesFragment : Fragment() {
             // When an item is selected, it opens the sneaker details
             override fun onItemClick(event: Event) {
                 Log.d(TAG, "Event selected: ${event.name}")
-
+                event.id?.let { supportFragmentManager.eventSelectedFromExpenses(trip.id, it) }
             }
         })
 

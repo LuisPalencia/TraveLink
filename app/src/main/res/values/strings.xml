@@ -159,6 +159,7 @@
     <!-- Expenses Fragment -->
     <string name="total_expenses_trip">The total cost of the trip is:</string>
     <string name="events_with_expenses">Events with expenses</string>
+    <string name="most_expensive_events">Most expensive events</string>
 
     <!-- Fragment Dialog Rating -->
     <string name="trip_rating">Trip rating</string>

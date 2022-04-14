@@ -318,13 +318,21 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
     }
 
     override fun eventSelected(idTrip: String, idEvent: String) {
+        this.eventSelected(idTrip, idEvent, R.id.action_eventsFragment_to_eventDetailsFragment)
+    }
+
+    override fun eventSelectedFromExpenses(idTrip: String, idEvent: String) {
+        this.eventSelected(idTrip, idEvent, R.id.action_expensesFragment_to_eventDetailsFragment)
+    }
+
+    private fun eventSelected(idTrip: String, idEvent: String, idAction: Int){
         val trip = mainViewModel.getTripById(idTrip)
         val event = mainViewModel.getEventById(idEvent, idTrip)
         if(trip != null && event != null){
             val bundle = bundleOf()
             bundle.putParcelable(Constants.BUNDLE_TRIP, trip)
             bundle.putParcelable(Constants.BUNDLE_EVENT, event)
-            findNavController(R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_eventDetailsFragment, bundle)
+            findNavController(R.id.nav_host_fragment).navigate(idAction, bundle)
         }else{
             Toast.makeText(this, R.string.error_load_event, Toast.LENGTH_LONG).show()
         }
