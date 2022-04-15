@@ -82,7 +82,15 @@ class ExpensesFragment : Fragment() {
 
         binding.textViewTotalCost.text = "${mainViewModel.getTotalExpenseTrip(this.eventsWithExpenses)} €"
 
-        setRecyclerView()
+        if(this.eventsWithExpenses.size > 0){
+            binding.layoutNoExpenses.visibility = View.GONE
+            binding.recyclerViewExpenses.visibility = View.VISIBLE
+            setRecyclerView()
+        }else{
+            binding.layoutNoExpenses.visibility = View.VISIBLE
+            binding.recyclerViewExpenses.visibility = View.GONE
+        }
+
     }
 
     // Method that sets the recycler view of the favourite sneakers fragment
