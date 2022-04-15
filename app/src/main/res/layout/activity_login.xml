@@ -40,12 +40,22 @@
             />
 
         <ImageView
+            android:id="@+id/imageViewBackground"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/rectangle_red_border_bottom_right"
+            android:layout_marginBottom="-10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/textViewLogIn"
+            />
+
+        <ImageView
             android:id="@+id/imageViewAppLogo"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_travel"
             android:layout_marginTop="50dp"
-            app:tint="@color/blue_dark"
+            app:tint="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,6 +68,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/log_in"
             android:textSize="30sp"
+            android:textColor="@color/white"
             android:fontFamily="@font/roboto_black"
             android:gravity="start"
             app:layout_constraintTop_toBottomOf="@id/imageViewAppLogo"
