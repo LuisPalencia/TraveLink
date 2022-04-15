@@ -93,8 +93,8 @@ class EditEventFragment : Fragment() {
         return rootView
     }
 
-
     private fun setupView(){
+        binding.layoutFormEvent.textViewCreateEvent.setText(R.string.edit_event)
         // Configuration for the Price EditText
         binding.layoutFormEvent.editTextPrice.setLocale(Locale.getDefault().toLanguageTag())
 
