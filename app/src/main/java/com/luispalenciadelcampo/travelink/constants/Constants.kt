@@ -2,16 +2,20 @@ package com.luispalenciadelcampo.travelink.constants
 
 object Constants {
     // This val is because resource "R.string.default_web_client_id" is not being loaded successfully for Google Login, so it has been added manually
-    const val DEFAULT_WEB_CLIENT_ID = ""
+    const val DEFAULT_WEB_CLIENT_ID = "371437697943-5egemrfffv9r1btqdtvqfdtaliv111ee.apps.googleusercontent.com"
 
 
-    const val DB_URL = ""
-    const val PLACES_API_KEY = ""
+    const val DB_URL = "https://travelink-e8a4f-default-rtdb.europe-west1.firebasedatabase.app/"
+    const val PLACES_API_KEY = "AIzaSyCcclGjPXGuNcjZpXZGlSU5hYkAmrWmWH8"
 
     // Firebase database references
     const val DB_REFERENCE_USERS = "users"
     const val DB_REFERENCE_TRIPS = "trips"
     const val DB_REFERENCE_EVENTS = "events"
+
+    // Firebase storage references
+    const val STORAGE_REFERENCE_IMAGE_TRIPS = "trips"
+    const val STORAGE_REFERENCE_IMAGE_EVENTS = "events"
 
     // Request codes
     const val AUTOCOMPLETE_CITIES_REQUEST_CODE = 1
@@ -47,7 +51,9 @@ object Constants {
     const val RESULT_GET_TRIPS_ERROR = "RESULT_GET_TRIPS_ERROR"
     const val RESULT_CREATE_TRIP_ERROR = "RESULT_CREATE_TRIP_ERROR"
     const val RESULT_REMOVE_TRIP_ERROR = "RESULT_REMOVE_TRIP_ERROR"
+    const val RESULT_CREATE_EVENT_ERROR = "RESULT_REMOVE_EVENT_ERROR"
     const val RESULT_REMOVE_EVENT_ERROR = "RESULT_REMOVE_EVENT_ERROR"
+    const val RESULT_UPDATE_EVENT_ERROR = "RESULT_REMOVE_EVENT_ERROR"
 
     const val RESULT_RATE_TRIP_ERROR = "RESULT_RATE_TRIP_ERROR"
 

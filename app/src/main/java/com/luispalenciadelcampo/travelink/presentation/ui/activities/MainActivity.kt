@@ -365,4 +365,12 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         startActivity(intent)
     }
 
+    override fun showAccountInformation() {
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_profileFragment_to_accountInformationFragment)
+    }
+
+    override fun showContactDetails() {
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_profileFragment_to_contactFragment)
+    }
+
 }

@@ -7,20 +7,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import com.luispalenciadelcampo.travelink.R
+import com.luispalenciadelcampo.travelink.databinding.FragmentContactBinding
 import com.luispalenciadelcampo.travelink.databinding.FragmentProfileBinding
-import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
+import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
 import java.io.IOException
 
+class ContactFragment : Fragment() {
 
-class ProfileFragment : Fragment() {
 
-    private val TAG = "ProfileFragment"
+    private val TAG = "ContactFragment"
     private lateinit var supportFragmentManager: SupportFragmentManager
     private lateinit var rootView: View
 
-    private var _binding: FragmentProfileBinding? = null
+    private var _binding: FragmentContactBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -41,31 +42,10 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentContactBinding.inflate(inflater, container, false)
         rootView = binding.root
 
-        setButtons()
-
         return rootView
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun setButtons(){
-        binding.btnProfileConfig.setOnClickListener {
-            supportFragmentManager.showAccountInformation()
-        }
-
-        binding.btnContact.setOnClickListener {
-            supportFragmentManager.showContactDetails()
-        }
-
-        binding.btnLogoff.setOnClickListener {
-            supportFragmentManager.signOutUser()
-        }
     }
 
 
