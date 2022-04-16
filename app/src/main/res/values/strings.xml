@@ -30,6 +30,8 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="birthday">Birthday</string>
+    <string name="address">Address</string>
     <string name="agree_privacy_policy">I agree with privacy and policy</string>
     <string name="go_back_to_login">Go back to login</string>
     <string name="already_have_account">Already have an account?</string>
@@ -180,6 +182,9 @@
     <string name="telephone_number">Number: 123456789</string>
     <string name="postal_number">Postal code: 13300</string>
     <string name="city_contact">City: Valdepenas</string>
+
+    <!-- Account Information Fragment -->
+    <string name="update_information">Update information</string>
 
     <!-- Layout examples -->
     <string name="example_trip_name">Trip to Madrid</string>
