@@ -176,6 +176,11 @@
     <string name="rate_trip_success">Trip has been rated!</string>
     <string name="rate_trip_error">An error occurred when trying to rate the trip</string>
 
+    <!-- Contact fragment -->
+    <string name="telephone_number">Number: 123456789</string>
+    <string name="postal_number">Postal code: 13300</string>
+    <string name="city_contact">City: Valdepenas</string>
+
     <!-- Layout examples -->
     <string name="example_trip_name">Trip to Madrid</string>
     <string name="example_date">01/01/2022 – 07/01/2022</string>

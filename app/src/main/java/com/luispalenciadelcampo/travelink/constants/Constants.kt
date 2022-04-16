@@ -2,11 +2,11 @@ package com.luispalenciadelcampo.travelink.constants
 
 object Constants {
     // This val is because resource "R.string.default_web_client_id" is not being loaded successfully for Google Login, so it has been added manually
-    const val DEFAULT_WEB_CLIENT_ID = "371437697943-5egemrfffv9r1btqdtvqfdtaliv111ee.apps.googleusercontent.com"
+    const val DEFAULT_WEB_CLIENT_ID = ""
 
 
-    const val DB_URL = "https://travelink-e8a4f-default-rtdb.europe-west1.firebasedatabase.app/"
-    const val PLACES_API_KEY = "AIzaSyCcclGjPXGuNcjZpXZGlSU5hYkAmrWmWH8"
+    const val DB_URL = ""
+    const val PLACES_API_KEY = ""
 
     // Firebase database references
     const val DB_REFERENCE_USERS = "users"
