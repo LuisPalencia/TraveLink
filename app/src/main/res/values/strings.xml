@@ -42,6 +42,7 @@
     <string name="success_account_creation">Verification email has been sent. Please check your mailbox and confirm the account</string>
     <string name="error_in_data_account">There are some errors in the data introduced. Please fix them</string>
     <string name="error_sign_up_privacy_policy">You must accept the privacy and policy of the app</string>
+    <string name="select_your_birthday">Select your birthday</string>
 
     <!-- Recover password -->
     <string name="send_email">Send email</string>
@@ -86,6 +87,7 @@
     <string name="error_cities_max">The maximum of cities is five</string>
     <string name="trip_created">The trip has been created!</string>
     <string name="error_trip_creation">An error occurred when trying to create the trip</string>
+    <string name="select_date_trip">Select a date for the trip</string>
 
     <!-- HomeTrip Fragment -->
     <string name="events">Events</string>

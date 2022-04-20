@@ -147,7 +147,7 @@ class CreateTripFragment : Fragment() {
 
         binding.editTextTripDateRange.setOnClickListener {
             val builder = MaterialDatePicker.Builder.dateRangePicker()
-            builder.setTitleText("Select a date for the trip")
+            builder.setTitleText(R.string.select_date_trip)
 
             val materialDatePicker = builder.build()
 
