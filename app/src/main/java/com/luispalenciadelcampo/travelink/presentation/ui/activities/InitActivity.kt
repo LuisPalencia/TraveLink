@@ -1,5 +1,6 @@
 package com.luispalenciadelcampo.travelink.presentation.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,15 @@ class InitActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        if(firebaseAuth.currentUser != null){
+            val sharedPref = this.getSharedPreferences(Constants.SHARED_PREFERENCES_APP, Context.MODE_PRIVATE)
+            if(sharedPref != null){
+                val rememberMeOption = sharedPref.getBoolean(Constants.SHARED_PREFERENCE_REMEMBER_ME, true)
+                if(!rememberMeOption){
+                    firebaseAuth.signOut()
+                }
+            }
+        }
 
         if(firebaseAuth.currentUser != null){ // User is authenticated
             val intent = Intent(this, MainActivity::class.java)

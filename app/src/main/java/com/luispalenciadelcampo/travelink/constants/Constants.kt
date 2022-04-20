@@ -17,8 +17,9 @@ object Constants {
     const val STORAGE_REFERENCE_IMAGE_TRIPS = "trips"
     const val STORAGE_REFERENCE_IMAGE_EVENTS = "events"
 
-    // Request codes
-    const val AUTOCOMPLETE_CITIES_REQUEST_CODE = 1
+    // Shared preferences
+    const val SHARED_PREFERENCES_APP = "SHARED_PREFERENCES_APP"
+    const val SHARED_PREFERENCE_REMEMBER_ME = "remember_me"
 
 
 

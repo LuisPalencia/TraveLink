@@ -1,5 +1,6 @@
 package com.luispalenciadelcampo.travelink.presentation.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -110,27 +111,17 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            // Check the checkbox in order to remember user or not
+            checkRememberMe()
+
             // Email and password are correct
             binding.editTextUsername.error = null
             binding.editTextPassword.error = null
-
-            //
 
             // Try to log in by email in Firebase
             lifecycleScope.launch {
                 authViewModel.logInUser(email, password)
             }
-
-            /*
-            //Check internet connection
-            if(GenericFunctions.isDeviceConnectedToInternet(this)){
-
-            }else{
-                // Show error
-                GenericFunctions.getErrorInternetDialog(this).show()
-            }
-
-             */
         }
 
         // Sets a click listener in the login by Google button
@@ -151,6 +142,13 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RecoverPasswordActivity()::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
+    }
+
+    private fun checkRememberMe(){
+        val sharedPref = this.getSharedPreferences(Constants.SHARED_PREFERENCES_APP, Context.MODE_PRIVATE) ?: return
+        val edit = sharedPref.edit()
+        edit.putBoolean(Constants.SHARED_PREFERENCE_REMEMBER_ME, binding.checkBoxRememberMe.isChecked)
+        edit.apply()
     }
 
     private fun signInWithGoogle() {
