@@ -25,10 +25,8 @@ class AuthRepositoryImpl @Inject constructor(
         lastname: String
     ): Resource<AuthResult> {
         return try {
-            Log.d(TAG, "CREANDO USUARIO")
             val resultCreateUser =
                 firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-            Log.d(TAG, "USUARIO CREADO!!!!!!")
             if (resultCreateUser.user != null) { // User has been created successfully
                 // Send verification email
                 firebaseAuth.currentUser!!.sendEmailVerification().await()
@@ -68,14 +66,11 @@ class AuthRepositoryImpl @Inject constructor(
             val resultLogIn = firebaseAuth.signInWithEmailAndPassword(email, password).await()
 
             if(resultLogIn.user!!.isEmailVerified) {
-                Log.d(TAG, "CORRECT")
                 Resource.Success(resultLogIn)
             }else{
-                Log.d(TAG, "ERROR_EMAIL_NOT_VERIFIED")
                 Resource.Error(Constants.RESULT_LOGIN_ERROR_EMAIL_NOT_VERIFIED)
             }
         }catch (e: FirebaseAuthInvalidCredentialsException){
-            Log.d(TAG, "ERROR_WRONG_CREDENTIALS")
             Resource.Error(Constants.RESULT_LOGIN_ERROR_WRONG_CREDENTIALS)
         }catch (e: Exception){
             Resource.Error(Constants.RESULT_LOGIN_ERROR_UNKNOWN)
@@ -88,6 +83,16 @@ class AuthRepositoryImpl @Inject constructor(
 
             val resultLogIn = firebaseAuth.signInWithCredential(credential).await()
             if(resultLogIn.user != null){
+                if (resultLogIn.additionalUserInfo?.isNewUser == true) {
+                    val name: String
+                    if(firebaseAuth.currentUser!!.displayName != null){
+                        name = firebaseAuth.currentUser!!.displayName.toString()
+                    }else{
+                        name = ""
+                    }
+
+                    this.insertNewUserGoogleSignIn(resultLogIn.user!!.uid, name)
+                }
                 Resource.Success(resultLogIn)
             }else{
                 Resource.Error(Constants.RESULT_LOGIN_GOOGLE_ERROR)
@@ -117,5 +122,22 @@ class AuthRepositoryImpl @Inject constructor(
         }catch (e: Exception){
             Resource.Error(Constants.RESULT_SEND_EMAIL_RECOVER_PASSWORD_ERROR_UNKNOWN)
         }
+    }
+
+    private suspend fun insertNewUserGoogleSignIn(userId: String, name: String){
+        val user = User(
+            uuid = userId,
+            name = name,
+            lastname = ""
+        )
+        //database.getReference(Constants.DB_REFERENCE_USERS).child(user.uuid!!).setValue(user).await()
+
+        val childUpdates = hashMapOf<String, Any>(
+            "name" to user.name!!,
+            "lastname" to user.lastname!!
+        )
+
+        firebaseDatabase.getReference(Constants.DB_REFERENCE_USERS).child(user.uuid!!)
+            .updateChildren(childUpdates).await()
     }
 }
