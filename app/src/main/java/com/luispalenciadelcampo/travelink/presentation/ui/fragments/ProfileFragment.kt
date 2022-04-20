@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.databinding.FragmentProfileBinding
 import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
+import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import java.io.IOException
 
 
@@ -24,6 +26,8 @@ class ProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -45,6 +49,8 @@ class ProfileFragment : Fragment() {
         rootView = binding.root
 
         setButtons()
+
+        binding.txtHelloUser.text = "${getString(R.string.hello)}, ${mainViewModel.user.value?.name}"
 
         return rootView
     }
