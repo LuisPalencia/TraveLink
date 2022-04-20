@@ -6,6 +6,6 @@ import com.luispalenciadelcampo.travelink.utils.Resource
 import javax.inject.Inject
 
 class RegisterUserUseCase @Inject constructor(private val authRepository: AuthRepository){
-    suspend operator fun invoke(email: String, password: String, name: String, lastName: String):
-            Resource<AuthResult> = authRepository.registerUser(email, password, name, lastName)
+    suspend operator fun invoke(email: String, password: String, name: String, lastName: String, birthday: String):
+            Resource<AuthResult> = authRepository.registerUser(email, password, name, lastName, birthday)
 }

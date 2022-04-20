@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.utils.Resource
 import com.luispalenciadelcampo.travelink.databinding.ActivitySignUpBinding
@@ -16,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.*
 
 @AndroidEntryPoint
 class SignUpActivity : AppCompatActivity() {
@@ -63,11 +65,13 @@ class SignUpActivity : AppCompatActivity() {
                 val email = binding.editTextEmail.text.toString()
                 val password = binding.editTextPassword.text.toString()
                 val confirmPassword = binding.editTextConfirmPassword.text.toString()
+                val birthday = binding.editTextBirthday.text.toString()
 
                 // checks these three things: email valid, password that matches minimum requiriments, and the confirm password is the same as the password
                 if(!PatternsAccount.isValidEmail(email) ||
                     firstname.isEmpty() ||
                     lastname.isEmpty() ||
+                    birthday.isEmpty() ||
                     !PatternsAccount.isValidPassword(password) ||
                     !PatternsAccount.isValidConfirmPassword(password, confirmPassword)
                 ){ // There are errors in the data introduced
@@ -80,7 +84,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 // All data is correct, proceed to create user
                 lifecycleScope.launch {
-                    authViewModel.registerUser(email, password, firstname, lastname)
+                    authViewModel.registerUser(email, password, firstname, lastname, birthday)
                 }
             }else{
                 // Show error
@@ -90,6 +94,19 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.textViewLogIn.setOnClickListener{
             finish()
+        }
+
+        binding.editTextBirthday.setOnClickListener {
+            val builder = MaterialDatePicker.Builder.datePicker()
+            builder.setTitleText(R.string.select_your_birthday)
+
+            val materialDatePicker = builder.build()
+
+            materialDatePicker.show(supportFragmentManager, "dateRangePicker")
+
+            materialDatePicker.addOnPositiveButtonClickListener {
+                binding.editTextBirthday.setText("${GenericFunctions.dateToString(Date(it))}")
+            }
         }
     }
 

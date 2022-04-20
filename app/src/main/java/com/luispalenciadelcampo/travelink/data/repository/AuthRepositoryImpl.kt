@@ -22,7 +22,8 @@ class AuthRepositoryImpl @Inject constructor(
         email: String,
         password: String,
         name: String,
-        lastname: String
+        lastname: String,
+        birthday: String
     ): Resource<AuthResult> {
         return try {
             val resultCreateUser =
@@ -39,8 +40,9 @@ class AuthRepositoryImpl @Inject constructor(
                 //database.getReference(Constants.DB_REFERENCE_USERS).child(user.uuid!!).setValue(user).await()
 
                 val childUpdates = hashMapOf<String, Any>(
-                    "name" to user.name!!,
-                    "lastname" to user.lastname!!
+                    "name" to name,
+                    "lastname" to lastname,
+                    "birthday" to birthday
                 )
 
                 firebaseDatabase.getReference(Constants.DB_REFERENCE_USERS).child(user.uuid!!)

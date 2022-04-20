@@ -187,6 +187,8 @@
 
     <!-- Account Information Fragment -->
     <string name="update_information">Update information</string>
+    <string name="success_update_user_info">Information updated successfully</string>
+    <string name="error_update_user_info">An error ocurred when trying to update the information</string>
 
     <!-- Layout examples -->
     <string name="example_trip_name">Trip to Madrid</string>

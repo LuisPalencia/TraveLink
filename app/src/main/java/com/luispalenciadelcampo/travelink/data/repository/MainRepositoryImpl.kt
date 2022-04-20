@@ -37,7 +37,7 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun getUser(userId: String): Resource<User> {
         return try{
-            val user = User()
+            val user = User(uuid = userId)
 
             val userRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_USERS}/$userId")
 
@@ -49,9 +49,12 @@ class MainRepositoryImpl @Inject constructor(
                     result?.children?.forEach { snapshot ->
                         when(snapshot.key){
                             "name" -> user.name = snapshot.value?.toString() ?: ""
-                            "lastName" -> user.lastname = snapshot.value?.toString() ?: ""
+                            "lastname" -> user.lastname = snapshot.value?.toString() ?: ""
+                            "birthday" -> user.birthday = GenericFunctions.stringToDate(snapshot.value.toString())
                         }
                     }
+
+                    Log.d(TAG, user.toString())
                 }else{
                     throw Exception()
                 }
@@ -60,6 +63,18 @@ class MainRepositoryImpl @Inject constructor(
         }catch (e: Exception){
             Resource.Error(Constants.RESULT_GET_USER_ERROR)
         }
+    }
+
+    override suspend fun updateUserInfo(user: User): Resource<User> {
+        val childUpdates = hashMapOf<String, Any>(
+            "name" to user.name,
+            "lastname" to user.lastname,
+            "birthday" to GenericFunctions.dateToString(user.birthday)
+        )
+
+        firebaseDatabase.getReference(Constants.DB_REFERENCE_USERS).child(user.uuid).updateChildren(childUpdates)
+
+        return Resource.Success(user)
     }
 
     @ExperimentalCoroutinesApi

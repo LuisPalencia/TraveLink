@@ -22,5 +22,6 @@ class UseCase (
     var GetPlaceImageUseCase: GetPlaceImageUseCase,
     var GetEventPhotoUseCase: GetEventPhotoUseCase,
     var GetTripPhotoUseCase: GetTripPhotoUseCase,
-    var UpdateEventUseCase: UpdateEventUseCase
+    var UpdateEventUseCase: UpdateEventUseCase,
+    var UpdateUserInfoUseCase: UpdateUserInfoUseCase
 )
