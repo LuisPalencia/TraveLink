@@ -46,7 +46,7 @@ class SignUpActivity : AppCompatActivity() {
                     finish()
                 }
                 is Resource.Error -> {
-                    Toast.makeText(this, "ERROR AL CREAR USUARIO", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.error_account_creation), Toast.LENGTH_LONG).show()
                 }
                 is Resource.Loading -> {
 

@@ -40,6 +40,7 @@
     <string name="incorrect_last_name">You must introduce a lastname</string>
     <string name="incorrect_password">The password must contain: 1 number, 1 lowercase, 1 uppercase and a minimun length of 6 characters</string>
     <string name="success_account_creation">Verification email has been sent. Please check your mailbox and confirm the account</string>
+    <string name="error_account_creation">An error occurred when trying to create the account</string>
     <string name="error_in_data_account">There are some errors in the data introduced. Please fix them</string>
     <string name="error_sign_up_privacy_policy">You must accept the privacy and policy of the app</string>
     <string name="select_your_birthday">Select your birthday</string>
