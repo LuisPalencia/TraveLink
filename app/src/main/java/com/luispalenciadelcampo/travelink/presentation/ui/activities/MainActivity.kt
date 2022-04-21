@@ -204,29 +204,6 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         }
     }
 
-    // Overrided function that is executed after a permission requests
-    @SuppressLint("MissingSuperCall")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            Constants.ACCESS_FINE_LOCATION_PERMISSIONS_CODE -> {
-                // If request is cancelled, the result arrays are empty.
-                if ((grantResults.isNotEmpty() &&
-                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                ) {
-                    // Permission is granted.
-                    Log.d(TAG, "ACCESS_FINE_LOCATION permission is granted")
-                } else {
-                    Log.d(TAG, "ACCESS_FINE_LOCATION permission is not granted")
-                }
-                return
-            }
-        }
-    }
-
     override fun popBackStackFragment(){
         currentNavController?.value?.popBackStack()
     }

@@ -6,8 +6,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -15,15 +13,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.material.snackbar.Snackbar
@@ -56,8 +51,6 @@ class ProfileFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by activityViewModels()
 
-    private lateinit var requestPermission: ActivityResultLauncher<String>
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -66,15 +59,6 @@ class ProfileFragment : Fragment() {
             supportFragmentManager = context as MainActivity
         }catch (e: IOException){
             Log.d(TAG, "MainActivity is on null state")
-        }
-
-        requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted ->
-            if (isGranted) {
-                takeImageFromGallery()
-            } else {
-                // Failed pass
-                Snackbar.make(binding.constraintLayout, getString(R.string.error_permissions_gallery), Snackbar.LENGTH_LONG).show()
-            }
         }
     }
 
@@ -181,15 +165,20 @@ class ProfileFragment : Fragment() {
                 //Permissions are not granted and the dialog in order to request them can be showed
                 else -> {
                     // Request the permission
-
                     requestPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
-
-
                 }
             }
         }catch (e: SecurityException){
             Log.d(TAG, e.toString())
+        }
+    }
+
+    private var requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted ->
+        if (isGranted) {
+            takeImageFromGallery()
+        } else {
+            // Failed pass
+            Snackbar.make(binding.constraintLayout, getString(R.string.error_permissions_gallery), Snackbar.LENGTH_LONG).show()
         }
     }
 
