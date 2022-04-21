@@ -11,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -19,6 +21,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.constants.Constants
 import com.luispalenciadelcampo.travelink.data.dto.Event
@@ -46,6 +49,8 @@ class EventMapFragment : Fragment(), OnMapReadyCallback {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var requestPermission: ActivityResultLauncher<String>
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -54,6 +59,10 @@ class EventMapFragment : Fragment(), OnMapReadyCallback {
             supportFragmentManager = context as MainActivity
         }catch (e: IOException){
             Log.d(TAG, "MainActivity is on null state")
+        }
+
+        requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted ->
+            checkLocationPermissionAndSetDeviceLocation()
         }
     }
 
@@ -112,8 +121,7 @@ class EventMapFragment : Fragment(), OnMapReadyCallback {
                 //Permissions are not granted and the dialog in order to request them can be showed
                 else -> {
                     // Request the permission
-                    map?.isMyLocationEnabled = false
-                    map?.uiSettings?.isMyLocationButtonEnabled  = false
+                    requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                 }
             }
         }catch (e: SecurityException){

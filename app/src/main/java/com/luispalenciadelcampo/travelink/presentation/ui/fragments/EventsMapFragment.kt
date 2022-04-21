@@ -11,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -55,6 +57,8 @@ class EventsMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var requestPermission: ActivityResultLauncher<String>
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -63,6 +67,10 @@ class EventsMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
             supportFragmentManager = context as MainActivity
         }catch (e: IOException){
             Log.d(TAG, "MainActivity is on null state")
+        }
+
+        requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted ->
+            checkLocationPermissionAndSetDeviceLocation()
         }
     }
 
@@ -213,12 +221,12 @@ class EventsMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
                 shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
                     map?.isMyLocationEnabled = false
                     map?.uiSettings?.isMyLocationButtonEnabled  = false
+                    Log.d(TAG, "Permissions not enabled")
                 }
                 //Permissions are not granted and the dialog in order to request them can be showed
                 else -> {
                     // Request the permission
-                    map?.isMyLocationEnabled = false
-                    map?.uiSettings?.isMyLocationButtonEnabled  = false
+                    requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                 }
             }
         }catch (e: SecurityException){
