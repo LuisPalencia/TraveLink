@@ -39,6 +39,21 @@
             app:layout_constraintGuide_percent="0.9"
             />
 
+        <com.example.loadinganimation.LoadingAnimation
+            android:id="@+id/loadingAnimation"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:elevation="10dp"
+            app:barType="@drawable/triad_ring"
+            app:boldText="false"
+            app:enlarge="5"
+            app:textSize="15sp"
+            app:isVisible="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
         <ImageView
             android:id="@+id/imageViewBackground"
             android:layout_width="match_parent"

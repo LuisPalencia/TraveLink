@@ -22,6 +22,7 @@ class AuthViewModel @Inject constructor(
 
     suspend fun logInUser(email: String, password: String) {
         viewModelScope.launch(Dispatchers.Main) {
+            userLogInStatus.postValue(Resource.Loading())
             val loginResult = useCase.LoginUseCase(email, password)
             userLogInStatus.postValue(loginResult)
         }

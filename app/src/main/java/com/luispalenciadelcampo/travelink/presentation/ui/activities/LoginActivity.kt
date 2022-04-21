@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.luispalenciadelcampo.travelink.R
@@ -47,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
         setButtons()
         setObserver()
 
+        binding.loadingAnimation.isVisible = false
 
     }
 
@@ -64,10 +66,14 @@ class LoginActivity : AppCompatActivity() {
         authViewModel.userLogInStatus.observe(this) { result ->
             when (result) {
                 is Resource.Success -> {
+                    binding.loadingAnimation.isVisible = false
+
                     binding.textViewErrorLogin.visibility = View.GONE
                     userLoggedIn()
                 }
                 is Resource.Error -> {
+                    binding.loadingAnimation.isVisible = false
+
                     binding.textViewErrorLogin.visibility = View.VISIBLE
                     var errorMessage = ""
                     errorMessage = when (result.message) {
@@ -88,6 +94,13 @@ class LoginActivity : AppCompatActivity() {
 
                 }
                 is Resource.Loading -> {
+                    binding.loadingAnimation.setTextViewVisibility(true)
+                    binding.loadingAnimation.setTextStyle(true)
+                    binding.loadingAnimation.setTextSize(12F)
+                    binding.loadingAnimation.setTextMsg("Getting place photo")
+                    binding.loadingAnimation.setEnlarge(5)
+                    binding.loadingAnimation.isVisible = true
+
                     binding.textViewErrorLogin.visibility = View.GONE
                     Log.d(TAG, "LOADING")
                 }
