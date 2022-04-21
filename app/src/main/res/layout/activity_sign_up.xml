@@ -181,6 +181,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginEnd="30dp"
             android:textColor="?android:textColorHint"
+            android:buttonTint="?attr/colorPrimary"
             app:layout_constraintTop_toBottomOf="@id/editTextBirthday"
             app:layout_constraintStart_toStartOf="@id/startGuideline"
             app:layout_constraintEnd_toStartOf="@id/endGuideline"
