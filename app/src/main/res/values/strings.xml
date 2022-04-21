@@ -64,8 +64,13 @@
     <!-- Profile fragment -->
     <string name="hello">Hello</string>
     <string name="account_configuration">Account configuration</string>
+    <string name="select_profile_image">Select profile image</string>
     <string name="log_off">Log off</string>
     <string name="contact">Contact</string>
+    <string name="error_updating_profile_image">An error ocurren when trying to update the profile image</string>
+    <string name="success_updating_profile_image">Profile image updated!</string>
+    <string name="error_permissions_gallery">You need to accept the permissions in order to select a profile image</string>
+    <string name="error_permissions_gallery_settings">You need to accept the permissions from the settings in order to select a profile image</string>
 
     <!-- CreateTrip fragment -->
     <string name="create_new_trip">Create a new trip!</string>

@@ -25,4 +25,5 @@ interface MainRepository {
     suspend fun getAndUploadEventImage(idTrip: String, event: Event): Resource<String>
     suspend fun getAndUploadTripImage(trip: Trip, userId: String): Resource<String>
     suspend fun updateUserInfo(user: User): Resource<User>
+    suspend fun uploadProfileImage(userId: String, image: Bitmap): Resource<String>
 }

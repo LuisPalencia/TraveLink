@@ -2,11 +2,16 @@ package com.luispalenciadelcampo.travelink.utils
 
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import androidx.appcompat.app.AlertDialog
 import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.data.dto.Event
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -59,7 +64,17 @@ class GenericFunctions {
             return calendar
         }
 
+        fun getBitmapCompressedFromUri(uriImage: Uri, context: Context?): Bitmap{
+            val parcelFileDescriptor = context?.contentResolver?.openFileDescriptor(uriImage, "r")
+            val fileDescriptor = parcelFileDescriptor?.fileDescriptor
+            val imageBitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
+            parcelFileDescriptor?.close()
 
+            val outputStream = ByteArrayOutputStream()
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
+
+            return BitmapFactory.decodeStream(ByteArrayInputStream(outputStream.toByteArray()))
+        }
 
 
         //Method that checks if the device is connected to internet

@@ -16,6 +16,7 @@ object Constants {
     // Firebase storage references
     const val STORAGE_REFERENCE_IMAGE_TRIPS = "trips"
     const val STORAGE_REFERENCE_IMAGE_EVENTS = "events"
+    const val STORAGE_REFERENCE_IMAGE_USERS = "users"
 
     // Shared preferences
     const val SHARED_PREFERENCES_APP = "SHARED_PREFERENCES_APP"

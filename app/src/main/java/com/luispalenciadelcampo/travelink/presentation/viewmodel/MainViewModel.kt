@@ -1,5 +1,6 @@
 package com.luispalenciadelcampo.travelink.presentation.viewmodel
 
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,6 +31,7 @@ class MainViewModel @Inject constructor(
 
     val user = MutableLiveData<User>()
     val updateInfoUser = MutableLiveData<Resource<User>>()
+    val uploadProfileImageStatus = MutableLiveData<Resource<String>>()
 
     val trips = MutableLiveData<Resource<MutableList<Trip>>>()
     val actualTrips = MutableLiveData<MutableList<Trip>>()
@@ -74,6 +76,27 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             val resultUser = useCase.UpdateUserInfoUseCase(user)
             updateInfoUser.postValue(resultUser)
+        }
+    }
+
+    suspend fun uploadProfileImage(userId: String, image: Bitmap){
+        viewModelScope.launch(Dispatchers.IO) {
+            uploadProfileImageStatus.postValue(Resource.Loading())
+            val resultUploadImage = useCase.UploadProfileImageUseCase(userId, image)
+
+            when (resultUploadImage) {
+                is Resource.Success -> {
+                    this@MainViewModel.user.value?.profileImageUrl = resultUploadImage.data
+                }
+                is Resource.Error -> {
+                    Log.d(TAG, "Error when trying to upload user image: ${resultUploadImage.message}")
+                }
+                is Resource.Loading -> {
+
+                }
+            }
+            
+            uploadProfileImageStatus.postValue(resultUploadImage)
         }
     }
 

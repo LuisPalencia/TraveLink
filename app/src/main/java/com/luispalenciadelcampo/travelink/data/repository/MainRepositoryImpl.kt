@@ -51,6 +51,7 @@ class MainRepositoryImpl @Inject constructor(
                             "name" -> user.name = snapshot.value?.toString() ?: ""
                             "lastname" -> user.lastname = snapshot.value?.toString() ?: ""
                             "birthday" -> user.birthday = GenericFunctions.stringToDate(snapshot.value.toString())
+                            "profileImageUrl" -> user.profileImageUrl = snapshot.value?.toString() ?: ""
                         }
                     }
 
@@ -479,6 +480,7 @@ class MainRepositoryImpl @Inject constructor(
         try {
             response = Tasks.await(uploadTask)
         }catch (e: Exception){
+            e.message?.let { Log.d(TAG, it) }
             return null
         }
 
@@ -492,7 +494,6 @@ class MainRepositoryImpl @Inject constructor(
 
             if (responseUrl != null) {
                 imageUrl = responseUrl.toString()
-                Log.d(TAG, "PATH: $imageUrl")
             }else{
                 return null
             }
@@ -586,6 +587,33 @@ class MainRepositoryImpl @Inject constructor(
             }
         }
         return Resource.Error("Error when trying to get the photo")
+    }
+
+    // Method that uploads to the firebase storage the profile image passed as argument for an user and returns the URL of the image
+    override suspend fun uploadProfileImage(userId: String, image: Bitmap): Resource<String> {
+        // Get the reference inside the Firebase Storage to the profile user image
+        val profileImageReference = Storage.firebaseStorage.reference.child("${Constants.STORAGE_REFERENCE_IMAGE_USERS}/${userId}_profileImage.jpg")
+
+        // Upload the image. This method returns the URL of the image
+        val imageUrl = this.uploadImageFirebaseStorage(profileImageReference, image)
+
+        // Check if image is not null
+        return if (imageUrl != null) {
+            // Update the DB in order to add the image URL to the user attributes
+            val userRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_USERS}/$userId")
+
+            //Set the map and update it in the DB
+            val childUpdates = hashMapOf<String, Any>(
+                "profileImageUrl" to imageUrl
+            )
+
+            //Perform the DB insertion
+            userRef.updateChildren(childUpdates).await()
+
+            Resource.Success(imageUrl)
+        }else{
+            Resource.Error("Error when trying to upload the photo URL")
+        }
     }
 
     /*
