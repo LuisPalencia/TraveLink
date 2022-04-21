@@ -37,6 +37,7 @@ class AuthViewModel @Inject constructor(
 
     suspend fun registerUser(email: String, password: String, name: String, lastname: String, birthday: String) {
         viewModelScope.launch(Dispatchers.Main) {
+            userSignInStatus.postValue(Resource.Loading())
             val loginResult = useCase.RegisterUserUseCase(email, password, name, lastname, birthday)
             userSignInStatus.postValue(loginResult)
         }
@@ -44,6 +45,7 @@ class AuthViewModel @Inject constructor(
 
     suspend fun sendEmailRecoverPassword(email: String) {
         viewModelScope.launch(Dispatchers.Main) {
+            sendEmailRecoverPasswordStatus.postValue(Resource.Loading())
             val sendEmailResult = useCase.SendRecoverPasswordEmailUseCase(email)
             sendEmailRecoverPasswordStatus.postValue(sendEmailResult)
         }

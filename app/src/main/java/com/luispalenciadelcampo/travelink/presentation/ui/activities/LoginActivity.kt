@@ -102,7 +102,6 @@ class LoginActivity : AppCompatActivity() {
                     binding.loadingAnimation.isVisible = true
 
                     binding.textViewErrorLogin.visibility = View.GONE
-                    Log.d(TAG, "LOADING")
                 }
             }
         }

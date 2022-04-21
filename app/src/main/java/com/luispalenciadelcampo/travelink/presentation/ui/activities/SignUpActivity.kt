@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -36,20 +38,29 @@ class SignUpActivity : AppCompatActivity() {
         setButtons()
         setEditTextListeners()
         setObserver()
+
+        binding.loadingAnimation.isVisible = false
     }
 
     private fun setObserver(){
         authViewModel.userSignInStatus.observe(this) { result ->
             when (result) {
                 is Resource.Success -> {
+                    binding.loadingAnimation.isVisible = false
                     Toast.makeText(this, getString(R.string.success_account_creation), Toast.LENGTH_LONG).show()
                     finish()
                 }
                 is Resource.Error -> {
+                    binding.loadingAnimation.isVisible = false
                     Toast.makeText(this, getString(R.string.error_account_creation), Toast.LENGTH_LONG).show()
                 }
                 is Resource.Loading -> {
-
+                    binding.loadingAnimation.setTextViewVisibility(true)
+                    binding.loadingAnimation.setTextStyle(true)
+                    binding.loadingAnimation.setTextSize(12F)
+                    binding.loadingAnimation.setTextMsg("Getting place photo")
+                    binding.loadingAnimation.setEnlarge(5)
+                    binding.loadingAnimation.isVisible = true
                 }
             }
         }
