@@ -103,7 +103,9 @@ class HomeTripFragment : Fragment() {
 
 
     private fun setView(){
-        binding.textViewTripName.text = trip.name
+        //binding.textViewTripName.text = trip.name
+        // Sets the toolbar title
+        binding.collapsingToolbar.title = trip.name
 
         if (trip.imageUrl?.isNotEmpty() == true) {
             Glide.with(this.requireContext())
@@ -173,7 +175,7 @@ class HomeTripFragment : Fragment() {
                     supportFragmentManager.popBackStackFragment()
                 }
                 is Resource.Error -> {
-                    Snackbar.make(binding.scrollView, getString(R.string.error_trip_removed), Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.coordinatorLayout, getString(R.string.error_trip_removed), Snackbar.LENGTH_SHORT).show()
                 }
                 else -> {}
             }
@@ -184,10 +186,10 @@ class HomeTripFragment : Fragment() {
         mainViewModel.rateTripStatus.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Success -> {
-                    Snackbar.make(binding.scrollView, getString(R.string.rate_trip_success), Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.coordinatorLayout, getString(R.string.rate_trip_success), Snackbar.LENGTH_SHORT).show()
                 }
                 is Resource.Error -> {
-                    Snackbar.make(binding.scrollView, getString(R.string.rate_trip_error), Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.coordinatorLayout, getString(R.string.rate_trip_error), Snackbar.LENGTH_SHORT).show()
                 }
                 else -> {}
             }
@@ -196,7 +198,6 @@ class HomeTripFragment : Fragment() {
 
     private fun setObserverGetPlacePhoto(){
         mainViewModel.getTripPlacePhotoStatus.observe(viewLifecycleOwner) { result ->
-            Log.d(TAG, "PHOTO STATUS CHANGED")
             when (result) {
                 is Resource.Success -> {
                     binding.loadingAnimation.isVisible = false
@@ -204,11 +205,11 @@ class HomeTripFragment : Fragment() {
                     Glide.with(this.requireContext())
                         .load(result.data)
                         .into(binding.imageViewTrip)
-                    Snackbar.make(binding.scrollView, getString(R.string.trip_photo_obtained_message), Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.coordinatorLayout, getString(R.string.trip_photo_obtained_message), Snackbar.LENGTH_SHORT).show()
                 }
                 is Resource.Error -> {
                     binding.loadingAnimation.isVisible = false
-                    Snackbar.make(binding.scrollView, getString(R.string.error_get_trip_photo), Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.coordinatorLayout, getString(R.string.error_get_trip_photo), Snackbar.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
                     binding.loadingAnimation.setTextViewVisibility(true)

@@ -27,6 +27,7 @@
     <color name="night_color_bnv_not_checked">#CAC7C7</color>
 
     <color name="grease">#777272</color>
+    <color name="grease_light">#D8CBCB</color>
 
     <color name="purple_button">#CC9C27B0</color>
     <color name="green_button">#CC31CA37</color>
