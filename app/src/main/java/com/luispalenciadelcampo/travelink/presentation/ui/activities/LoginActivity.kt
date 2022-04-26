@@ -117,9 +117,9 @@ class LoginActivity : AppCompatActivity() {
                 // Set the error in the EditText
                 binding.editTextUsername.error = getString(R.string.incorrect_email)
                 return@setOnClickListener
-            } else if(!PatternsAccount.isValidPassword(password)){ // Password is not valid
+            } else if(password.isEmpty()){ // Password is not valid
                 // Set the error in the EditText
-                binding.editTextPassword.error = getString(R.string.incorrect_password)
+                binding.editTextPassword.error = getString(R.string.password_empty)
                 return@setOnClickListener
             }
 

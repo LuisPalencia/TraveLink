@@ -38,7 +38,8 @@
     <string name="different_passwords">Passwords are different</string>
     <string name="incorrect_name">You must introduce a name</string>
     <string name="incorrect_last_name">You must introduce a lastname</string>
-    <string name="incorrect_password">The password must contain: 1 number, 1 lowercase, 1 uppercase and a minimun length of 6 characters</string>
+    <string name="incorrect_password">The password must contain: 1 number, 1 lowercase, 1 uppercase and a minimum length of 6 characters</string>
+    <string name="password_empty">The password field is empty</string>
     <string name="success_account_creation">Verification email has been sent. Please check your mailbox and confirm the account</string>
     <string name="error_account_creation">An error occurred when trying to create the account</string>
     <string name="error_in_data_account">There are some errors in the data introduced. Please fix them</string>
