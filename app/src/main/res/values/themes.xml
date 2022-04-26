@@ -18,7 +18,7 @@
         <item name="colorProfileImage">@color/grease</item>
 
         <!-- Font family for all app -->
-        <item name="android:fontFamily">@font/roboto_black</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
 
         <!-- Colors Bottom Navigation View -->
         <item name="color_bnv_background">@color/day_color_bnv</item>
