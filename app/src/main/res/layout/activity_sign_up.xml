@@ -63,17 +63,29 @@
             app:layout_constraintBottom_toBottomOf="@id/textViewSignUp"
             />
 
+        <ImageView
+            android:id="@+id/imageViewSignUp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_person"
+            android:layout_marginTop="50dp"
+            app:tint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
         <TextView
             android:id="@+id/textViewSignUp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="20dp"
             android:text="@string/sign_up"
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:gravity="start"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewSignUp"
             app:layout_constraintStart_toStartOf="@id/startGuideline"
             app:layout_constraintEnd_toEndOf="@id/endGuideline"
             />
