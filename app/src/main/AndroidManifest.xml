@@ -12,9 +12,9 @@
     <application
         android:name=".app.TraveLinkApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_travelink"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_travelink_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TraveLink">
         <activity
