@@ -66,9 +66,9 @@
 
         <ImageView
             android:id="@+id/imageViewAppLogo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_travel"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/ic_travelink_icon"
             android:layout_marginTop="50dp"
             app:tint="@color/white"
             app:layout_constraintTop_toTopOf="parent"
@@ -80,7 +80,7 @@
             android:id="@+id/textViewLogIn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="@string/log_in"
             android:textSize="30sp"
             android:textColor="@color/white"
