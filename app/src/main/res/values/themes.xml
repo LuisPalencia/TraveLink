@@ -28,5 +28,8 @@
         <!-- Color background list -->
         <item name="colorBackgroundList">@color/list_background_day</item>
 
+        <!-- Color separator -->
+        <item name="colorSeparator">@color/black</item>
+
     </style>
 </resources>

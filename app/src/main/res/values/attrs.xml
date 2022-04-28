@@ -12,5 +12,6 @@
     <attr name="colorBackgroundTransparent" format="reference" />
     <attr name="colorProfileImage" format="reference" />
     <attr name="colorBackgroundList" format="reference" />
+    <attr name="colorSeparator" format="reference" />
 
 </resources>

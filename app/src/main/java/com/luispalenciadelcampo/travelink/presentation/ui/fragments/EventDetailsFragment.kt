@@ -108,6 +108,14 @@ class EventDetailsFragment : Fragment() {
         binding.textViewCity.text = TripFunctions.getCityName(event.city, trip.cities)
         binding.textViewPrice.text = "${event.price} €"
 
+        if(event.description.isNotEmpty()){
+            binding.textViewDescription.text = event.description
+        }else{
+            binding.textViewDescription.visibility = View.GONE
+            binding.textViewDescriptionTitle.visibility = View.GONE
+        }
+
+
         if (event.imageUrl?.isNotEmpty() == true) {
             Glide.with(this.requireContext())
                 .load(event.imageUrl)

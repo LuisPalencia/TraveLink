@@ -29,5 +29,8 @@
         <!-- Color background list -->
         <item name="colorBackgroundList">@color/list_background_night</item>
 
+        <!-- Color separator -->
+        <item name="colorSeparator">@color/white</item>
+
     </style>
 </resources>

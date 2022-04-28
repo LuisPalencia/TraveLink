@@ -49,6 +49,7 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:text="@string/example_event_name"
+            android:maxLines="1"
             app:layout_constraintStart_toEndOf="@id/cardViewImageEvent"
             app:layout_constraintTop_toTopOf="@id/cardViewImageEvent"
 

@@ -157,6 +157,7 @@
     <string name="photo">Photo</string>
     <string name="edit_event">Edit event</string>
     <string name="rate_event">Rate event</string>
+    <string name="description">Description</string>
 
     <!-- Event map Fragment -->
     <string name="error_message_permission_location">You need to enable the location permission in order to show your current location</string>
