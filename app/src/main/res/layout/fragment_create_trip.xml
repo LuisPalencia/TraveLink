@@ -68,6 +68,7 @@
             android:layout_marginTop="20dp"
             android:paddingStart="20dp"
             android:paddingEnd="8dp"
+            android:maxLength="100"
             app:layout_constraintTop_toBottomOf="@id/textViewCreateTrip"
             app:layout_constraintStart_toStartOf="@id/startGuideline"
             app:layout_constraintEnd_toEndOf="@id/endGuideline"
