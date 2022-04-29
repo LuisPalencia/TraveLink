@@ -19,6 +19,8 @@
     <color name="blue_light">#6ff9ff</color>
     <color name="blue_dark">#0095a8</color>
 
+    <color name="green">#14B629</color>
+
     <color name="day_color_bnv">#5DAAE8</color>
     <color name="day_color_bnv_checked">#FFFFFF</color>
     <color name="day_color_bnv_not_checked">#1D1C1C</color>

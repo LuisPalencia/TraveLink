@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
@@ -42,39 +43,45 @@ class RateDialogFragment(private val trip: Trip): DialogFragment() {
         this.textViewRating = rootView.findViewById(R.id.textViewRating)
 
         this.ratingBar.rating = trip.rating.toFloat()
+        setRatingMessage(this.ratingBar.rating)
 
         this.ratingBar.onRatingBarChangeListener =
             RatingBar.OnRatingBarChangeListener { ratingBar, rating, fromUser ->
-                Log.d(TAG, "$rating")
-
-                when(rating){
-                    in 0.0..1.0 -> {
-                        this.textViewRating.text = getString(R.string.very_bad)
-                    }
-                    in 1.0..2.0 -> {
-                        this.textViewRating.text = getString(R.string.not_good)
-                    }
-                    in 2.0..3.0 -> {
-                        this.textViewRating.text = getString(R.string.quite_ok)
-                    }
-                    in 3.0..4.0 -> {
-                        this.textViewRating.text = getString(R.string.very_good)
-                    }
-                    in 4.0..5.0 -> {
-                        this.textViewRating.text = getString(R.string.excellent)
-                    }
-                }
+                setRatingMessage(rating)
             }
 
-        rootView.findViewById<Button>(R.id.btnSendRating).setOnClickListener {
+        rootView.findViewById<ImageButton>(R.id.btnSendRating).setOnClickListener {
             lifecycleScope.launch {
                 mainViewModel.rateTrip(ratingBar.rating.toDouble(), this@RateDialogFragment.trip)
             }
             this.dismiss()
         }
 
-        rootView.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+        rootView.findViewById<ImageButton>(R.id.btnCancel).setOnClickListener {
             this.dismiss()
+        }
+
+        rootView.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+
+    }
+
+    private fun setRatingMessage(rating: Float){
+        when(rating){
+            in 0.0..1.0 -> {
+                this.textViewRating.text = getString(R.string.very_bad)
+            }
+            in 1.0..2.0 -> {
+                this.textViewRating.text = getString(R.string.not_good)
+            }
+            in 2.0..3.0 -> {
+                this.textViewRating.text = getString(R.string.quite_ok)
+            }
+            in 3.0..4.0 -> {
+                this.textViewRating.text = getString(R.string.very_good)
+            }
+            in 4.0..5.0 -> {
+                this.textViewRating.text = getString(R.string.excellent)
+            }
         }
     }
 }
