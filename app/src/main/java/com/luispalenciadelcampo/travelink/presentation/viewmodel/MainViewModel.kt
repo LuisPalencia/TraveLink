@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.luispalenciadelcampo.travelink.data.dto.Event
-import com.luispalenciadelcampo.travelink.data.dto.PlaceImage
 import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.data.dto.User
 import com.luispalenciadelcampo.travelink.domain.usecases.UseCase
@@ -221,7 +220,7 @@ class MainViewModel @Inject constructor(
     suspend fun rateTrip(rating: Double, trip: Trip){
         viewModelScope.launch(Dispatchers.Main) {
             trip.rating = rating
-            val resultRateTrip = useCase.RateTrip(trip.id, trip.userAdminId!!, rating)
+            val resultRateTrip = useCase.RateTripUseCase(trip.id, trip.userAdminId!!, rating)
             rateTripStatus.postValue(resultRateTrip)
         }
     }
