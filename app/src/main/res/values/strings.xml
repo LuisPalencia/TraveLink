@@ -179,6 +179,7 @@
     <!-- Fragment Dialog Rating -->
     <string name="trip_rating">Trip rating</string>
     <string name="rate_this_trip">Please rate this trip</string>
+    <string name="rate_this_event">Please rate this event</string>
     <string name="send_rating">Send rating</string>
     <string name="very_bad">Very bad</string>
     <string name="not_good">Not good</string>
@@ -187,6 +188,8 @@
     <string name="excellent">Excellent!</string>
     <string name="rate_trip_success">Trip has been rated!</string>
     <string name="rate_trip_error">An error occurred when trying to rate the trip</string>
+    <string name="rate_event_success">Event has been rated!</string>
+    <string name="rate_event_error">An error occurred when trying to rate the event</string>
 
     <!-- Contact fragment -->
     <string name="telephone_number">Number: 123456789</string>

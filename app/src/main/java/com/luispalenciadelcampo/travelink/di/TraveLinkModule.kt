@@ -70,7 +70,8 @@ object TraveLinkModule {
             GetTripPhotoUseCase = GetTripPhotoUseCase(mainRepository),
             UpdateEventUseCase = UpdateEventUseCase(mainRepository),
             UpdateUserInfoUseCase = UpdateUserInfoUseCase(mainRepository),
-            UploadProfileImageUseCase = UploadProfileImageUseCase(mainRepository)
+            UploadProfileImageUseCase = UploadProfileImageUseCase(mainRepository),
+            RateEventUseCase = RateEventUseCase(mainRepository)
         )
     }
 }

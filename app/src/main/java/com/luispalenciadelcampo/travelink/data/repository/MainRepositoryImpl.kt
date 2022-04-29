@@ -169,7 +169,7 @@ class MainRepositoryImpl @Inject constructor(
                             "startTime" -> event.startTime = GenericFunctions.stringToDateHour(it.value.toString())
                             "endTime" -> event.endTime = GenericFunctions.stringToDateHour(it.value.toString())
                             "description" -> event.description = it.value.toString() ?: ""
-                            "rating" -> event.rating = it.value.toString().toIntOrNull() ?: 0
+                            "rating" -> event.rating = it.value.toString().toDoubleOrNull() ?: 0.0
                             "city" -> event.city = it.value.toString() ?: ""
                             "place" -> {
                                 for(child in it.children){
@@ -383,6 +383,21 @@ class MainRepositoryImpl @Inject constructor(
     ): Resource<Boolean> {
         return try {
             val tripRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_TRIPS}/$userId/$tripId")
+            tripRef.child("rating").setValue(rating).await()
+
+            Resource.Success(true)
+        }catch (e: Exception){
+            Resource.Error(Constants.RESULT_RATE_TRIP_ERROR)
+        }
+    }
+
+    override suspend fun rateEvent(
+        eventId: String,
+        tripId: String,
+        rating: Double
+    ): Resource<Boolean> {
+        return try {
+            val tripRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_EVENTS}/$tripId/$eventId")
             tripRef.child("rating").setValue(rating).await()
 
             Resource.Success(true)

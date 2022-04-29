@@ -14,6 +14,7 @@ interface SupportFragmentManager {
     fun showEventsMap(id: String)
     fun showExpenses(id: String)
     fun rateTrip(id: String)
+    fun rateEvent(event: Event, tripId: String)
     fun eventSelected(idTrip: String, idEvent: String)
     fun eventSelectedFromExpenses(idTrip: String, idEvent: String)
     fun showEventLocation(event: Event)

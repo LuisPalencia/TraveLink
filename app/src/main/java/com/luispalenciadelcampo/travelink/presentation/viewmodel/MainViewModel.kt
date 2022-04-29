@@ -39,6 +39,7 @@ class MainViewModel @Inject constructor(
     val createTripStatus = MutableLiveData<Resource<Trip>>()
     val removeTripStatus = MutableLiveData<Resource<Boolean>>()
     val rateTripStatus = MutableLiveData<Resource<Boolean>>()
+    val rateEventStatus = MutableLiveData<Resource<Boolean>>()
     private var tripsListenerJob: Job? = null
     val liveDataUpdateTrip = MutableLiveData<Trip>()
 
@@ -222,6 +223,13 @@ class MainViewModel @Inject constructor(
             trip.rating = rating
             val resultRateTrip = useCase.RateTrip(trip.id, trip.userAdminId!!, rating)
             rateTripStatus.postValue(resultRateTrip)
+        }
+    }
+
+    suspend fun rateEvent(rating: Double, eventId: String, tripId: String){
+        viewModelScope.launch(Dispatchers.Main) {
+            val resultRateEvent = useCase.RateEventUseCase(eventId, tripId, rating)
+            rateEventStatus.postValue(resultRateEvent)
         }
     }
 

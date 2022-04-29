@@ -1,13 +1,11 @@
 package com.luispalenciadelcampo.travelink.presentation.ui.activities
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -23,21 +21,19 @@ import com.luispalenciadelcampo.travelink.storage.Storage
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
 import com.luispalenciadelcampo.travelink.utils.GenericFunctions
 import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.data.dto.Trip
-import com.luispalenciadelcampo.travelink.presentation.ui.fragments.RateDialogFragment
+import com.luispalenciadelcampo.travelink.presentation.ui.fragments.RateEventDialogFragment
+import com.luispalenciadelcampo.travelink.presentation.ui.fragments.RateTripDialogFragment
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import com.luispalenciadelcampo.travelink.utils.Resource
 import com.luispalenciadelcampo.travelink.utils.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.io.FileInputStream
-import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), SupportFragmentManager {
@@ -287,11 +283,16 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
     override fun rateTrip(id: String) {
         val trip = mainViewModel.getTripById(id)
         if(trip != null){
-            var dialog = RateDialogFragment(trip)
+            val dialog = RateTripDialogFragment(trip)
             dialog.show(supportFragmentManager, "rateDialog")
         }else{
             Toast.makeText(this, R.string.error_load_trip, Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun rateEvent(event: Event, tripId: String) {
+        val dialog = RateEventDialogFragment(event, tripId)
+        dialog.show(supportFragmentManager, "rateEventDialog")
     }
 
     override fun eventSelected(idTrip: String, idEvent: String) {

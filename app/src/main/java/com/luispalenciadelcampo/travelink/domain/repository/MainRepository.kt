@@ -21,6 +21,7 @@ interface MainRepository {
     suspend fun removeEvent(event: Event, tripId: String): Resource<Boolean>
     suspend fun updateEvent(event: Event, tripId: String): Resource<Boolean>
     suspend fun rateTrip(tripId: String, userId: String, rating: Double): Resource<Boolean>
+    suspend fun rateEvent(eventId: String, tripId: String, rating: Double): Resource<Boolean>
     suspend fun getPlaceImage(placeId: String): Resource<PlaceImage>
     suspend fun getAndUploadEventImage(idTrip: String, event: Event): Resource<String>
     suspend fun getAndUploadTripImage(trip: Trip, userId: String): Resource<String>

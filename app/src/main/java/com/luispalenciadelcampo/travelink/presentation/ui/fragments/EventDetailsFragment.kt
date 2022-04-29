@@ -88,6 +88,7 @@ class EventDetailsFragment : Fragment() {
         setView()
         setButtons()
         setObserverGetPlacePhoto()
+        setObserverRateEvent()
 
         return rootView
     }
@@ -143,7 +144,7 @@ class EventDetailsFragment : Fragment() {
         }
 
         binding.cardViewRateEvent.setOnClickListener {
-
+            supportFragmentManager.rateEvent(this.event, this.trip.id)
         }
 
         binding.btnDeleteEvent.setOnClickListener {
@@ -189,7 +190,6 @@ class EventDetailsFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun setObserverRemoveEvent(){
@@ -202,6 +202,20 @@ class EventDetailsFragment : Fragment() {
                 is Resource.Error -> {
                     Snackbar.make(binding.scrollView, getString(R.string.error_event_removed), Snackbar.LENGTH_SHORT).show()
                 }
+            }
+        }
+    }
+
+    private fun setObserverRateEvent(){
+        mainViewModel.rateEventStatus.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Resource.Success -> {
+                    Snackbar.make(binding.scrollView, getString(R.string.rate_event_success), Snackbar.LENGTH_SHORT).show()
+                }
+                is Resource.Error -> {
+                    Snackbar.make(binding.scrollView, getString(R.string.rate_event_error), Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {}
             }
         }
     }

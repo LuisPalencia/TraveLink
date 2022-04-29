@@ -1,11 +1,9 @@
 package com.luispalenciadelcampo.travelink.presentation.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.RatingBar
 import android.widget.TextView
@@ -13,11 +11,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.luispalenciadelcampo.travelink.R
-import com.luispalenciadelcampo.travelink.data.dto.Trip
+import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
-class RateDialogFragment(private val trip: Trip): DialogFragment() {
+class RateEventDialogFragment(private val event: Event, private val tripId: String): DialogFragment() {
 
     private val TAG = "RateDialogFragment"
     private lateinit var rootView: View
@@ -42,7 +40,7 @@ class RateDialogFragment(private val trip: Trip): DialogFragment() {
         this.ratingBar = rootView.findViewById(R.id.ratingBar)
         this.textViewRating = rootView.findViewById(R.id.textViewRating)
 
-        this.ratingBar.rating = trip.rating.toFloat()
+        this.ratingBar.rating = event.rating.toFloat()
         setRatingMessage(this.ratingBar.rating)
 
         this.ratingBar.onRatingBarChangeListener =
@@ -52,7 +50,9 @@ class RateDialogFragment(private val trip: Trip): DialogFragment() {
 
         rootView.findViewById<ImageButton>(R.id.btnSendRating).setOnClickListener {
             lifecycleScope.launch {
-                mainViewModel.rateTrip(ratingBar.rating.toDouble(), this@RateDialogFragment.trip)
+                val rating = ratingBar.rating.toDouble()
+                this@RateEventDialogFragment.event.rating = rating
+                mainViewModel.rateEvent(rating, this@RateEventDialogFragment.event.id, this@RateEventDialogFragment.tripId)
             }
             this.dismiss()
         }
@@ -61,7 +61,7 @@ class RateDialogFragment(private val trip: Trip): DialogFragment() {
             this.dismiss()
         }
 
-        rootView.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+        rootView.findViewById<TextView>(R.id.textViewDescription).setText(R.string.rate_this_event)
 
     }
 
