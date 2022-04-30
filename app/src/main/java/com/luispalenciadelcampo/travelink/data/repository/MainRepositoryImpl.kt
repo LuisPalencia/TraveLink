@@ -304,6 +304,13 @@ class MainRepositoryImpl @Inject constructor(
             val tripsUserRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_TRIPS}/$userId/${trip.id}")
             tripsUserRef.removeValue().await()
 
+            // If the trip has an image, remove it from the firebase storage
+            if(trip.imageUrl?.isNotEmpty() == true){
+                val tripImageReference =
+                    Storage.firebaseStorage.reference.child("${Constants.STORAGE_REFERENCE_IMAGE_TRIPS}/${trip.id}/tripImage.jpg")
+                this.removeFileFirebaseStorage(tripImageReference)
+            }
+
             Resource.Success(true)
         }catch (e: Exception){
             Resource.Error(Constants.RESULT_REMOVE_TRIP_ERROR)
@@ -344,6 +351,14 @@ class MainRepositoryImpl @Inject constructor(
         return try {
             val eventRef = firebaseDatabase.getReference("${Constants.DB_REFERENCE_EVENTS}/$tripId/${event.id}")
             eventRef.removeValue().await()
+
+            // If the event has an image, remove it from the firebase storage
+            if(event.imageUrl?.isNotEmpty() == true){
+                val eventImageReference = Storage.firebaseStorage.reference.child("${Constants.STORAGE_REFERENCE_IMAGE_TRIPS}/$tripId/${Constants.STORAGE_REFERENCE_IMAGE_EVENTS}/${event.id}/eventImage.jpg")
+                this.removeFileFirebaseStorage(eventImageReference)
+            }
+
+
 
             Resource.Success(true)
         }catch (e: Exception){
@@ -631,51 +646,8 @@ class MainRepositoryImpl @Inject constructor(
         }
     }
 
-    /*
-    override suspend fun getPlaceImage(placeId: String): Resource<PlaceImage>{
-        // Specify fields. Requests for photos must always have the PHOTO_METADATAS field.
-        val fields = listOf(Place.Field.PHOTO_METADATAS)
-
-        // Get a Place object (this example uses fetchPlace(), but you can also use findCurrentPlace())
-        val placeRequest = FetchPlaceRequest.newInstance(placeId, fields)
-        var placeImage: PlaceImage? = null
-
-        Storage.placesClient.fetchPlace(placeRequest)
-            .addOnSuccessListener { response: FetchPlaceResponse ->
-                val place = response.place
-
-                // Get the photo metadata.
-                val metada = place.photoMetadatas
-                if (metada == null || metada.isEmpty()) {
-                    Log.d(TAG, "No photo metadata.")
-                    //return@addOnSuccessListener
-                    Resource.Error<String>("Error: no photo metadata.")
-                }
-                val photoMetadata = metada.first()
-
-                // Get the attribution text.
-                val attributions = photoMetadata?.attributions
-
-                // Create a FetchPhotoRequest.
-                val photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                    .setMaxWidth(500) // Optional.
-                    .setMaxHeight(300) // Optional.
-                    .build()
-                Storage.placesClient.fetchPhoto(photoRequest)
-                    .addOnSuccessListener { fetchPhotoResponse: FetchPhotoResponse ->
-                        placeImage = PlaceImage(fetchPhotoResponse.bitmap, attributions)
-                        Resource.Success(placeImage)
-                    }.addOnFailureListener { exception: Exception ->
-                        if (exception is ApiException) {
-                            Log.e(TAG, "Place not found: " + exception.message)
-                            //val statusCode = exception.statusCode
-                            Resource.Error<String>(exception.message ?: "Error")
-                            return@addOnFailureListener
-                        }
-                    }
-            }
-        return Resource.Loading()
+    // Method that removes a file from the firebase storage
+    private suspend fun removeFileFirebaseStorage(reference: StorageReference){
+        reference.delete().await()
     }
-
-     */
 }
