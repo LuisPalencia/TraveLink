@@ -122,7 +122,15 @@
         android:id="@+id/eventsMapFragment"
         android:name="com.luispalenciadelcampo.travelink.presentation.ui.fragments.EventsMapFragment"
         android:label="fragment_events_map"
-        tools:layout="@layout/fragment_events_map" />
+        tools:layout="@layout/fragment_events_map" >
+        <action
+            android:id="@+id/action_eventsMapFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/expensesFragment"
         android:name="com.luispalenciadelcampo.travelink.presentation.ui.fragments.ExpensesFragment"

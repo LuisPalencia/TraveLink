@@ -303,6 +303,10 @@ class MainActivity : AppCompatActivity(), SupportFragmentManager {
         this.eventSelected(idTrip, idEvent, R.id.action_expensesFragment_to_eventDetailsFragment)
     }
 
+    override fun eventSelectedFromMap(idTrip: String, idEvent: String) {
+        this.eventSelected(idTrip, idEvent, R.id.action_eventsMapFragment_to_eventDetailsFragment)
+    }
+
     private fun eventSelected(idTrip: String, idEvent: String, idAction: Int){
         val trip = mainViewModel.getTripById(idTrip)
         val event = mainViewModel.getEventById(idEvent, idTrip)

@@ -45,6 +45,7 @@ class EventsMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
 
     private var map: GoogleMap? = null
     private lateinit var eventList: MutableList<Event>
+    private var hashMapMarkerEvents = hashMapOf<Marker, String>()
     private var positionEvent = 0
 
 
@@ -181,11 +182,17 @@ class EventsMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
 
             // Add a marker for each event at its position
             for(event in eventList){
-                this.map?.addMarker(MarkerOptions()
+                val marker = this.map?.addMarker(MarkerOptions()
                     .title(event.name)
                     .position(LatLng(event.place.latitude, event.place.longitude))
                     .snippet(GenericFunctions.dateHourToString(event.startTime))
                 )
+
+                // Add the marker and the event id to the hashmap so it is available when a marker is selected
+                if(marker != null){
+                    hashMapMarkerEvents[marker] = event.id
+                }
+
             }
             // Set the text for the first event
             setTextEventSelected()
@@ -200,7 +207,12 @@ class EventsMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
 
     // Listener that is executed when a marker is selected
     override fun onInfoWindowClick(p0: Marker) {
-        Toast.makeText(this.requireContext(), "${p0.title}", Toast.LENGTH_LONG).show()
+        // Get the id of the event selected
+        val eventId = hashMapMarkerEvents[p0]
+        // Call main activity in order to show the event details
+        if (eventId != null) {
+            supportFragmentManager.eventSelectedFromMap(trip.id, eventId)
+        }
     }
 
     // Method that shows in the map the device's position

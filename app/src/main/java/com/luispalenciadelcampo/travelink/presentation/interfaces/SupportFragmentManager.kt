@@ -17,6 +17,7 @@ interface SupportFragmentManager {
     fun rateEvent(event: Event, tripId: String)
     fun eventSelected(idTrip: String, idEvent: String)
     fun eventSelectedFromExpenses(idTrip: String, idEvent: String)
+    fun eventSelectedFromMap(idTrip: String, idEvent: String)
     fun showEventLocation(event: Event)
     fun signOutUser()
     fun showAccountInformation()
