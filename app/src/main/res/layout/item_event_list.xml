@@ -67,6 +67,24 @@
             app:layout_constraintTop_toBottomOf="@id/textViewEventName"
             />
 
+        <RatingBar
+            android:id="@+id/ratingBarEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="3"
+            android:progressTint="@color/rating_bar_activated"
+            android:progressBackgroundTint="@color/rating_bar_activated"
+            android:secondaryProgressTint="@color/rating_bar_activated"
+            style = "@style/Widget.AppCompat.RatingBar.Indicator"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:stepSize="0.5"
+            android:layout_marginEnd="-20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

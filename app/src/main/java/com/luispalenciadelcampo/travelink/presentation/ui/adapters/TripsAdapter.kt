@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -44,11 +45,13 @@ class TripsAdapter(
         var imageViewTrip: ImageView
         var textViewTripName: TextView
         var textViewTripDate: TextView
+        var ratingBarTrip: RatingBar
 
         init {
             imageViewTrip = view.findViewById(R.id.imageViewTrip)
             textViewTripName = view.findViewById(R.id.textViewTripName)
             textViewTripDate = view.findViewById(R.id.textViewTripDate)
+            ratingBarTrip = view.findViewById(R.id.ratingBarTrip)
         }
     }
 
@@ -65,6 +68,7 @@ class TripsAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.textViewTripName.text = data[position].name
         viewHolder.textViewTripDate.text = "${GenericFunctions.dateToString(data[position].startDate!!)} - ${GenericFunctions.dateToString(data[position].endDate!!)}"
+        viewHolder.ratingBarTrip.rating = data[position].rating.toFloat()
 
         if (data[position].imageUrl?.isNotEmpty() == true) {
             Glide.with(context)

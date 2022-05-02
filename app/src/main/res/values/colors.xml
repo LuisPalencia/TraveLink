@@ -31,6 +31,9 @@
     <color name="grease">#777272</color>
     <color name="grease_light">#D8CBCB</color>
 
+    <color name="rating_bar_normal">#8F8787</color>
+    <color name="rating_bar_activated">#FFEB3B</color>
+
     <color name="purple_button">#CC9C27B0</color>
     <color name="green_button">#CC31CA37</color>
     <color name="blue_button">#CC03A9F4</color>

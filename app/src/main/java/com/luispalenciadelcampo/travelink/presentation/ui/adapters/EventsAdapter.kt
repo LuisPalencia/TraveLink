@@ -142,6 +142,7 @@ class EventsAdapter(
 
             binding.textViewEventName.text = item.name
             binding.textViewEventTime.text = "${GenericFunctions.dateHourToString(item.startTime)} - ${GenericFunctions.dateHourToString(item.endTime)}"
+            binding.ratingBarEvent.rating = item.rating.toFloat()
         }
 
         companion object {

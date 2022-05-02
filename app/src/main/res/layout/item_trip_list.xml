@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
+        android:src="@drawable/trip1"
         android:scaleType="centerCrop" />
 
 
@@ -22,16 +23,24 @@
         android:background="@android:color/transparent"
         >
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/middleVerticalGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"
+            />
+
         <TextView
             android:id="@+id/textViewTripName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="@string/example_trip_name"
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="@color/white"
             android:layout_marginBottom="10dp"
+            android:maxLines="1"
             app:layout_constraintStart_toStartOf="@id/textViewTripDate"
             app:layout_constraintBottom_toTopOf="@id/textViewTripDate"
 
@@ -50,6 +59,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
+
+        <RatingBar
+            android:id="@+id/ratingBarTrip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="3"
+            android:layout_marginTop="10dp"
+            style = "@style/Widget.AppCompat.RatingBar.Indicator"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:progressTint="@color/rating_bar_activated"
+            android:progressBackgroundTint="@color/rating_bar_activated"
+            android:secondaryProgressTint="@color/rating_bar_activated"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
 
 
 
