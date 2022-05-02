@@ -11,7 +11,7 @@
 <item
     android:height="60dp">
     <shape android:shape="rectangle">
-        <solid android:color="@color/red" />
+        <solid android:color="?attr/colorPrimary" />
         <corners
             android:topLeftRadius="50dp"
             android:topRightRadius="50dp" />
