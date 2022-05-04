@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TraveLink</string>
+
+    <!-- General -->
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancelar</string>
+    <string name="error">Error</string>
+    <string name="email">Email</string>
+    <string name="error_internet_title">Error: Internet</string>
+    <string name="error_internet_content">El dispositivo no está conectado a internet. Se necesita una conexión a internet para poder usar la aplicación. </string>
+
+    <!-- Login -->
+    <string name="log_in">Iniciar sesión</string>
+    <string name="username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="not_have_account">¿No tienes una cuenta?</string>
+    <string name="sign_up">Regístrate</string>
+    <string name="forgot_password">Recuperar contraseña</string>
+    <string name="keep_me_logged_in">Mantener mi sesión iniciada</string>
+    <string name="wrong_credentials">Usuario o contraseña incorrecto</string>
+    <string name="incorrect_email">El email no es correcto</string>
+
+    <string name="error_login">Ha ocurrido un error al intentar iniciar sesión</string>
+    <string name="error_email_verified">Debes de confirmar la cuenta antes de iniciar sesión</string>
+    <string name="error_login_google">Ha ocurrido un error al intentar iniciar sesión mediante Google</string>
+    <string name="correct_login">Inicio de sesión correcto</string>
+
+
+    <!-- Sign up -->
+    <string name="first_name">Nombre</string>
+    <string name="last_name">Apellidos</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="birthday">Fecha de nacimiento</string>
+    <string name="agree_privacy_policy">Estoy de acuerdo con la privacidad y la política</string>
+    <string name="go_back_to_login">Volver al inicio de sesión</string>
+    <string name="already_have_account">¿Ya dispone de una cuenta?</string>
+    <string name="different_passwords">Las contraseñas son diferenters</string>
+    <string name="incorrect_name">Debes de introducir un nombre</string>
+    <string name="incorrect_last_name">Debes de introducir los apellidos</string>
+    <string name="incorrect_password">La contraseña debe contener: 1 número, 1 minúscula, 1 mayúscula y una longitud mínima de 6 caracteres</string>
+    <string name="password_empty">El campo de la contraseña está vacío</string>
+    <string name="success_account_creation">Se ha enviado a tu cuenta un email para verificar la cuenta. Por favor, compruebe su buzón de correo y confirme la cuenta</string>
+    <string name="error_account_creation">Se ha producido un error al intentar crear la cuenta</string>
+    <string name="error_in_data_account">Hay algunos errores en los datos introducidos. Por favor, corríjalos</string>
+    <string name="error_sign_up_privacy_policy">Debes aceptar la privacidad y la política de la aplicación</string>
+    <string name="select_your_birthday">Selecciona tu fecha de nacimiento</string>
+
+    <!-- Recover password -->
+    <string name="send_email">Enviar email</string>
+    <string name="success_email_recover_password">El correo electrónico ha sido enviado. Por favor, compruebe su buzón de correo electrónico</string>
+    <string name="error_email_recover_password">Se ha producido un error al intentar enviar el correo electrónico</string>
+    <string name="error_not_existing_email">El correo electrónico especificado no existe</string>
+    <string name="recover_your_password">Recupera tu contraseña</string>
+
+    <!-- Main activity -->
+    <string name="trips">Viajes</string>
+    <string name="profile">Perfil</string>
+
+    <!-- Trips fragment -->
+    <string name="current_trips">Current trips</string>
+    <string name="past_trips">Past trips</string>
+    <string name="no_trips_message">There are no trips in this section. Create a new one now!</string>
+
+    <!-- Profile fragment -->
+    <string name="hello">Hola</string>
+    <string name="account_configuration">Configuración de la cuenta</string>
+    <string name="select_profile_image">Seleccciona tu foto de perfil</string>
+    <string name="log_off">Cerrar sesión</string>
+    <string name="contact">Contacto</string>
+    <string name="error_updating_profile_image">Se ha producido un error al intentar actualizar la imagen del perfil</string>
+    <string name="success_updating_profile_image">Foto de perfil actualiada</string>
+    <string name="error_permissions_gallery">Debe aceptar los permisos para poder seleccionar una foto de perfil</string>
+    <string name="error_permissions_gallery_settings">Es necesario aceptar los permisos desde los ajustes del dispositivo para poder seleccionar una foto de perfil</string>
+
+    <!-- CreateTrip fragment -->
+    <string name="create_new_trip">¡Crear un nuevo viaje!</string>
+    <string name="trip_name">Nombre del viaje</string>
+    <string name="start_date">Fecha de inicio</string>
+    <string name="end_date">Fecha de fin</string>
+    <string name="date_for_trip">Fecha del viaje</string>
+    <string name="cities">Ciudades</string>
+    <string name="add_city">Añadir ciudad</string>
+    <string name="create_trip">Crear viaje</string>
+    <string name="error_name_trip_empty">Debes de introducir un nombre</string>
+    <string name="error_start_date_not_selected">Debe seleccionar una fecha de inicio</string>
+    <string name="error_end_date_not_selected">Debe seleccionar una fecha de fin</string>
+    <string name="error_end_date_before_start_date">La fecha de fin no puede ser anterior a la fecha de inicio</string>
+    <string name="error_max_days_exceeded">Un viaje no puede durar más de 30 días</string>
+    <string name="error_cities_not_added">Debes de añadir al menos una ciudad</string>
+    <string name="error_cities_already_added">Error: la ciudad seleccionada ya está añadida</string>
+    <string name="error_adding_city">Se ha producido un error al intentar añadir la ciudad</string>
+    <string name="error_cities_max">El máximo de ciudades es de cinco</string>
+    <string name="trip_created">¡El viaje ha sido creado!</string>
+    <string name="error_trip_creation">Se ha producido un error al intentar crear el viaje</string>
+    <string name="select_date_trip">Seleccione una fecha para el viaje</string>
+
+    <!-- HomeTrip Fragment -->
+    <string name="events">Eventos</string>
+    <string name="map">Mapa</string>
+    <string name="rating">Valorar</string>
+    <string name="remove_trip">Eliminar viaje</string>
+    <string name="expenses">Gastos</string>
+    <string name="create_event">Crear evento</string>
+    <string name="error_load_trip">Se ha producido un error al intentar cargar el viaje</string>
+    <string name="trip_removed_successfully">Viaje eliminado correctamente</string>
+    <string name="error_trip_removed">Se ha producido un error al eliminar el viaje</string>
+    <string name="dialog_remove_trip_title">Eliminar viaje</string>
+    <string name="dialog_remove_trip_message">¿Estás seguro de que quieres eliminar este viaje? No podrás recuperarlo</string>
+    <string name="trip_photo">Foto del viaje</string>
+    <string name="error_get_trip_photo">Se ha producido un error al obtener una foto del lugar del viaje</string>
+    <string name="trip_photo_obtained_message">Foto obtenida con éxito</string>
+
+    <!-- CreateEvent fragment -->
+    <string name="create_new_event">Crea un nuevo evento!</string>
+    <string name="event_name">Nombre para el evento</string>
+    <string name="event_date">Fecha del evento</string>
+    <string name="start_time">Hora de inicio</string>
+    <string name="end_time">Hora de fin</string>
+    <string name="description_field">Una breve descripción del evento, o detalles a tener en cuenta sobre el mismo</string>
+    <string name="city">Ciudad</string>
+    <string name="place">Lugar</string>
+    <string name="price">Precio</string>
+    <string name="error_name_event_empty">Es necesario introducir un nombre para el evento</string>
+    <string name="error_price_event_empty">Es necesario introducir un precio para el evento</string>
+    <string name="error_start_time_empty">Es necesario introducir la hora de inicio del evento</string>
+    <string name="error_end_time_empty">Es necesario introducir la hora de fin del evento</string>
+    <string name="error_end_time_before_start_time">La hora de fin no puede ser anterior a la hora de inicio</string>
+    <string name="error_date_event_empty">Es necesario introducir una fecha para el evento</string>
+    <string name="error_place_event_empty">Es necesario seleccionar un lugar para el evento</string>
+    <string name="event_created">¡El evento ha sido creado!</string>
+    <string name="error_event_creation">Se ha producido un error al intentar crear el evento</string>
+
+    <!-- EditEvent fragment -->
+    <string name="update_event">Actualizar evento</string>
+    <string name="event_updated">¡El evento ha sido actualizado!</string>
+    <string name="error_event_update">Se ha producido un error al intentar actualizar el evento</string>
+
+    <!-- Events Fragment -->
+    <string name="error_load_event">Se ha producido un error al intentar cargar el evento</string>
+    <string name="no_events_message">No hay eventos para este viaje. ¡Crea uno nuevo ahora!</string>
+
+    <!-- Event details Fragment -->
+    <string name="show_location">Mostrar ubicación</string>
+    <string name="remove_event">Eliminar evento</string>
+    <string name="event_removed_successfully">Evento eliminado correctamente</string>
+    <string name="error_event_removed">Se ha producido un error al eliminar el evento</string>
+    <string name="error_get_event_photo">Se ha producido un error al obtener una foto del lugar del evento</string>
+    <string name="event_photo_obtained_message">Foto obtenida con éxito</string>
+    <string name="dialog_remove_event_title">Eliminar evento</string>
+    <string name="dialog_remove_event_message">¿Estás seguro de que quieres eliminar este evento? No podrás recuperarlo</string>
+    <string name="location">Ubicación</string>
+    <string name="photo">Foto</string>
+    <string name="edit_event">Editar evento</string>
+    <string name="rate_event">Valorar evento</string>
+    <string name="description">Descripción</string>
+
+    <!-- Event map Fragment -->
+    <string name="error_message_permission_location">Tienes que activar el permiso de localización para poder mostrar tu ubicación actual</string>
+
+    <!-- Events map Fragment -->
+    <string name="start">Inicio</string>
+    <string name="next">Siguiente</string>
+    <string name="previous">Anterior</string>
+    <string name="event_selected">Evento seleccionado</string>
+    <string name="first_event_error">Este es el primer evento</string>
+    <string name="last_event_error">Este es el último evento</string>
+
+    <!-- Expenses Fragment -->
+    <string name="total_expenses_trip">El coste total del viaje es:</string>
+    <string name="events_with_expenses">Eventos con gastos</string>
+    <string name="most_expensive_events">Eventos más caros</string>
+    <string name="no_trip_expenses_message">Este viaje no tiene todavía ningún gasto</string>
+
+    <!-- Fragment Dialog Rating -->
+    <string name="trip_rating">Valoración del viaje</string>
+    <string name="rate_this_trip">Por favor, valora este viaje</string>
+    <string name="rate_this_event">Por favor, valora este evento</string>
+    <string name="confirm_rating">Confirmar valoración</string>
+    <string name="very_bad">Muy mal</string>
+    <string name="not_good">Regular</string>
+    <string name="quite_ok">Ok</string>
+    <string name="very_good">Muy bien</string>
+    <string name="excellent">¡Excelente!</string>
+    <string name="rate_trip_success">¡El viaje ha sido valorado!</string>
+    <string name="rate_trip_error">Se ha producido un error al intentar valorar el viaje</string>
+    <string name="rate_event_success">¡El evento ha sido valorado!</string>
+    <string name="rate_event_error">Se ha producido un error al intentar valorar el evento</string>
+
+    <!-- Contact fragment -->
+    <string name="telephone_number">Número de teléfono: 123456789</string>
+    <string name="postal_number">Código postal: 13300</string>
+    <string name="city_contact">Ciudad: Valdepeñas</string>
+
+    <!-- Account Information Fragment -->
+    <string name="update_information">Actualizar información</string>
+    <string name="success_update_user_info">Información actualizada con éxito</string>
+    <string name="error_update_user_info">Se ha producido un error al intentar actualizar la información</string>
+
+    <!-- Layout examples -->
+    <string name="example_trip_name">Trip to Madrid</string>
+    <string name="example_date">01/01/2022 – 07/01/2022</string>
+    <string name="example_city">Madrid</string>
+    <string name="example_day">01/01/2022</string>
+    <string name="example_event_name">Science museum</string>
+    <string name="example_event_time">12:00 – 14:00</string>
+    <string name="example_description">Est ei erat mucius quaeque. Ei his quas phaedrum, efficiantur mediocritatem ne sed, hinc oratio blandit ei sed. Blandit gloriatur eam et. Brute noluisse per et, verear disputando neglegentur at quo. Sea quem legere ei, unum soluta ne duo. Ludus complectitur quo te, ut vide autem homero pro.</string>
+    <string name="example_place">Plaza de España</string>
+    <string name="example_price">0.00€</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

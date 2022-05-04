@@ -132,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="6dp"
-            android:text="@string/remember_me"
+            android:text="@string/keep_me_logged_in"
             android:textColor="?android:textColorHint"
             android:buttonTint="?attr/colorPrimary"
             android:checked="true"

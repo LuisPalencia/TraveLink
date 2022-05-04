@@ -7,7 +7,7 @@
     <string name="error">Error</string>
     <string name="email">Email</string>
     <string name="error_internet_title">Error: Internet</string>
-    <string name="error_internet_content">The device is not connected to internet. You need an internet connection in order to use the app</string>
+    <string name="error_internet_content">The device is not connected to internet. An internet connection is needed in order to use the app</string>
 
     <!-- Login -->
     <string name="log_in">Log in</string>
@@ -16,7 +16,7 @@
     <string name="not_have_account">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
     <string name="forgot_password">Forgot Password</string>
-    <string name="remember_me">Remember me</string>
+    <string name="keep_me_logged_in">Keep me logged in</string>
     <string name="wrong_credentials">Incorrect username or password</string>
     <string name="incorrect_email">The email is not correct</string>
 
@@ -31,7 +31,6 @@
     <string name="last_name">Last Name</string>
     <string name="confirm_password">Confirm password</string>
     <string name="birthday">Birthday</string>
-    <string name="address">Address</string>
     <string name="agree_privacy_policy">I agree with privacy and policy</string>
     <string name="go_back_to_login">Go back to login</string>
     <string name="already_have_account">Already have an account?</string>
@@ -49,13 +48,12 @@
     <!-- Recover password -->
     <string name="send_email">Send email</string>
     <string name="success_email_recover_password">Email has been sent. Plase check your mailbox</string>
-    <string name="error_email_recover_password">An error ocurred when trying to send the email</string>
+    <string name="error_email_recover_password">An error occurred when trying to send the email</string>
     <string name="error_not_existing_email">The email specified doesn\'t exist</string>
     <string name="recover_your_password">Recover your password</string>
 
     <!-- Main activity -->
     <string name="trips">Trips</string>
-    <string name="favourites">Favourites</string>
     <string name="profile">Profile</string>
 
     <!-- Trips fragment -->
@@ -69,7 +67,7 @@
     <string name="select_profile_image">Select profile image</string>
     <string name="log_off">Log off</string>
     <string name="contact">Contact</string>
-    <string name="error_updating_profile_image">An error ocurren when trying to update the profile image</string>
+    <string name="error_updating_profile_image">An error occurred when trying to update the profile image</string>
     <string name="success_updating_profile_image">Profile image updated!</string>
     <string name="error_permissions_gallery">You need to accept the permissions in order to select a profile image</string>
     <string name="error_permissions_gallery_settings">You need to accept the permissions from the settings in order to select a profile image</string>
@@ -88,7 +86,7 @@
     <string name="error_end_date_not_selected">You need to select an end date</string>
     <string name="error_end_date_before_start_date">End date can\'t be before than start date</string>
     <string name="error_max_days_exceeded">A trip cannot last more than 30 days</string>
-    <string name="error_cities_not_added">You need to select an end date</string>
+    <string name="error_cities_not_added">You need to add at least one city</string>
     <string name="error_cities_already_added">The city selected is already added</string>
     <string name="error_adding_city">An error occurred when trying to add the city</string>
     <string name="error_cities_max">The maximum of cities is five</string>
@@ -100,11 +98,8 @@
     <string name="events">Events</string>
     <string name="map">Map</string>
     <string name="rating">Rating</string>
-    <string name="participants">Participants</string>
     <string name="remove_trip">Remove trip</string>
     <string name="expenses">Expenses</string>
-    <string name="trip_information">Trip info</string>
-    <string name="timeline">Timeline</string>
     <string name="create_event">Create event</string>
     <string name="error_load_trip">An error occurred when trying to load the trip</string>
     <string name="trip_removed_successfully">Trip removed successfully</string>
@@ -180,7 +175,7 @@
     <string name="trip_rating">Trip rating</string>
     <string name="rate_this_trip">Please rate this trip</string>
     <string name="rate_this_event">Please rate this event</string>
-    <string name="send_rating">Send rating</string>
+    <string name="confirm_rating">Confirm rating</string>
     <string name="very_bad">Very bad</string>
     <string name="not_good">Not good</string>
     <string name="quite_ok">Quite Ok</string>
@@ -192,7 +187,7 @@
     <string name="rate_event_error">An error occurred when trying to rate the event</string>
 
     <!-- Contact fragment -->
-    <string name="telephone_number">Number: 123456789</string>
+    <string name="telephone_number">Telephone number: 123456789</string>
     <string name="postal_number">Postal code: 13300</string>
     <string name="city_contact">City: Valdepenas</string>
 
