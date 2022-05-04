@@ -13,5 +13,6 @@
     <attr name="colorProfileImage" format="reference" />
     <attr name="colorBackgroundList" format="reference" />
     <attr name="colorSeparator" format="reference" />
+    <attr name="colorEditTextDisabled" format="reference" />
 
 </resources>

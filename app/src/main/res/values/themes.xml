@@ -31,5 +31,8 @@
         <!-- Color separator -->
         <item name="colorSeparator">@color/black</item>
 
+        <!-- Color EditText disabled -->
+        <item name="colorEditTextDisabled">@color/edit_text_disabled_day</item>
+
     </style>
 </resources>

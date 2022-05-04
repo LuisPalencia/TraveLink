@@ -32,5 +32,8 @@
         <!-- Color separator -->
         <item name="colorSeparator">@color/white</item>
 
+        <!-- Color EditText disabled -->
+        <item name="colorEditTextDisabled">@color/edit_text_disabled_night</item>
+
     </style>
 </resources>

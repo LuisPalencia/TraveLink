@@ -34,6 +34,9 @@
     <color name="rating_bar_normal">#8F8787</color>
     <color name="rating_bar_activated">#FFEB3B</color>
 
+    <color name="edit_text_disabled_day">#EBE4E4</color>
+    <color name="edit_text_disabled_night">#575753</color>
+
     <color name="purple_button">#CC9C27B0</color>
     <color name="green_button">#CC31CA37</color>
     <color name="blue_button">#CC03A9F4</color>
