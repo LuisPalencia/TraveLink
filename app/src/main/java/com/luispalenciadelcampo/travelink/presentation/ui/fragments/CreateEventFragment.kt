@@ -132,6 +132,9 @@ class CreateEventFragment : Fragment() {
             val validators = CompositeDateValidator.allOf(listValidators)
             constraintsBuilderRange.setValidator(validators)
 
+            // Set the calendar in the month where the trip starts
+            constraintsBuilderRange.setOpenAt(trip.startDate.time)
+
             builder.setCalendarConstraints(constraintsBuilderRange.build())
 
             val datePicker = builder.build()
