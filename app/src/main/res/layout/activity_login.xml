@@ -85,7 +85,7 @@
             android:textSize="30sp"
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_black"
-            android:gravity="c"
+            android:gravity="start"
             app:layout_constraintTop_toBottomOf="@id/imageViewAppLogo"
             app:layout_constraintStart_toStartOf="@id/startGuideline"
             app:layout_constraintEnd_toEndOf="@id/endGuideline"
