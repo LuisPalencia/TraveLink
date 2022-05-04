@@ -221,8 +221,6 @@ class HomeTripFragment : Fragment() {
                 }
             }
         }
-
     }
-
 
 }
