@@ -35,7 +35,7 @@
                 android:background="@color/white"
                 android:scaleType="centerCrop"
 
-                android:src="@drawable/trip1" />
+                android:src="@drawable/event" />
 
         </androidx.cardview.widget.CardView>
 

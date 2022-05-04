@@ -136,7 +136,7 @@ class EventsAdapter(
                     .into(binding.imageViewEvent)
             }else{
                 Glide.with(context)
-                    .load(R.drawable.trip1)
+                    .load(R.drawable.event)
                     .into(binding.imageViewEvent)
             }
 

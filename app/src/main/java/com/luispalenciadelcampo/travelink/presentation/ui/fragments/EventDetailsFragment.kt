@@ -122,7 +122,7 @@ class EventDetailsFragment : Fragment() {
                 .into(binding.imageViewEvent)
         }else{
             Glide.with(this.requireContext())
-                .load(R.drawable.trip1)
+                .load(R.drawable.event)
                 .into(binding.imageViewEvent)
         }
     }
