@@ -45,7 +45,7 @@ class AuthRepositoryImpl @Inject constructor(
                     "birthday" to birthday
                 )
 
-                firebaseDatabase.getReference(Constants.DB_REFERENCE_USERS).child(user.uuid!!)
+                firebaseDatabase.getReference(Constants.DB_REFERENCE_USERS).child(user.uuid)
                     .updateChildren(childUpdates)
 
                 // Sign out so the user needs to verify the email before logging in
@@ -135,11 +135,11 @@ class AuthRepositoryImpl @Inject constructor(
         //database.getReference(Constants.DB_REFERENCE_USERS).child(user.uuid!!).setValue(user).await()
 
         val childUpdates = hashMapOf<String, Any>(
-            "name" to user.name!!,
-            "lastname" to user.lastname!!
+            "name" to user.name,
+            "lastname" to user.lastname
         )
 
-        firebaseDatabase.getReference(Constants.DB_REFERENCE_USERS).child(user.uuid!!)
+        firebaseDatabase.getReference(Constants.DB_REFERENCE_USERS).child(user.uuid)
             .updateChildren(childUpdates).await()
     }
 }

@@ -194,9 +194,7 @@ class CreateTripFragment : Fragment() {
         // return after the user has made a selection.
         val fields = listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG)
 
-
-
-        // Start the autocomplete intent.
+        // Create the autocomplete intent.
         // Adds a filter in order to only search for cities
         val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
             .setTypeFilter(TypeFilter.CITIES)

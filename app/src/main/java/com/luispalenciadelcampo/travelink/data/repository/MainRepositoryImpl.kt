@@ -93,7 +93,7 @@ class MainRepositoryImpl @Inject constructor(
                     trip.userAdminId = snapshot.key.toString()
                     trips.children.forEach{
                         when(it.key){
-                            "name" -> trip.name = it.value.toString() ?: ""
+                            "name" -> trip.name = it.value.toString()
                             "startDate" -> {
                                 trip.startDate = GenericFunctions.stringToDate(it.value.toString())
                             }
@@ -112,8 +112,8 @@ class MainRepositoryImpl @Inject constructor(
                                     val city = TripPlace()
                                     for(itemCity in child.children){
                                         when(itemCity.key) {
-                                            "idPlace" -> city.idPlace = itemCity.value.toString() ?: ""
-                                            "name" -> city.name = itemCity.value.toString() ?: ""
+                                            "idPlace" -> city.idPlace = itemCity.value.toString()
+                                            "name" -> city.name = itemCity.value.toString()
                                             "latitude" -> city.latitude = itemCity.value.toString().toDoubleOrNull() ?: 0.0
                                             "longitude" -> city.longitude = itemCity.value.toString().toDoubleOrNull() ?: 0.0
                                         }
@@ -164,13 +164,13 @@ class MainRepositoryImpl @Inject constructor(
 
                     events.children.forEach{
                         when(it.key){
-                            "name" -> event.name = it.value.toString() ?: ""
+                            "name" -> event.name = it.value.toString()
                             "day" -> event.day = it.value.toString().toIntOrNull() ?: 0
                             "startTime" -> event.startTime = GenericFunctions.stringToDateHour(it.value.toString())
                             "endTime" -> event.endTime = GenericFunctions.stringToDateHour(it.value.toString())
-                            "description" -> event.description = it.value.toString() ?: ""
+                            "description" -> event.description = it.value.toString()
                             "rating" -> event.rating = it.value.toString().toDoubleOrNull() ?: 0.0
-                            "city" -> event.city = it.value.toString() ?: ""
+                            "city" -> event.city = it.value.toString()
                             "place" -> {
                                 for(child in it.children){
                                     when(child.key) {
@@ -277,10 +277,10 @@ class MainRepositoryImpl @Inject constructor(
 
             //Set the map and update it in the DB
             val childUpdates = hashMapOf<String, Any>(
-                "name" to trip.name!!,
-                "startDate" to GenericFunctions.dateToString(trip.startDate!!),
-                "endDate" to GenericFunctions.dateToString(trip.endDate!!),
-                "cities" to trip.cities!!,
+                "name" to trip.name,
+                "startDate" to GenericFunctions.dateToString(trip.startDate),
+                "endDate" to GenericFunctions.dateToString(trip.endDate),
+                "cities" to trip.cities,
                 "rating" to 0,
             )
 
@@ -330,8 +330,8 @@ class MainRepositoryImpl @Inject constructor(
             val childUpdates = hashMapOf<String, Any>(
                 "name" to event.name!!,
                 "day" to event.day,
-                "startTime" to GenericFunctions.dateHourToString(event.startTime!!),
-                "endTime" to GenericFunctions.dateHourToString(event.endTime!!),
+                "startTime" to GenericFunctions.dateHourToString(event.startTime),
+                "endTime" to GenericFunctions.dateHourToString(event.endTime),
                 "description" to event.description,
                 "rating" to 0,
                 "city" to event.city,
@@ -374,8 +374,8 @@ class MainRepositoryImpl @Inject constructor(
             val childUpdates = hashMapOf<String, Any>(
                 "name" to event.name!!,
                 "day" to event.day,
-                "startTime" to GenericFunctions.dateHourToString(event.startTime!!),
-                "endTime" to GenericFunctions.dateHourToString(event.endTime!!),
+                "startTime" to GenericFunctions.dateHourToString(event.startTime),
+                "endTime" to GenericFunctions.dateHourToString(event.endTime),
                 "description" to event.description,
                 "rating" to 0,
                 "city" to event.city,
@@ -384,7 +384,7 @@ class MainRepositoryImpl @Inject constructor(
             )
 
             //Perform the DB insertion
-            eventsTripRef.child(event.id!!).updateChildren(childUpdates).await()
+            eventsTripRef.child(event.id).updateChildren(childUpdates).await()
             Resource.Success(true)
         }catch (e: Exception){
             Resource.Error(Constants.RESULT_UPDATE_EVENT_ERROR)
@@ -430,7 +430,7 @@ class MainRepositoryImpl @Inject constructor(
         val placeRequest = FetchPlaceRequest.newInstance(placeId, fields)
         val request: Task<FetchPlaceResponse> = Storage.placesClient.fetchPlace(placeRequest)
 
-        var placeImage: PlaceImage? = null
+        var placeImage: PlaceImage?
 
         var response: FetchPlaceResponse? = null
 
@@ -463,7 +463,7 @@ class MainRepositoryImpl @Inject constructor(
                 .setMaxHeight(300) // Optional.
                 .build()
 
-            var responseFetchPlacePhoto: FetchPhotoResponse? = null
+            var responseFetchPlacePhoto: FetchPhotoResponse?
 
             try {
                 responseFetchPlacePhoto = Tasks.await(Storage.placesClient.fetchPhoto(photoRequest))
@@ -542,7 +542,7 @@ class MainRepositoryImpl @Inject constructor(
             )
 
             //Perform the DB insertion
-            event.id?.let { eventsTripRef.child(it).updateChildren(childUpdates).await() }
+            event.id.let { eventsTripRef.child(it).updateChildren(childUpdates).await() }
 
             return true
         }catch (e: Exception){
