@@ -9,7 +9,6 @@ import android.net.NetworkCapabilities
 import android.net.Uri
 import androidx.appcompat.app.AlertDialog
 import com.luispalenciadelcampo.travelink.R
-import com.luispalenciadelcampo.travelink.data.dto.Event
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat

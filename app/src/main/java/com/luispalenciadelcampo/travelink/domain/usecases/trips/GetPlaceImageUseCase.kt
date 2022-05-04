@@ -1,6 +1,5 @@
 package com.luispalenciadelcampo.travelink.domain.usecases.trips
 
-import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.data.dto.PlaceImage
 import com.luispalenciadelcampo.travelink.domain.repository.MainRepository
 import com.luispalenciadelcampo.travelink.utils.Resource

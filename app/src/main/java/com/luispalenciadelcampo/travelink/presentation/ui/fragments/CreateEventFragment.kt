@@ -3,7 +3,6 @@ package com.luispalenciadelcampo.travelink.presentation.ui.fragments
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import android.util.TimeFormatException
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

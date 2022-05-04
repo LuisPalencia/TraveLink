@@ -16,7 +16,6 @@ import com.luispalenciadelcampo.travelink.databinding.FragmentExpensesBinding
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
 import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
 import com.luispalenciadelcampo.travelink.presentation.ui.adapters.ExpensesAdapter
-import com.luispalenciadelcampo.travelink.presentation.ui.adapters.TripsAdapter
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import java.io.IOException
 

@@ -19,7 +19,6 @@ import com.luispalenciadelcampo.travelink.constants.Constants
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.databinding.FragmentEventDetailsBinding
-import com.luispalenciadelcampo.travelink.databinding.FragmentHomeTripBinding
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
 import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel

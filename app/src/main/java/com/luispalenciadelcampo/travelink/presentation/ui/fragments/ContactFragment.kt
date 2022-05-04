@@ -7,9 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.databinding.FragmentContactBinding
-import com.luispalenciadelcampo.travelink.databinding.FragmentProfileBinding
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
 import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
 import java.io.IOException

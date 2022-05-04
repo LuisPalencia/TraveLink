@@ -30,7 +30,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.data.dto.TripPlace
-import com.luispalenciadelcampo.travelink.presentation.viewmodel.AuthViewModel
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 import java.io.IOException

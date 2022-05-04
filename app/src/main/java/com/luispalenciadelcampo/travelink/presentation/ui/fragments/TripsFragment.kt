@@ -9,17 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.luispalenciadelcampo.travelink.R
 import com.luispalenciadelcampo.travelink.databinding.FragmentTripsBinding
 import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
-import com.luispalenciadelcampo.travelink.presentation.ui.adapters.TripsAdapter
 import com.luispalenciadelcampo.travelink.presentation.ui.adapters.TripsViewPagerAdapter
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
-import com.luispalenciadelcampo.travelink.utils.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import java.io.IOException

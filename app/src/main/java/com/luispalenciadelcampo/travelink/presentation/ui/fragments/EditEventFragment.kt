@@ -26,7 +26,6 @@ import com.luispalenciadelcampo.travelink.constants.Constants
 import com.luispalenciadelcampo.travelink.data.dto.Event
 import com.luispalenciadelcampo.travelink.data.dto.Trip
 import com.luispalenciadelcampo.travelink.data.dto.TripPlace
-import com.luispalenciadelcampo.travelink.databinding.FragmentCreateEventBinding
 import com.luispalenciadelcampo.travelink.databinding.FragmentEditEventBinding
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
@@ -34,7 +33,6 @@ import com.luispalenciadelcampo.travelink.utils.GenericFunctions
 import com.luispalenciadelcampo.travelink.utils.TripFunctions
 import kotlinx.coroutines.launch
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 class EditEventFragment : Fragment() {

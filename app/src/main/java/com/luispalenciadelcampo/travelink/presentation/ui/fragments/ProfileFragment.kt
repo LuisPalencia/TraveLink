@@ -24,17 +24,13 @@ import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.luispalenciadelcampo.travelink.R
-import com.luispalenciadelcampo.travelink.data.dto.TripPlace
 import com.luispalenciadelcampo.travelink.databinding.FragmentProfileBinding
 import com.luispalenciadelcampo.travelink.presentation.ui.activities.MainActivity
 import com.luispalenciadelcampo.travelink.presentation.interfaces.SupportFragmentManager
 import com.luispalenciadelcampo.travelink.presentation.viewmodel.MainViewModel
 import com.luispalenciadelcampo.travelink.utils.GenericFunctions
 import com.luispalenciadelcampo.travelink.utils.Resource
-import com.luispalenciadelcampo.travelink.utils.observeOnce
 import kotlinx.coroutines.launch
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
 import java.io.IOException
 
 
