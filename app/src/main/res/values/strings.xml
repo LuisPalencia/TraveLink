@@ -89,7 +89,7 @@
     <string name="error_cities_not_added">You need to add at least one city</string>
     <string name="error_cities_already_added">The city selected is already added</string>
     <string name="error_adding_city">An error occurred when trying to add the city</string>
-    <string name="error_cities_max">The maximum of cities is five</string>
+    <string name="error_cities_max">The maximum of cities is ten</string>
     <string name="trip_created">The trip has been created!</string>
     <string name="error_trip_creation">An error occurred when trying to create the trip</string>
     <string name="select_date_trip">Select a date for the trip</string>

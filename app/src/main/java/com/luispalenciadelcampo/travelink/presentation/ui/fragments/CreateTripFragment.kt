@@ -89,7 +89,7 @@ class CreateTripFragment : Fragment() {
     // Set the logic of the buttons
     private fun setButtons(){
         binding.btnAddCity.setOnClickListener {
-            if(citiesList.size < 5){
+            if(citiesList.size < Constants.MAXIMUM_CITIES_TRIP){
                 searchNewCity()
             }else{
                 Snackbar.make(binding.scrollView, getString(R.string.error_cities_max), Snackbar.LENGTH_LONG).show()

@@ -23,8 +23,9 @@ object Constants {
     const val SHARED_PREFERENCE_REMEMBER_ME = "remember_me"
 
 
-
+    // Maximum values when creating trip
     const val MAXIMUM_DAYS_TRIP = 30
+    const val MAXIMUM_CITIES_TRIP = 10
 
     // Bundles
     const val LOGGED_BEFORE_MAIN_ACTIVITY = "LOGGED_BEFORE_MAIN_ACTIVITY" //Bundle login
