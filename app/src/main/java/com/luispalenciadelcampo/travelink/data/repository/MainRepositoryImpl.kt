@@ -450,7 +450,7 @@ class MainRepositoryImpl @Inject constructor(
             if (metada == null || metada.isEmpty()) {
                 Log.d(TAG, "No photo metadata.")
                 //return@addOnSuccessListener
-                Resource.Error<String>("Error: no photo metadata.")
+                return Resource.Error("Error: no photo metadata.")
             }
             val photoMetadata = metada.first()
 
