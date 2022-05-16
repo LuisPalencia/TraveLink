@@ -60,6 +60,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:text="@string/event_selected"
+            android:maxLines="1"
             />
 
     </androidx.cardview.widget.CardView>
