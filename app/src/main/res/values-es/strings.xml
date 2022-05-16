@@ -35,7 +35,7 @@
     <string name="agree_privacy_policy">Estoy de acuerdo con la privacidad y la política</string>
     <string name="go_back_to_login">Volver al inicio de sesión</string>
     <string name="already_have_account">¿Ya dispone de una cuenta?</string>
-    <string name="different_passwords">Las contraseñas son diferenters</string>
+    <string name="different_passwords">Las contraseñas son diferentes</string>
     <string name="incorrect_name">Debes de introducir un nombre</string>
     <string name="incorrect_last_name">Debes de introducir los apellidos</string>
     <string name="incorrect_password">La contraseña debe contener: 1 número, 1 minúscula, 1 mayúscula y una longitud mínima de 6 caracteres</string>
@@ -58,9 +58,9 @@
     <string name="profile">Perfil</string>
 
     <!-- Trips fragment -->
-    <string name="current_trips">Current trips</string>
-    <string name="past_trips">Past trips</string>
-    <string name="no_trips_message">There are no trips in this section. Create a new one now!</string>
+    <string name="current_trips">Viajes actuales</string>
+    <string name="past_trips">Viajes pasados</string>
+    <string name="no_trips_message">No existen viajes en esta sección. ¡Crea uno nuevo ahora!</string>
 
     <!-- Profile fragment -->
     <string name="hello">Hola</string>
