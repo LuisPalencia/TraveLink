@@ -149,7 +149,7 @@ class EditEventFragment : Fragment() {
         binding.layoutFormEvent.editTextPlace.setText(event.place.name)
         this.place = event.place
 
-        binding.layoutFormEvent.editTextPrice.setText(event.price.toString())
+        binding.layoutFormEvent.editTextPrice.setText(event.price.toInt().toString())
         binding.layoutFormEvent.editTextEventDescription.setText(event.description)
         binding.layoutFormEvent.btnCreateTrip.setText(R.string.update_event)
 
