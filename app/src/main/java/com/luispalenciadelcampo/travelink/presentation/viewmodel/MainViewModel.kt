@@ -29,7 +29,7 @@ class MainViewModel @Inject constructor(
     private val TAG = "MainViewModel"
 
     val user = MutableLiveData<User>()
-    val updateInfoUser = MutableLiveData<Resource<User>>()
+    var updateInfoUser = MutableLiveData<Resource<User>>()
     val uploadProfileImageStatus = MutableLiveData<Resource<String>>()
 
     val trips = MutableLiveData<Resource<MutableList<Trip>>>()
@@ -74,6 +74,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             val resultUser = useCase.UpdateUserInfoUseCase(user)
             updateInfoUser.postValue(resultUser)
+            updateInfoUser = MutableLiveData<Resource<User>>()
         }
     }
 
